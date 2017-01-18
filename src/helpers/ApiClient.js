@@ -1,5 +1,6 @@
 import superagent from 'superagent';
 import config from '../config';
+import leancloud from '../leancloud';
 
 const methods = ['get', 'post', 'put', 'patch', 'del'];
 
@@ -13,11 +14,19 @@ function formatUrl(path) {
   return '/api' + adjustedPath;
 }
 
+function leacncloudUrl(path) {
+  const adjustedPath = path[0] !== '/' ? '/' + path : path;
+
+  return 'https://' + leancloud.apiHost + adjustedPath;
+}
+
 export default class ApiClient {
   constructor(req) {
     methods.forEach((method) =>
-      this[method] = (path, { params, data } = {}) => new Promise((resolve, reject) => {
-        const request = superagent[method](formatUrl(path));
+      this[method] = (path, { params, data, lc } = {}) => new Promise((resolve, reject) => {
+        const url = !lc ? formatUrl(path) : leacncloudUrl(path);
+
+        const request = superagent[method](url);
 
         if (params) {
           request.query(params);
@@ -29,6 +38,11 @@ export default class ApiClient {
 
         if (data) {
           request.send(data);
+        }
+
+        if (lc) {
+          request.set('X-LC-Key', leancloud.LeanCloudAPPKEY);
+          request.set('X-LC-Id', leancloud.LeanCloudAPPID);
         }
 
         request.end((err, { body } = {}) => err ? reject(body || err) : resolve(body));
