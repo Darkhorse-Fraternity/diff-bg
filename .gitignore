@@ -6,3 +6,6 @@ webpack-assets.json
 webpack-stats.json
 npm-debug.log
 *.swp
+
+
+src/leancloud.js
