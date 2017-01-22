@@ -6,6 +6,8 @@ import {load as loadList} from 'redux/modules/leancloud';
 import {asyncConnect} from 'redux-async-connect';
 import * as lcParams from '../../helpers/leanCloud';
 // import ListView from 'antd-mobile/lib/list-view'
+import * as immutable from 'immutable';
+
 
 const COMPKEY = 'IdeaList';
 @asyncConnect([{
@@ -29,7 +31,7 @@ export default class IdeaList extends Component {
   };
 
   defaultProps = {
-    data: {}
+    data: immutable.fromJS({})
   }
 
   render() {
