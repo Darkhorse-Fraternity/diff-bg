@@ -5,7 +5,7 @@ import * as leancloudActions from 'redux/modules/leancloud';
 import {load as loadList} from 'redux/modules/leancloud';
 import {asyncConnect} from 'redux-async-connect';
 import * as lcParams from '../../helpers/leanCloud';
-
+// import ListView from 'antd-mobile/lib/list-view'
 
 const COMPKEY = 'IdeaList';
 @asyncConnect([{
@@ -27,6 +27,10 @@ export default class IdeaList extends Component {
     loading: PropTypes.bool,
     load: PropTypes.func.isRequired,
   };
+
+  defaultProps = {
+    data: {}
+  }
 
   render() {
     console.log('test:', this.props.data.toJS());
