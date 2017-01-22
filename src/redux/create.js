@@ -26,6 +26,7 @@ export default function createStore(history, client, data) {
   const reducer = require('./modules/reducer');
   if (data) {
     data.pagination = Immutable.fromJS(data.pagination);
+    data.leancloud = Immutable.fromJS(data.leancloud);
   }
   const store = finalCreateStore(reducer, data);
 

@@ -18,6 +18,18 @@
                 "imports": ["react", "redbox-react"]
               }
             ]
+        }],
+        ["import", {
+          "libraryName": "antd-mobile",
+          "style": "css"
+        }]
+      ]
+    },
+    "production":{
+      "plugins": [
+        ["import", {
+          "libraryName": "antd-mobile",
+          "style": "css"
         }]
       ]
     }
