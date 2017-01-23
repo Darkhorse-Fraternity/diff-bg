@@ -7,7 +7,7 @@ import * as leancloudActions from 'redux/modules/leancloud';
 import {load as loadList} from 'redux/modules/leancloud';
 import {asyncConnect} from 'redux-async-connect';
 import * as lcParams from '../../helpers/leanCloud';
-import { ListView } from 'antd-mobile';
+import {ListView} from 'antd-mobile';
 import * as immutable from 'immutable';
 
 // const data = [
