@@ -10,6 +10,7 @@ export default class Home extends Component {
 
     const Content = styled.div`
         padding: 10rem;
+        background-color: #1b6d85;
     `;
 
     const logoImage = require('./logo.png');

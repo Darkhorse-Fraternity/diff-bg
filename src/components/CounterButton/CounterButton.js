@@ -1,4 +1,5 @@
-import React, {Component, PropTypes} from 'react';
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import {connectMultireducer} from 'multireducer';
 import {increment} from 'redux/modules/counter';
 
@@ -13,7 +14,7 @@ export default class CounterButton extends Component {
     className: PropTypes.string
   }
 
-  props = {
+  static defaultProps = {
     className: ''
   }
 

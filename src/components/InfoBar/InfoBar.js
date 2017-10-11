@@ -1,8 +1,8 @@
-import React, {Component, PropTypes} from 'react';
+import React, {Component} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {load} from 'redux/modules/info';
-
+import PropTypes from 'prop-types';
 @connect(
     state => ({info: state.info.data}),
     dispatch => bindActionCreators({load}, dispatch))

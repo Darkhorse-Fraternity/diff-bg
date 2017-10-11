@@ -1,5 +1,6 @@
-import React, {Component, PropTypes} from 'react';
+import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import PropTypes from 'prop-types';
 
 @connect(state => ({ time: state.info.data.time }))
 export default class MiniInfoBar extends Component {
