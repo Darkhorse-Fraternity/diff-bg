@@ -6,6 +6,7 @@ import * as authActions from 'redux/modules/auth';
 // import Form from 'components/Login/Form';
 import LoginForm from 'styles/LoginForm';
 import Overlay from 'styles/Overlay';
+import Welcome from 'styles/Welcome';
 
 @connect(
   state => ({
@@ -39,11 +40,11 @@ export default class Login extends Component {
   }
 
   render() {
-    const {user, logout} = this.props;
+    const {user, logout, isLogging} = this.props;
     return (
       <Overlay login>
         <Helmet title="登录"/>
-        {!user &&
+        {!isLogging &&
         <div>
           <form className="login-form form-inline" onSubmit={this.handleSubmit}>
             <div className="form-group">
@@ -55,16 +56,14 @@ export default class Login extends Component {
           </form>
         </div>
         }
-        {user &&
-        <div>
-          <p>You are currently logged in as {user.name}.</p>
-
-          <div>
-            <button className="btn btn-danger" onClick={logout}><i className="fa fa-sign-out"/>{' '}Log Out</button>
-          </div>
-        </div>
+        {isLogging &&
+          <LoginForm out>
+            <Welcome
+              user={user}
+              username={'test'}
+              onLogoutClick={logout}/>
+          </LoginForm>
         }
-        <LoginForm out/>
       </Overlay>
     );
   }

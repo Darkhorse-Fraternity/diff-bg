@@ -3,7 +3,6 @@
 import React from 'react'
 import styled from 'styled-components'
 import styledProps from 'styled-props'
-import FlatButton from 'material-ui/FlatButton'
 import RaisedButton from 'material-ui/FlatButton'
 
 const margin = {
