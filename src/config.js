@@ -1,4 +1,5 @@
 require('babel-polyfill');
+const {LeanCloud_APP_ID, LeanCloud_APP_SIGN} = require('./lckey');
 
 const environment = {
   development: {
@@ -7,18 +8,26 @@ const environment = {
   production: {
     isProduction: true
   }
-}[process.env.NODE_ENV || 'development'];
+}[process.env.LEANCLOUD_APP_ENV || process.env.NODE_ENV || 'development'];
 
 module.exports = Object.assign({
   host: process.env.HOST || 'localhost',
-  port: process.env.PORT,
+  port: process.env.LEANCLOUD_APP_PORT || process.env.PORT,
   apiHost: process.env.APIHOST || 'localhost',
   apiPort: process.env.APIPORT,
+  remoteApiHost: environment.isProduction ?
+    'cmwljtyw.api.lncld.net/1.1' :
+    'q81jdsbi.api.lncld.net/1.1',
+  remoteApiPort: '',
+  remoteHeader: {
+    'X-LC-Id': LeanCloud_APP_ID,
+    'X-LC-Sign': LeanCloud_APP_SIGN,
+  },
   app: {
-    title: 'React Redux Example',
-    description: 'All the modern best practices in one example.',
+    title: 'Combo',
+    description: '一款有着鼓励功能的Todo',
     head: {
-      titleTemplate: 'React Redux Example: %s',
+      titleTemplate: 'Combo: %s',
       meta: [
         {name: 'description', content: 'All the modern best practices in one example.'},
         {charset: 'utf-8'},

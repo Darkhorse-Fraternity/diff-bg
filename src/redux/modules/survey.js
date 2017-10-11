@@ -1,6 +1,6 @@
-const IS_VALID = 'redux-example/survey/IS_VALID';
-const IS_VALID_SUCCESS = 'redux-example/survey/IS_VALID_SUCCESS';
-const IS_VALID_FAIL = 'redux-example/survey/IS_VALID_FAIL';
+const IS_VALID = 'combo/survey/IS_VALID';
+const IS_VALID_SUCCESS = 'combo/survey/IS_VALID_SUCCESS';
+const IS_VALID_FAIL = 'combo/survey/IS_VALID_FAIL';
 
 const initialState = {
   saveError: null,

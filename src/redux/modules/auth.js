@@ -1,13 +1,14 @@
-const LOAD = 'redux-example/auth/LOAD';
-const LOAD_SUCCESS = 'redux-example/auth/LOAD_SUCCESS';
-const LOAD_FAIL = 'redux-example/auth/LOAD_FAIL';
-const LOGIN = 'redux-example/auth/LOGIN';
-const LOGIN_SUCCESS = 'redux-example/auth/LOGIN_SUCCESS';
-const LOGIN_FAIL = 'redux-example/auth/LOGIN_FAIL';
-const LOGOUT = 'redux-example/auth/LOGOUT';
-const LOGOUT_SUCCESS = 'redux-example/auth/LOGOUT_SUCCESS';
-const LOGOUT_FAIL = 'redux-example/auth/LOGOUT_FAIL';
+const LOAD = 'combo/auth/LOAD';
+const LOAD_SUCCESS = 'combo/auth/LOAD_SUCCESS';
+const LOAD_FAIL = 'combo/auth/LOAD_FAIL';
+const LOGIN = 'combo/auth/LOGIN';
+const LOGIN_SUCCESS = 'combo/auth/LOGIN_SUCCESS';
+const LOGIN_FAIL = 'combo/auth/LOGIN_FAIL';
+const LOGOUT = 'combo/auth/LOGOUT';
+const LOGOUT_SUCCESS = 'combo/auth/LOGOUT_SUCCESS';
+const LOGOUT_FAIL = 'combo/auth/LOGOUT_FAIL';
 
+import {requestUsersByMobilePhone} from '../../helpers/leanCloud';
 const initialState = {
   loaded: false
 };
@@ -84,14 +85,19 @@ export function load() {
   };
 }
 
-export function login(name) {
+export function login(name, pass) {
+  const params = requestUsersByMobilePhone(name, pass);
   return {
     types: [LOGIN, LOGIN_SUCCESS, LOGIN_FAIL],
-    promise: (client) => client.post('/login', {
-      data: {
-        name: name
-      }
-    })
+    promise: client => client.req(params)
+  };
+}
+
+export function sign(name, pass) {
+  const params = requestUsersByMobilePhone(name, pass);
+  return {
+    types: [LOGIN, LOGIN_SUCCESS, LOGIN_FAIL],
+    promise: client => client.req(params)
   };
 }
 
@@ -101,3 +107,4 @@ export function logout() {
     promise: (client) => client.get('/logout')
   };
 }
+

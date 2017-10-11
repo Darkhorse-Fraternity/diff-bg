@@ -6,12 +6,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import createStore from './redux/create';
 import ApiClient from './helpers/ApiClient';
-import io from 'socket.io-client';
 import {Provider} from 'react-redux';
-import { Router, browserHistory } from 'react-router';
-import { syncHistoryWithStore } from 'react-router-redux';
-import { ReduxAsyncConnect } from 'redux-async-connect';
+import {Router, browserHistory} from 'react-router';
+import {syncHistoryWithStore} from 'react-router-redux';
+import {ReduxAsyncConnect} from 'redux-async-connect';
 import useScroll from 'scroll-behavior/lib/useStandardScroll';
+// import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+
 
 import getRoutes from './routes';
 
@@ -20,28 +21,17 @@ const _browserHistory = useScroll(() => browserHistory)();
 const dest = document.getElementById('content');
 const store = createStore(_browserHistory, client, window.__data);
 const history = syncHistoryWithStore(_browserHistory, store);
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
-function initSocket() {
-  const socket = io('', {path: '/ws'});
-  socket.on('news', (data) => {
-    console.log(data);
-    socket.emit('my other event', { my: 'data from client' });
-  });
-  socket.on('msg', (data) => {
-    console.log(data);
-  });
-
-  return socket;
-}
-
-global.socket = initSocket();
 
 const component = (
-  <Router render={(props) =>
-        <ReduxAsyncConnect {...props} helpers={{client}} filter={item => !item.deferred} />
-      } history={history}>
-    {getRoutes(store)}
-  </Router>
+  <MuiThemeProvider>
+    <Router render={(props) =>
+      <ReduxAsyncConnect {...props} helpers={{client}} filter={item => !item.deferred}/>
+    } history={history}>
+      {getRoutes(store)}
+    </Router>
+  </MuiThemeProvider>
 );
 
 ReactDOM.render(
@@ -51,7 +41,7 @@ ReactDOM.render(
   dest
 );
 
-if (process.env.NODE_ENV !== 'production') {
+if (process.env.LEANCLOUD_APP_ENV !== 'production') {
   window.React = React; // enable debugger
 
   if (!dest || !dest.firstChild || !dest.firstChild.attributes || !dest.firstChild.attributes['data-react-checksum']) {
@@ -65,7 +55,7 @@ if (__DEVTOOLS__ && !window.devToolsExtension) {
     <Provider store={store} key="provider">
       <div>
         {component}
-        <DevTools />
+        <DevTools/>
       </div>
     </Provider>,
     dest

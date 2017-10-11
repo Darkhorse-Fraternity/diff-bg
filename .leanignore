@@ -3,3 +3,9 @@
 .avoscloud/
 .leancloud/
 node_modules/
+dist/
+*.iml
+.idea/
+webpack-assets.json
+webpack-stats.json
+npm-debug.log

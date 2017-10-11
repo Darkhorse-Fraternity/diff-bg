@@ -28,6 +28,12 @@ app.listen(port, function onAppListening(err) {
   if (err) {
     console.error(err);
   } else {
-    console.info('==> 🚧  Webpack development server listening on port %s', port);
+    // console.info('==> 🚧  Webpack development server listening on port %s', port);
   }
+  process.on('uncaughtException', function(err) {
+    console.error('Caught exception:', err.stack);
+  });
+  process.on('unhandledRejection', function(reason, p) {
+    console.error('Unhandled Rejection at: Promise ', p, ' reason: ', reason.stack);
+  });
 });

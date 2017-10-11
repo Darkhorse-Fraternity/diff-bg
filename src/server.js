@@ -18,7 +18,7 @@ import { ReduxAsyncConnect, loadOnServer } from 'redux-async-connect';
 import createHistory from 'react-router/lib/createMemoryHistory';
 import {Provider} from 'react-redux';
 import getRoutes from './routes';
-
+import AV from 'leanengine'
 const targetUrl = 'http://' + config.apiHost + ':' + config.apiPort;
 const pretty = new PrettyError();
 const app = new Express();
@@ -28,10 +28,22 @@ const proxy = httpProxy.createProxyServer({
   ws: true
 });
 
+
+if(process.env.LEANCLOUD_APP_ID){
+  AV.init({
+    appId: process.env.LEANCLOUD_APP_ID,
+    appKey: process.env.LEANCLOUD_APP_KEY,
+    masterKey: process.env.LEANCLOUD_APP_MASTER_KEY
+  });
+}
+
 app.use(compression());
 app.use(favicon(path.join(__dirname, '..', 'static', 'favicon.ico')));
 
 app.use(Express.static(path.join(__dirname, '..', 'static')));
+
+// 加载云引擎中间件
+app.use(AV.express());
 
 // Proxy to API server
 app.use('/api', (req, res) => {
@@ -42,9 +54,6 @@ app.use('/ws', (req, res) => {
   proxy.web(req, res, {target: targetUrl + '/ws'});
 });
 
-server.on('upgrade', (req, socket, head) => {
-  proxy.ws(req, socket, head);
-});
 
 // added the error handling to avoid https://github.com/nodejitsu/node-http-proxy/issues/527
 proxy.on('error', (error, req, res) => {
@@ -114,8 +123,15 @@ if (config.port) {
     if (err) {
       console.error(err);
     }
-    console.info('----\n==> ✅  %s is running, talking to API server on %s.', config.app.title, config.apiPort);
+    // console.info('----\n==> ✅  %s is running, talking to API server on %s.', config.app.title, config.apiPort);
     console.info('==> 💻  Open http://%s:%s in a browser to view the app.', config.host, config.port);
+    // 注册全局未捕获异常处理器
+    process.on('uncaughtException', function(err) {
+      console.error('Caught exception:', err.stack);
+    });
+    process.on('unhandledRejection', function(reason, p) {
+      console.error('Unhandled Rejection at: Promise ', p, ' reason: ', reason.stack);
+    });
   });
 } else {
   console.error('==>     ERROR: No PORT environment variable has been specified');
