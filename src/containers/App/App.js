@@ -7,22 +7,21 @@ import Navbar from 'react-bootstrap/lib/Navbar';
 import Nav from 'react-bootstrap/lib/Nav';
 import NavItem from 'react-bootstrap/lib/NavItem';
 import Helmet from 'react-helmet';
-import { isLoaded as isInfoLoaded, load as loadInfo } from 'redux/modules/info';
-import { isLoaded as isAuthLoaded, load as loadAuth, logout } from 'redux/modules/auth';
+import { logout } from 'redux/modules/auth';
 import { push } from 'react-router-redux';
 import config from '../../config';
 import { asyncConnect } from 'redux-async-connect';
 
 @asyncConnect([{
-  promise: ({store: {dispatch, getState}}) => {
+  promise: ({store: {}}) => {
     const promises = [];
 
-    if (!isInfoLoaded(getState())) {
-      promises.push(dispatch(loadInfo()));
-    }
-    if (!isAuthLoaded(getState())) {
-      promises.push(dispatch(loadAuth()));
-    }
+    // if (!isInfoLoaded(getState())) {
+    //   promises.push(dispatch(loadInfo()));
+    // }
+    // if (!isAuthLoaded(getState())) {
+    //   promises.push(dispatch(loadAuth()));
+    // }
 
     return Promise.all(promises);
   }
@@ -77,15 +76,6 @@ export default class App extends Component {
 
           <Navbar.Collapse eventKey={0}>
             <Nav navbar>
-              <LinkContainer to="/widgets">
-                <NavItem eventKey={2}>Widgets</NavItem>
-              </LinkContainer>
-              <LinkContainer to="/survey">
-                <NavItem eventKey={3}>Survey</NavItem>
-              </LinkContainer>
-              <LinkContainer to="/pagination">
-                <NavItem eventKey={4}>Pagination</NavItem>
-              </LinkContainer>
               <LinkContainer to="/about">
                 <NavItem eventKey={5}>About Us</NavItem>
               </LinkContainer>
