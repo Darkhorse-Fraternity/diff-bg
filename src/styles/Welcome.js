@@ -27,12 +27,12 @@ const Welcome = ({user, username, onLogoutClick}) => (
   <WelcomeDIV>
     {/* <CheckCircle /> */}
 
-              {/*<Avatar*/}
-                  {/*color={'#fff'}*/}
-                  {/*backgroundColor={'#43c1ef'}*/}
-                  {/*size={40}*/}
-                   {/*>{username}*/}
-            {/*</Avatar>*/}
+              <Avatar
+                  color={'#fff'}
+                  backgroundColor={'#43c1ef'}
+                  size={40}
+                   >{username}
+            </Avatar>
 
     <Page>
       {username}
@@ -40,15 +40,15 @@ const Welcome = ({user, username, onLogoutClick}) => (
       <br />
       欢迎使用TodoList!
     </Page>
-    {/*<Button*/}
-    {/*fullWidth={true}*/}
-      {/*bigger*/}
-      {/*logout*/}
-      {/*label='退出登录'*/}
-      {/*onTouchTap={(e) => {*/}
-        {/*onLogoutClick()*/}
-      {/*}}*/}
-    {/*/>*/}
+    <Button
+    fullWidth={true}
+      bigger
+      logout
+      label='退出登录'
+      onTouchTap={(e) => {
+        onLogoutClick()
+      }}
+    />
   </WelcomeDIV>
 )
 

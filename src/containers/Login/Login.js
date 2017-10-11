@@ -40,11 +40,11 @@ export default class Login extends Component {
   }
 
   render() {
-    const {user, logout, isLogging} = this.props;
+    const {user, logout} = this.props;
     return (
       <Overlay login>
         <Helmet title="登录"/>
-        {!isLogging &&
+        {!user &&
         <div>
           <form className="login-form form-inline" onSubmit={this.handleSubmit}>
             <div className="form-group">
@@ -56,11 +56,11 @@ export default class Login extends Component {
           </form>
         </div>
         }
-        {isLogging &&
+        {user &&
           <LoginForm out>
             <Welcome
               user={user}
-              username={'test'}
+              username={user.username}
               onLogoutClick={logout}/>
           </LoginForm>
         }
