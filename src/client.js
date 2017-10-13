@@ -8,19 +8,19 @@ import createStore from './redux/create';
 import ApiClient from './helpers/ApiClient';
 import {Provider} from 'react-redux';
 import {HashRouter as Router, browserHistory} from 'react-router';
-import {syncHistoryWithStore} from 'react-router-redux';
+// import {syncHistoryWithStore} from 'react-router-redux';
 import {ReduxAsyncConnect} from 'redux-async-connect';
-import useScroll from 'scroll-behavior/lib/useStandardScroll';
+// import useScroll from 'scroll-behavior/lib/useStandardScroll';
 // import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 
 import getRoutes from './routes';
 
 const client = new ApiClient();
-const _browserHistory = useScroll(() => browserHistory)();
+// const _browserHistory = useScroll(() => browserHistory)();
 const dest = document.getElementById('content');
-const store = createStore(_browserHistory, client, window.__data);
-const history = syncHistoryWithStore(_browserHistory, store);
+const store = createStore(browserHistory, client, window.__data);
+// const history = syncHistoryWithStore(_browserHistory, store);
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 
@@ -29,7 +29,7 @@ const component = (
     <Router render={(props) =>
       <ReduxAsyncConnect {...props} helpers={{client}}
                          filter={item => !item.deferred}/>
-    } history={history}>
+    } history={browserHistory}>
       {getRoutes(store)}
     </Router>
   </MuiThemeProvider>
