@@ -41,8 +41,6 @@ ReactDOM.render(
   dest
 );
 
-
-
 if (process.env.LEANCLOUD_APP_ENV !== 'production') {
   window.React = React; // enable debugger
 
