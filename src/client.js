@@ -7,7 +7,7 @@ import ReactDOM from 'react-dom';
 import createStore from './redux/create';
 import ApiClient from './helpers/ApiClient';
 import {Provider} from 'react-redux';
-import {HashRouter as Router, browserHistory} from 'react-router';
+import {Router, browserHistory} from 'react-router';
 // import {syncHistoryWithStore} from 'react-router-redux';
 import {ReduxAsyncConnect} from 'redux-async-connect';
 // import useScroll from 'scroll-behavior/lib/useStandardScroll';
