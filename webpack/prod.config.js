@@ -4,7 +4,7 @@ require('babel-polyfill');
 var path = require('path');
 var webpack = require('webpack');
 var CleanPlugin = require('clean-webpack-plugin');
-var ExtractTextPlugin = require('extract-text-webpack-plugin-webpack-2');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var strip = require('strip-loader');
 
 var projectRootPath = path.resolve(__dirname, '../');
