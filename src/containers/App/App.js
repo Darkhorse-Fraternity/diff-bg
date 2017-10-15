@@ -1,12 +1,13 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { IndexLink } from 'react-router';
+import {connect} from 'react-redux';
+import {IndexLink, Link} from 'react-router';
 import Helmet from 'react-helmet';
-import { logout } from 'redux/modules/auth';
-import { push } from 'react-router-redux';
+import {logout} from 'redux/modules/auth';
+import {push} from 'react-router-redux';
 import config from '../../config';
-import { asyncConnect } from 'redux-async-connect';
+import {asyncConnect} from 'redux-async-connect';
+import FlatButton from 'material-ui/FlatButton';
 
 @asyncConnect([{
   promise: ({store: {}}) => {
@@ -53,28 +54,35 @@ export default class App extends Component {
   };
 
   render() {
-    const {user} = this.props;
+    // const {user} = this.props;
     // const styles = require('./App.scss');
-    console.log('test:', user);
+    // console.log('this.context:', this.context);
 
     return (
-      <div >
-        <Helmet {...config.app.head}/>
-        <IndexLink to="/" activeStyle={{color: '#33e0ff'}}>
-          <div/>
-          <span>{config.app.title}</span>
-        </IndexLink>
+        <div>
+          <Helmet {...config.app.head}/>
 
-        <div >
-          {this.props.children}
-        </div>
+          <div>
+            <IndexLink to="/" activeStyle={{color: '#33e0ff'}}>
+              <div/>
+              <span>{config.app.title}</span>
+            </IndexLink>
+            <Link
+              to={"/login"}
+            >
+              <FlatButton label="LOGIN"/>
+            </Link>
+          </div>
+          <div>
+            {this.props.children}
+          </div>
 
-        <div className="well text-center">
-          footer <a
-          href="http://lahuo.leanapp.cn/"
-          target="_blank">design by tony</a>
+          <div className="well text-center">
+            footer <a
+            href="http://lahuo.leanapp.cn/"
+            target="_blank">design by tony</a>
+          </div>
         </div>
-      </div>
     );
   }
 }

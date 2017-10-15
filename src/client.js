@@ -25,20 +25,20 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 
 const component = (
-  <MuiThemeProvider>
-    <Router render={(props) =>
-      <ReduxAsyncConnect {...props} helpers={{client}}
-                         filter={item => !item.deferred}/>
-    } history={browserHistory}>
-      {getRoutes(store)}
-    </Router>
-  </MuiThemeProvider>
+  <Router render={(props) =>
+    <ReduxAsyncConnect {...props} helpers={{client}}
+                       filter={item => !item.deferred}/>
+  } history={browserHistory}>
+    {getRoutes(store)}
+  </Router>
 );
 
 ReactDOM.render(
-  <Provider store={store} key="provider">
-    {component}
-  </Provider>,
+  <MuiThemeProvider>
+    <Provider store={store} key="provider">
+      {component}
+    </Provider>
+  </MuiThemeProvider>,
   dest
 );
 
@@ -53,12 +53,14 @@ if (process.env.LEANCLOUD_APP_ENV !== 'production') {
 if (__DEVTOOLS__ && !window.devToolsExtension) {
   const DevTools = require('./containers/DevTools/DevTools');
   ReactDOM.render(
-    <Provider store={store} key="provider">
-      <div>
-        {component}
-        <DevTools/>
-      </div>
-    </Provider>,
+    <MuiThemeProvider>
+      <Provider store={store} key="provider">
+        <div>
+          {component}
+          <DevTools/>
+        </div>
+      </Provider>
+    </MuiThemeProvider>,
     dest
   );
 }
