@@ -7,12 +7,12 @@ import ReactDOM from 'react-dom';
 import createStore from './redux/create';
 import ApiClient from './helpers/ApiClient';
 import {Provider} from 'react-redux';
-import {Router, browserHistory} from 'react-router';
+import {Router, browserHistory, applyRouterMiddleware} from 'react-router';
 // import {syncHistoryWithStore} from 'react-router-redux';
 import {ReduxAsyncConnect} from 'redux-connect';
-// import useScroll from 'scroll-behavior/lib/useStandardScroll';
-// import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import { useScroll } from 'react-router-scroll';
+// import createHistory from 'history/createBrowserHistory'
 
 import getRoutes from './routes';
 
@@ -21,16 +21,23 @@ const client = new ApiClient();
 const dest = document.getElementById('content');
 const store = createStore(browserHistory, client, window.__data);
 // const history = syncHistoryWithStore(_browserHistory, store);
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
+// const history = createHistory()
 
 const component = (
-  <Router render={(props) =>
-    <ReduxAsyncConnect {...props} helpers={{client}}
-                       filter={item => !item.deferred}/>
-  } history={browserHistory}>
-    {getRoutes(store)}
-  </Router>
+  <Router
+    render={(props) => (
+      <ReduxAsyncConnect
+        {...props}
+        helpers={{ client }}
+        filter={item => !item.deferred}
+        render={applyRouterMiddleware(useScroll())}
+      />
+    )}
+    history={browserHistory}
+    routes={getRoutes(store)}
+  />
+
 );
 
 
