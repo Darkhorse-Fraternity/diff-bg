@@ -137,7 +137,7 @@
     "react-router-scroll": "^0.4.3",
     "redux": "^3.0.4",
     "redux-connect": "^6.0.0",
-    "redux-form": "^3.0.12",
+    "redux-form": "^7.1.1",
     "redux-thunk": "^2.1.0",
     "serialize-javascript": "^1.1.2",
     "serve-favicon": "^2.3.0",
