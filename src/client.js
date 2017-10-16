@@ -41,7 +41,7 @@ const component = (
 );
 
 
-ReactDOM.render(
+ReactDOM.hydrate(
   <MuiThemeProvider>
     <Provider store={store} key="provider">
       {component}
@@ -60,7 +60,7 @@ if (process.env.LEANCLOUD_APP_ENV !== 'production') {
 
 if (__DEVTOOLS__ && !window.devToolsExtension) {
   const DevTools = require('./containers/DevTools/DevTools');
-  ReactDOM.render(
+  ReactDOM.hydrate(
     <MuiThemeProvider>
       <Provider store={store} key="provider">
         <div>

@@ -1,11 +1,26 @@
 /*eslint-disable */
 import React, {Component} from 'react'
 import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup'
-// import Todo from '../components/Todo'
 import {List, ListItem, UsersView} from 'styles/List'
 import TextField from 'material-ui/TextField'
+import {asyncConnect} from 'redux-connect';
 
+@asyncConnect([{
+  key: 'users',
+  promise: ({store: {}}) => {
+    // const promises = [];
 
+    // if (!isInfoLoaded(getState())) {
+    //   promises.push(dispatch(loadInfo()));
+    // }
+    // if (!isAuthLoaded(getState())) {
+    //   promises.push(dispatch(loadAuth()));
+    // }
+
+    // return Promise.all(promises);
+    return Promise.resolve({ id: 1, name: 'Borsch' });
+  }
+}])
 export default class Users extends Component {
 
   render() {

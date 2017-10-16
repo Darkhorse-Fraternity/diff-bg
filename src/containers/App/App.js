@@ -10,8 +10,9 @@ import {asyncConnect} from 'redux-connect';
 import FlatButton from 'material-ui/FlatButton';
 
 @asyncConnect([{
+  key: 'lunch',
   promise: ({store: {}}) => {
-    const promises = [];
+    // const promises = [];
 
     // if (!isInfoLoaded(getState())) {
     //   promises.push(dispatch(loadInfo()));
@@ -20,7 +21,8 @@ import FlatButton from 'material-ui/FlatButton';
     //   promises.push(dispatch(loadAuth()));
     // }
 
-    return Promise.all(promises);
+    // return Promise.all(promises);
+    return Promise.resolve({ id: 1, name: 'Borsch' });
   }
 }])
 @connect(
@@ -54,6 +56,7 @@ export default class App extends Component {
   };
 
   render() {
+    console.log('props:', this.props);
     const {user} = this.props;
     // const styles = require('./App.scss');
     // console.log('this.context:', this.context);
