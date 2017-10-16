@@ -38,7 +38,7 @@ const Welcome = ({user, username, onLogoutClick}) => (
       {username}
       <br />
       <br />
-      欢迎使用TodoList!
+      欢迎使用Combo!
     </Page>
     <Button
     fullWidth={true}

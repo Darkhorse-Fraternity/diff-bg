@@ -57,17 +57,17 @@ errorMsgTranslator (err) {
           }
         >
           <LoginInfo error={loginError}>
-            { loginError ? this.errorMsgTranslator(loginError) : 'Welcome'}
+            { loginError ? this.errorMsgTranslator(loginError) : 'Combo'}
           </LoginInfo>
           <TextField
-            floatingLabelText='UserName'
+            floatingLabelText='账号'
             className='username'
             autoComplete='off'
             ref={node => this.usnInput = node}
             />
           <br />
           <TextField
-            floatingLabelText='Password'
+            floatingLabelText='验证码'
             type='password'
             className='password'
             autoComplete='off'

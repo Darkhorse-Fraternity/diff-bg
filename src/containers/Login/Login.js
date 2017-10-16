@@ -7,7 +7,7 @@ import * as authActions from 'redux/modules/auth';
 import LoginForm from 'styles/LoginForm';
 import Overlay from 'styles/Overlay';
 import Welcome from 'styles/Welcome';
-
+import Form from 'components/Login/Form';
 @connect(
   state => ({
     user: state.auth.user,
@@ -44,18 +44,7 @@ export default class Login extends Component {
     return (
       <Overlay login>
         <Helmet title="登录"/>
-        {!user &&
-        <div>
-          <form className="login-form form-inline" onSubmit={this.handleSubmit}>
-            <div className="form-group">
-              <input type="text" ref="username" placeholder="输入账号" className="form-control"/>
-              <input type="text" ref="password" placeholder="输入验证码" className="form-control"/>
-            </div>
-            <button className="btn btn-success" onClick={this.handleSubmit}><i className="fa fa-sign-in"/>{' '}Log In
-            </button>
-          </form>
-        </div>
-        }
+        {!user && <Form {...this.props}/>}
         {user &&
           <LoginForm out>
             <Welcome

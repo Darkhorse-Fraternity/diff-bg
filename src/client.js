@@ -33,6 +33,7 @@ const component = (
   </Router>
 );
 
+
 ReactDOM.render(
   <MuiThemeProvider>
     <Provider store={store} key="provider">

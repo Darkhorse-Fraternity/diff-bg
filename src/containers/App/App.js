@@ -54,7 +54,7 @@ export default class App extends Component {
   };
 
   render() {
-    // const {user} = this.props;
+    const {user} = this.props;
     // const styles = require('./App.scss');
     // console.log('this.context:', this.context);
 
@@ -64,13 +64,19 @@ export default class App extends Component {
 
           <div>
             <IndexLink to="/" activeStyle={{color: '#33e0ff'}}>
-              <div/>
-              <span>{config.app.title}</span>
+              <FlatButton label="首页"/>
             </IndexLink>
+            {user && (<Link
+              to={"/users"}
+              activeStyle={{color: '#33e0ff'}}
+            >
+              <FlatButton label="用户列表"/>
+            </Link>)}
             <Link
               to={"/login"}
+              activeStyle={{color: '#33e0ff'}}
             >
-              <FlatButton label="LOGIN"/>
+              <FlatButton label="登录"/>
             </Link>
           </div>
           <div>
