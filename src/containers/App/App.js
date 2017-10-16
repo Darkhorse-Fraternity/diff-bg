@@ -6,7 +6,7 @@ import Helmet from 'react-helmet';
 import {logout} from 'redux/modules/auth';
 import {push} from 'react-router-redux';
 import config from '../../config';
-import {asyncConnect} from 'redux-async-connect';
+import {asyncConnect} from 'redux-connect';
 import FlatButton from 'material-ui/FlatButton';
 
 @asyncConnect([{
