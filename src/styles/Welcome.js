@@ -45,7 +45,7 @@ const Welcome = ({user, username, onLogoutClick}) => (
       bigger
       logout
       label='退出登录'
-      onTouchTap={(e) => {
+      onClick={(e) => {
         onLogoutClick()
       }}
     />

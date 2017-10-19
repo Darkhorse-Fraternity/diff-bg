@@ -44,8 +44,8 @@ errorMsgTranslator (err) {
     })
   }
   render () {
-    const { sign,login, isLogging, loginError, onLogoutClick, isLogged } = this.props
-    return this.state.isLoginOpen ?
+    const { sign,login, isLogging, loginError } = this.props
+    return (true) ?
 
     <LoginForm  login
           onSubmit={(e) => {
@@ -57,7 +57,7 @@ errorMsgTranslator (err) {
           }
         >
           <LoginInfo error={loginError}>
-            { loginError ? this.errorMsgTranslator(loginError) : 'Combo'}
+            { loginError ? loginError.error : 'Combo'}
           </LoginInfo>
           <TextField
             floatingLabelText='账号'
@@ -88,9 +88,8 @@ errorMsgTranslator (err) {
             innerRef={node => this.submitBtn = node}
 
           />
-          <p>还没有账号？请点击<NormalLink href="#" onClick={this.toggleLoginOpen.bind(this)}
-            style={{color:'#29aed4'}}
-          >注册</NormalLink></p>
+            {/*style={{color:'#29aed4'}}*/}
+          {/*>注册</NormalLink></p>*/}
         </LoginForm>
 
         :
@@ -144,7 +143,8 @@ errorMsgTranslator (err) {
             innerRef={node => this.submitBtn = node}
 
           />
-          <p>已有账号？请<NormalLink href="#" onClick={this.toggleLoginOpen.bind(this)} style={{color:'#29aed4'}}>
+          <p>已有账号？请<NormalLink href="#"
+                               style={{color:'#29aed4'}}>
             登录</NormalLink></p>
         </LoginForm>
   }

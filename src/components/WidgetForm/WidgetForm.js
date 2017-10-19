@@ -54,12 +54,10 @@ export default class WidgetForm extends Component {
         </td>
         <td className={styles.buttonCol}>
           <button className="btn btn-default"
-                  onClick={() => editStop(formKey)}
                   disabled={submitting}>
             <i className="fa fa-ban"/> Cancel
           </button>
           <button className="btn btn-success"
-                  onClick={handleSubmit(() => save(values)
                     .then(result => {
                       if (result && typeof result.error === 'object') {
                         return Promise.reject(result.error);

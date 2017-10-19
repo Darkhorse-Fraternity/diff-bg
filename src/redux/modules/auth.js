@@ -102,9 +102,13 @@ export function sign(name, pass) {
 }
 
 export function logout() {
+  // return {
+  //   types: [LOGOUT, LOGOUT_SUCCESS, LOGOUT_FAIL],
+  //   promise: (client) => client.get('/logout')
+  // };
   return {
-    types: [LOGOUT, LOGOUT_SUCCESS, LOGOUT_FAIL],
-    promise: (client) => client.get('/logout')
+    type: LOGOUT_SUCCESS,
+    // promise: (client) => client.get('/logout')
   };
 }
 

@@ -4,6 +4,7 @@ import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup'
 import {List, ListItem, UsersView} from 'styles/List'
 import TextField from 'material-ui/TextField'
 import {asyncConnect} from 'redux-connect';
+import {req} from 'redux/modules/req'
 
 @asyncConnect([{
   key: 'users',
@@ -24,6 +25,7 @@ import {asyncConnect} from 'redux-connect';
 export default class Users extends Component {
 
   render() {
+    console.log('this.props:', this.props);
     const users = [{"name": "tonyYo"}, {"name": "masd"}]
     return (
       <UsersView>

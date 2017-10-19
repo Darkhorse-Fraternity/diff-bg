@@ -11,8 +11,8 @@ import Form from 'components/Login/Form';
 @connect(
   state => ({
     user: state.auth.user,
-    isLogging: state.auth.loading,
-    loginError: state.auth.error
+    isLogging: state.auth.loggingIn,
+    loginError: state.auth.loginError
   }),
   authActions)
 export default class Login extends Component {
@@ -44,7 +44,9 @@ export default class Login extends Component {
     return (
       <Overlay login>
         <Helmet title="登录"/>
-        {!user && <Form {...this.props}/>}
+        {!user && <Form
+          {...this.props}
+        />}
         {user &&
           <LoginForm out>
             <Welcome
