@@ -1,56 +1,87 @@
 /*eslint-disable */
 import React, {Component} from 'react'
-import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup'
+import {TransitionGroup, CSSTransition} from 'react-transition-group'
 import {List, ListItem, UsersView} from 'styles/List'
 import TextField from 'material-ui/TextField'
-import {asyncConnect} from 'redux-connect';
 import {req} from 'redux/modules/req'
+import {connect} from 'react-redux';
+import {searchUser} from 'helpers/leanCloud'
+import _ from 'lodash';
 
-@asyncConnect([{
-  key: 'users',
-  promise: ({store: {}}) => {
-    // const promises = [];
+const Fade = ({children, ...props}) => (
+  <CSSTransition
+    {...props}
+    timeout={1000}
+    classNames="fade"
+  >
+    {children}
+  </CSSTransition>
+);
 
-    // if (!isInfoLoaded(getState())) {
-    //   promises.push(dispatch(loadInfo()));
-    // }
-    // if (!isAuthLoaded(getState())) {
-    //   promises.push(dispatch(loadAuth()));
-    // }
 
-    // return Promise.all(promises);
-    return Promise.resolve({ id: 1, name: 'Borsch' });
+@connect(
+  state => ({users: state.req.data}),
+  {
+    load: (username) => {
+      const params = {
+        where: {
+          username:{
+            "$regex":username,
+            "$options":"i"
+          }
+        },
+        limit:100
+      };
+      const parmas = searchUser(params)
+      return req(parmas)
+    }
   }
-}])
+)
 export default class Users extends Component {
 
+  constructor(props) {
+    super(props);
+    this._onChange = _.throttle(this._onChange, 1000);
+  }
+
+
+  _onChange(value = ''){
+    this.props.load(value);
+  }
+
   render() {
-    console.log('this.props:', this.props);
-    const users = [{"name": "tonyYo"}, {"name": "masd"}]
+    // console.log('this.props:', this.props.users);
+    const users = this.props.users
     return (
       <UsersView>
-          <TextField
-            floatingLabelText='用户查询'
-            className='userSearch'
-            autoComplete='off'
-            ref={node => this.userInput = node}
-          />
-        <CSSTransitionGroup
-          component={List}
+
+        <TextField
+          id="userSearch"
+          label="用户查询"
+          className={"userSearch"}
+          margin="normal"
+          autoComplete='off'
+          onChange={evnet => this._onChange(evnet.target.value)}
+        />
+        {users && <TransitionGroup
           className='todo-list'
-          transitionName='add-remove-item'
-          transitionEnterTimeout={250}
-          transitionLeaveTimeout={250}
         >
-          {users.map(todo =>
-            <ListItem key={todo.name}>
-              <b>
-                {todo.name}
-              </b>
-            </ListItem>
+          {users.map(user =>
+            <Fade key={user.username}>
+              <ListItem>
+                <b>
+                  姓名: {user.username}
+                </b>
+                <p/>
+                <b>
+                  手机号 : {user.mobilePhoneNumber || '无'}
+                </b>
+              </ListItem>
+            </Fade>
           )}
 
-        </CSSTransitionGroup>
+        </TransitionGroup>}
+
       </UsersView>
     )
   }

@@ -7,7 +7,7 @@ import {logout} from 'redux/modules/auth';
 import {push} from 'react-router-redux';
 import config from '../../config';
 import {asyncConnect} from 'redux-connect';
-import FlatButton from 'material-ui/FlatButton';
+import FlatButton from 'material-ui/Button';
 
 @asyncConnect([{
   key: 'app',
@@ -22,7 +22,7 @@ import FlatButton from 'material-ui/FlatButton';
     // }
 
     // return Promise.all(promises);
-    return Promise.resolve({ id: 1, name: 'Borsch' });
+    return Promise.resolve({id: 1, name: 'Borsch'});
   }
 }])
 @connect(
@@ -50,48 +50,54 @@ export default class App extends Component {
     }
   }
 
+  // contextTypes: {
+  //   router: routerShape
+  // }
+
   handleLogout = (event) => {
     event.preventDefault();
     this.props.logout();
   };
 
+  // activity = (toLocation, onlyActiveOnIndex) =>{
+  //   const router = this.context.router;
+  //   return router.isActive(toLocation, onlyActiveOnIndex);
+  // };
+
   render() {
-    console.log('props:', this.props);
+    // console.log('props:', this.props);
     const {user} = this.props;
     // const styles = require('./App.scss');
     // console.log('this.context:', this.context);
 
+    console.log('test:', this.props);
+
     return (
+      <div>
+        <Helmet {...config.app.head}/>
+
         <div>
-          <Helmet {...config.app.head}/>
-
-          <div>
-            <IndexLink to="/" activeStyle={{color: '#33e0ff'}}>
-              <FlatButton label="首页"/>
-            </IndexLink>
-            {user && (<Link
-              to={"/users"}
-              activeStyle={{color: '#33e0ff'}}
-            >
-              <FlatButton label="用户列表"/>
-            </Link>)}
-            <Link
-              to={"/login"}
-              activeStyle={{color: '#33e0ff'}}
-            >
-              <FlatButton label="登录"/>
-            </Link>
-          </div>
-          <div>
-            {this.props.children}
-          </div>
-
-          <div className="well text-center">
-            footer <a
-            href="http://lahuo.leanapp.cn/"
-            target="_blank">design by tony</a>
-          </div>
+          <FlatButton component={IndexLink} to={"/"}>
+            首页
+          </FlatButton>
+          {user && (
+            <FlatButton component={Link} to={"/users"}>
+              用户列表
+            </FlatButton>)}
+          <FlatButton component={Link} to={"/login"}>
+            登录
+          </FlatButton>
         </div>
+        <div>
+          {this.props.children}
+        </div>
+
+        <div className="well text-center">
+          footer <a
+          href="http://lahuo.leanapp.cn/"
+          target="_blank">design by tony</a>
+        </div>
+      </div>
     );
   }
 }

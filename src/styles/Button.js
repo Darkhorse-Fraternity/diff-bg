@@ -3,7 +3,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import styledProps from 'styled-props'
-import RaisedButton from 'material-ui/FlatButton'
+import RaisedButton from 'material-ui/Button'
 
 const margin = {
   default: 0,

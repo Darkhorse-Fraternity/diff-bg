@@ -1,5 +1,6 @@
 import superagent from 'superagent';
 import config from '../config';
+import {toQueryString} from './useMeth';
 
 const methods = ['get', 'post', 'put', 'patch', 'del'];
 
@@ -41,7 +42,7 @@ export default class ApiClient {
         scheme = 'https',
         host = config.remoteApiHost,
         path = '/',
-        method = 'GET',
+        method = 'get',
         timeout = 20000,
         params,
         head = config.remoteHeader,
@@ -53,8 +54,9 @@ export default class ApiClient {
       const request = superagent[method](url);
       request.set(head);
       request.timeout(timeout);
-      if (method === 'GET') {
-        request.query(params);
+      if (method === 'get') {
+        const queryString = toQueryString(params);
+        request.query(queryString);
       } else {
         request.send(params);
       }

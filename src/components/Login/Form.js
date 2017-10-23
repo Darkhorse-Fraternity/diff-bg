@@ -13,7 +13,9 @@ class Form extends Component {
   constructor(props) {
   super(props);
   this.state = {
-    isLoginOpen: true
+    isLoginOpen: true,
+    phoneNum:'',
+    password:''
   };
 }
 
@@ -46,13 +48,12 @@ errorMsgTranslator (err) {
   render () {
     const { sign,login, isLogging, loginError } = this.props
     return (true) ?
-
     <LoginForm  login
           onSubmit={(e) => {
             e.preventDefault()
             login(
-              this.usnInput.input.value,
-              this.pswInput.input.value
+              this.state.phoneNum,
+              this.state.password
             )}
           }
         >
@@ -60,18 +61,22 @@ errorMsgTranslator (err) {
             { loginError ? loginError.error : 'Combo'}
           </LoginInfo>
           <TextField
-            floatingLabelText='账号'
+            id='username'
+            label='账号'
             className='username'
             autoComplete='off'
-            ref={node => this.usnInput = node}
+            margin="normal"
+            onChange={event=>this.setState({phoneNum:event.target.value})}
             />
           <br />
           <TextField
-            floatingLabelText='验证码'
+            id='password'
+            margin="normal"
+            label='验证码'
             type='password'
             className='password'
-            autoComplete='off'
-            ref={node => this.pswInput = node}
+            onChange={event=>this.setState({password:event.target.value})}
+            autoComplete="current-password"
             />
           <br />
           <LoginIndicator
@@ -81,13 +86,13 @@ errorMsgTranslator (err) {
             status={'loading'}
             hide={!isLogging}
             />
-          <Button login bigger label='登录'
+          <Button login
             primary={true}
             type='submit'
             hide={isLogging}
-            innerRef={node => this.submitBtn = node}
-
-          />
+            innerRef={node => this.submitBtn = node}>
+            登录
+          </Button>
             {/*style={{color:'#29aed4'}}*/}
           {/*>注册</NormalLink></p>*/}
         </LoginForm>

@@ -4,7 +4,7 @@ import styled from 'styled-components';
 export  const List = styled.div`
 `;
 
-export const UsersView = styled.div`
+export const UsersView = styled.form`
   padding: 25px;
 `
 

@@ -69,6 +69,14 @@ export function requestUsersByMobilePhone(mobilePhoneNumber:string,smsCode:strin
   }
 }
 
+export function searchUser(params) {
+  return {
+    path   : '/users',
+    method : methodType.get,
+    params : params
+  }
+}
+
 /**
  * 使用手机和密码登录
  * @param  {[type]} mobilePhoneNumber:string 注册用的手机号码

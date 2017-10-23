@@ -19,7 +19,7 @@ export default function reducer(state = initialState, action = {}) {
         ...state,
         loading: false,
         loaded: true,
-        user: action.result
+        data: action.result
       };
     case LOAD_FAIL:
       return {
@@ -37,6 +37,6 @@ export default function reducer(state = initialState, action = {}) {
 export function req(params) {
   return {
     types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
-    promise: client => client.req(params)
+    promise: client => client.req(params).then(res=>res.results)
   };
 }

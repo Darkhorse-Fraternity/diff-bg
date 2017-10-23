@@ -85,16 +85,16 @@ export function load() {
   };
 }
 
-export function login(name, pass) {
-  const params = requestUsersByMobilePhone(name, pass);
+export function login(...args) {
+  const params = requestUsersByMobilePhone(...args);
   return {
     types: [LOGIN, LOGIN_SUCCESS, LOGIN_FAIL],
     promise: client => client.req(params)
   };
 }
 
-export function sign(name, pass) {
-  const params = requestUsersByMobilePhone(name, pass);
+export function sign(...args) {
+  const params = requestUsersByMobilePhone(...args);
   return {
     types: [LOGIN, LOGIN_SUCCESS, LOGIN_FAIL],
     promise: client => client.req(params)
