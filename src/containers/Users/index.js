@@ -11,7 +11,6 @@ import {USERS} from 'redux/reqKeys'
 import Button from 'material-ui/Button';
 import { immutableRenderDecorator } from 'react-immutable-render-mixin';
 
-
 const Fade = ({children, ...props}) => (
   <CSSTransition
     {...props}
@@ -24,7 +23,7 @@ const Fade = ({children, ...props}) => (
 
 
 @connect(
-  state => ({users: state.req[USERS]}),
+  state => ({users: state.req.get(USERS)}),
   {
     load: (username) => {
       const params = {
@@ -56,8 +55,8 @@ export default class Users extends Component {
 
   render() {
     // console.log('this.props:', this.props.users);
-    console.log('test:', '1111');
-    const users = this.props.users
+    const users = this.props.users.toJS()
+
     return (
       <UsersView>
 
