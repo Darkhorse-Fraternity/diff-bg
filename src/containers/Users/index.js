@@ -7,7 +7,7 @@ import {req} from 'redux/modules/req'
 import {connect} from 'react-redux';
 import {searchUser, updateRoles} from 'helpers/leanCloud'
 import _ from 'lodash';
-import {USERS} from 'redux/reqKeys'
+import {USERS, UPDATEROLE} from 'redux/reqKeys';
 import Button from 'material-ui/Button';
 import { immutableRenderDecorator } from 'react-immutable-render-mixin';
 
@@ -36,12 +36,20 @@ const Fade = ({children, ...props}) => (
         limit: 100
       };
       const parmas = searchUser(params)
-      return req(parmas,USERS)
+      return  req(parmas,USERS)
     },
     updateRole: (id, op)=>{
       const rolsesId = '59ed675667f356003a441f5d';
       const params = updateRoles(id, op, rolsesId);
-      return req(params, 'updateRole')
+      return  async (dispatch) => {
+        try {
+          const res = await dispatch(req(params, UPDATEROLE))
+          console.log('updateRole:', res);
+        }catch (e){
+          console.log('updateRole e:', e.message);
+        }
+
+      }
     }
   }
 )
@@ -53,6 +61,10 @@ export default class Users extends Component {
     this._onChange = _.throttle(this._onChange, 1000);
   }
 
+
+  componentDidMount() {
+    this.props.load('')
+  }
 
   _onChange(value = '') {
     this.props.load(value);

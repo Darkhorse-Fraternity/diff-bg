@@ -13,7 +13,10 @@ const registerKeys = (keys = []) => {
   const loadState = {};
   keys.forEach((key) => {
     newKyes[key] = [];
-    loadState[key] = [];
+    loadState[key] = {
+      loading: false,
+      loaded: false,
+    };
   });
   newKyes.loadState = loadState;
   return newKyes;
@@ -60,7 +63,7 @@ export default function reducer(state = initialState, action: Object) {
 export function req(params, key) {
   return {
     types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
-    promise: client => client.req(params).then(res => res.results),
+    promise: client => client.req(params).then(res => res.results || res),
     key
   };
 }
@@ -70,7 +73,7 @@ export function reqN(params, key) {
   return () => {
     return {
       types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
-      promise: client => client.req(params).then(res => res.results),
+      promise: client => client.req(params).then(res => res.results || res),
       key
     };
   };

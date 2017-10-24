@@ -1,9 +1,11 @@
 
 export const USERS = 'users';
 export const CARDLIST = 'cardList';
+export const UPDATEROLE = 'updateRole';
 
 export const registerReqKeys = [
-  USERS
+  USERS,
+  UPDATEROLE
 ];
 
 

@@ -45,7 +45,7 @@ export function addEntities(data: Object): Object {
 
 
 export default function reducer(state = initialState, action: Object) {
-  console.log('test:', state,action);
+  // console.log('test:', state,action);
     switch (action.type) {
 
         case ADD_NORMALIZR:{
