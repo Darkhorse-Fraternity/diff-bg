@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
 import { routerReducer } from 'react-router-redux';
+
 // import {reducer as reduxAsyncConnect} from 'redux-connect';
 import {immutableReducer as reduxAsyncConnect } from 'redux-connect';
 // import * as immutable from 'immutable';
@@ -9,10 +10,12 @@ import {immutableReducer as reduxAsyncConnect } from 'redux-connect';
 
 import load from './req';
 import auth from './auth';
+import normalizr from './normalizr';
 
 export default combineReducers({
   routing: routerReducer,
   reduxAsyncConnect,
   auth,
-  req: load
+  req: load,
+  normalizr
 });

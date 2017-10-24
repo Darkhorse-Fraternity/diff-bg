@@ -26,28 +26,8 @@ const initialState = immutable.fromJS({
 export default function reducer(state = initialState, action: Object) {
   switch (action.type) {
     case LOAD:
-      // return {
-      //   ...state,
-      //   loadState: {
-      //     ...state.loadState,
-      //     [action.key]: {
-      //       loading: true
-      //     }
-      //   },
-      // };
       return state.setIn(['loadState', action.key, 'loading'], true);
     case LOAD_SUCCESS: {
-// return {
-      //   ...state,
-      //   loadState: {
-      //     ...state.loadState,
-      //     [action.key]: {
-      //       loading: false,
-      //       loaded: true,
-      //     }
-      //   },
-      //   [action.key]: action.result
-      // };
       const loadState = state.get('loadState').mergeDeep({
         [action.key]: {
           loading: false,
@@ -57,17 +37,6 @@ export default function reducer(state = initialState, action: Object) {
       return state.merge({loadState, [action.key]: action.result});
     }
     case LOAD_FAIL: {
-      // return {
-      //   ...state,
-      //   loadState: {
-      //     ...state.loadState,
-      //     [action.key]: {
-      //       loading: false,
-      //       loaded: false,
-      //       error: action.error
-      //     }
-      //   },
-      // };
       const loadState = state.get('loadState').mergeDeep({
         [action.key]: {
           loading: false,
@@ -96,3 +65,13 @@ export function req(params, key) {
   };
 }
 
+// 做normalizr 做到一半，太累了，后面做
+export function reqN(params, key) {
+  return () => {
+    return {
+      types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
+      promise: client => client.req(params).then(res => res.results),
+      key
+    };
+  };
+}

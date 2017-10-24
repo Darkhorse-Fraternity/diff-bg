@@ -5,7 +5,7 @@ import {List, ListItem, UsersView, LeftView, RightView} from 'styles/Users'
 import TextField from 'material-ui/TextField'
 import {req} from 'redux/modules/req'
 import {connect} from 'react-redux';
-import {searchUser} from 'helpers/leanCloud'
+import {searchUser, updateRoles} from 'helpers/leanCloud'
 import _ from 'lodash';
 import {USERS} from 'redux/reqKeys'
 import Button from 'material-ui/Button';
@@ -37,6 +37,11 @@ const Fade = ({children, ...props}) => (
       };
       const parmas = searchUser(params)
       return req(parmas,USERS)
+    },
+    updateRole: (id, op)=>{
+      const rolsesId = '59ed675667f356003a441f5d';
+      const params = updateRoles(id, op, rolsesId);
+      return req(params, 'updateRole')
     }
   }
 )
@@ -84,10 +89,14 @@ export default class Users extends Component {
                   </b>
                 </LeftView>
                 <RightView>
-                  <Button>
+                  <Button onClick={(e) => {
+                    this.props.updateRole(user.objectId, 'AddRelation');
+                  }}>
                     设置成管理员
                   </Button>
-                  <Button>
+                  <Button onClick={(e) => {
+                    this.props.updateRole(user.objectId, 'RemoveRelation');
+                  }}>
                     取消管理员
                   </Button>
                 </RightView>

@@ -163,6 +163,30 @@ export function updateUserName(id:string,username:string):Object{
     }
 }
 
+
+/*
+ * 更新角色
+ */
+export function updateRoles(id,op,rolsesId) {
+  return {
+    path:'/roles/'+rolsesId,
+    method:methodType.put,
+    params:{
+      "users": {
+        "__op": op,
+        "objects": [
+          {
+            "__type": "Pointer",
+            "className": "_User",
+            "objectId": id
+          }
+        ]
+      }
+    }
+  }
+}
+
+
 /**
  * 绑定文件或图片到user中。
  * @param  {[type]} userID:string [description]

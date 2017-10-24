@@ -8,6 +8,8 @@ const LOGOUT = 'combo/auth/LOGOUT';
 const LOGOUT_SUCCESS = 'combo/auth/LOGOUT_SUCCESS';
 const LOGOUT_FAIL = 'combo/auth/LOGOUT_FAIL';
 
+import config from '../../config';
+
 import {requestUsersByMobilePhone} from '../../helpers/leanCloud';
 const initialState = {
   loaded: false
@@ -89,7 +91,10 @@ export function login(...args) {
   const params = requestUsersByMobilePhone(...args);
   return {
     types: [LOGIN, LOGIN_SUCCESS, LOGIN_FAIL],
-    promise: client => client.req(params)
+    promise: client => client.req(params).then(res => {
+      config.remoteHeader['X-LC-Session'] = res.sessionToken;
+      return res;
+    })
   };
 }
 
