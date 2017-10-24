@@ -90,7 +90,7 @@ errorMsgTranslator (err) {
             // primary={true}
             type='submit'
             hide={isLogging}
-            innerRef={node => this.submitBtn = node}>
+          >
             登录
           </Button>
             {/*style={{color:'#29aed4'}}*/}
@@ -101,12 +101,7 @@ errorMsgTranslator (err) {
         <LoginForm
           onSubmit={(e) => {
             e.preventDefault()
-            sign(
-              this.usnInput.input.value,
-              this.pswInput.input.value,
-              this.emInput.input.value,
-            )}
-          }
+          }}
         >
           <LoginInfo error={loginError}>
             { loginError ? this.errorMsgTranslator(loginError) : 'Welcome'}
@@ -115,7 +110,6 @@ errorMsgTranslator (err) {
             floatingLabelText='UserName'
             className='username'
             autoComplete='off'
-            ref={node => this.usnInput = node}
             />
           <br />
 
@@ -124,7 +118,6 @@ errorMsgTranslator (err) {
             type='password'
             className='password'
             autoComplete='off'
-            ref={node => this.pswInput = node}
             />
           <br />
           <TextField
@@ -132,7 +125,6 @@ errorMsgTranslator (err) {
             type='email'
             className='password'
             autoComplete='off'
-            ref={node => this.emInput = node}
             />
           <br />
           <LoginIndicator
@@ -145,7 +137,6 @@ errorMsgTranslator (err) {
           <Button login bigger label='注册'
             type='submit'
             hide={isLogging}
-            innerRef={node => this.submitBtn = node}
 
           />
           <p>已有账号？请<NormalLink href="#"

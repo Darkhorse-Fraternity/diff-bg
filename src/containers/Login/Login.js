@@ -33,15 +33,6 @@ export default class Login extends Component {
     loginError: ''
   }
 
-  handleSubmit = (event) => {
-    event.preventDefault();
-    const input = this.refs.username;
-    const input2 = this.refs.password;
-    this.props.login(input.value, input2.value);
-    input.value = '';
-    input2.value = '';
-  }
-
   render() {
     const {user, logout} = this.props;
     return (

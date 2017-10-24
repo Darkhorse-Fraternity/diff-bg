@@ -6,6 +6,7 @@ import styled from 'styled-components'
 import Button from '../styles/Button'
 import Page from '../styles/Page'
 import Avatar from 'material-ui/Avatar';
+
 const WelcomeDIV = styled.div`
   color: #03A9F4;
   box-sizing: border-box;
@@ -16,6 +17,8 @@ const WelcomeDIV = styled.div`
   text-align: center;
   align-items: center;
   line-height: 1.5;
+  display:flex;
+  flex-flow: column;
   & svg {
     height: 50px !important;
     width: 50px !important;
@@ -27,21 +30,19 @@ const Welcome = ({user, username, onLogoutClick}) => (
   <WelcomeDIV>
     {/* <CheckCircle /> */}
 
-              <Avatar
-                  color={'#fff'}
-                  backgroundColor={'#43c1ef'}
-                  size={40}
-                   >{username}
-            </Avatar>
+    <Avatar
+      color={'#fff'}
+      size={40}
+    >{username}
+    </Avatar>
 
     <Page>
       {username}
-      <br />
-      <br />
+      <br/>
+      <br/>
       欢迎使用Combo!
     </Page>
     <Button
-    fullWidth={true}
       logout
       onClick={(e) => {
         onLogoutClick()

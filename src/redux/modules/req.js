@@ -6,10 +6,22 @@ const LOAD = 'combo/req/LOAD';
 const LOAD_SUCCESS = 'combo/req/LOAD_SUCCESS';
 const LOAD_FAIL = 'combo/req/LOAD_FAIL';
 import * as immutable from 'immutable';
+import {registerReqKeys} from '../reqKeys';
+
+const registerKeys = (keys = []) => {
+  const newKyes = {};
+  const loadState = {};
+  keys.forEach((key) => {
+    newKyes[key] = [];
+    loadState[key] = [];
+  });
+  newKyes.loadState = loadState;
+  return newKyes;
+};
 
 const initialState = immutable.fromJS({
   loadState: {},
-  users: [],
+  ...registerKeys(registerReqKeys)
 });
 export default function reducer(state = initialState, action: Object) {
   switch (action.type) {
