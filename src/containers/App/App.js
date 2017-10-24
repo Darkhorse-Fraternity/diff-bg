@@ -7,6 +7,8 @@ import {logout} from 'redux/modules/auth';
 import {push} from 'react-router-redux';
 import config from '../../config';
 import {asyncConnect} from 'redux-connect';
+import { immutableRenderDecorator } from 'react-immutable-render-mixin';
+
 import FlatButton from 'material-ui/Button';
 
 @asyncConnect([{
@@ -28,6 +30,7 @@ import FlatButton from 'material-ui/Button';
 @connect(
   state => ({user: state.auth.user}),
   {logout, pushState: push})
+@immutableRenderDecorator
 export default class App extends Component {
   static propTypes = {
     children: PropTypes.object.isRequired,
@@ -70,7 +73,7 @@ export default class App extends Component {
     // const styles = require('./App.scss');
     // console.log('this.context:', this.context);
 
-    console.log('test:', this.props);
+    // console.log('test:', this.props);
 
     return (
       <div>

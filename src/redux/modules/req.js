@@ -12,21 +12,36 @@ export default function reducer(state = initialState, action = {}) {
     case LOAD:
       return {
         ...state,
-        loading: true
+        loadState: {
+          ...state.loadState,
+          [action.key]: {
+            loading: true
+          }
+        },
       };
     case LOAD_SUCCESS:
       return {
         ...state,
-        loading: false,
-        loaded: true,
-        data: action.result
+        loadState: {
+          ...state.loadState,
+          [action.key]: {
+            loading: false,
+            loaded: true,
+          }
+        },
+        [action.key]: action.result
       };
     case LOAD_FAIL:
       return {
         ...state,
-        loading: false,
-        loaded: false,
-        error: action.error
+        loadState: {
+          ...state.loadState,
+          [action.key]: {
+            loading: false,
+            loaded: false,
+            error: action.error
+          }
+        },
       };
     default:
       return state;
@@ -34,9 +49,11 @@ export default function reducer(state = initialState, action = {}) {
 }
 
 
-export function req(params) {
+export function req(params, key) {
   return {
     types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
-    promise: client => client.req(params).then(res=>res.results)
+    promise: client => client.req(params).then(res=>res.results),
+    key
   };
 }
+

@@ -26,12 +26,12 @@ const normalACL = (currentUser)=>{
     const acl = new AV.ACL()
     acl.setPublicReadAccess(true);
     //说明
-    // acl.setRoleWriteAccess('Administrator',true);
+    acl.setRoleWriteAccess('Manager',true);
     acl.setWriteAccess(currentUser, true);
     return acl
 }
 
-const classNames = [iCard,iUse,iDo]
+const classNames = [iCard,iUse,iDo,'_User']
 const ACLSet = (classNames)=>{
     classNames.forEach(className =>{
         setNormalACL(className)

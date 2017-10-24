@@ -1,12 +1,16 @@
 /*eslint-disable */
 import React, {Component} from 'react'
 import {TransitionGroup, CSSTransition} from 'react-transition-group'
-import {List, ListItem, UsersView} from 'styles/List'
+import {List, ListItem, UsersView, LeftView, RightView} from 'styles/Users'
 import TextField from 'material-ui/TextField'
 import {req} from 'redux/modules/req'
 import {connect} from 'react-redux';
 import {searchUser} from 'helpers/leanCloud'
 import _ from 'lodash';
+import {USERS} from 'redux/reqKeys'
+import Button from 'material-ui/Button';
+import { immutableRenderDecorator } from 'react-immutable-render-mixin';
+
 
 const Fade = ({children, ...props}) => (
   <CSSTransition
@@ -20,23 +24,24 @@ const Fade = ({children, ...props}) => (
 
 
 @connect(
-  state => ({users: state.req.data}),
+  state => ({users: state.req[USERS]}),
   {
     load: (username) => {
       const params = {
         where: {
-          username:{
-            "$regex":username,
-            "$options":"i"
+          username: {
+            "$regex": username,
+            "$options": "i"
           }
         },
-        limit:100
+        limit: 100
       };
       const parmas = searchUser(params)
-      return req(parmas)
+      return req(parmas,USERS)
     }
   }
 )
+@immutableRenderDecorator
 export default class Users extends Component {
 
   constructor(props) {
@@ -45,7 +50,7 @@ export default class Users extends Component {
   }
 
 
-  _onChange(value = ''){
+  _onChange(value = '') {
     this.props.load(value);
   }
 
@@ -69,13 +74,23 @@ export default class Users extends Component {
           {users.map(user =>
             <Fade key={user.username}>
               <ListItem>
-                <b>
-                  姓名: {user.username}
-                </b>
-                <p/>
-                <b>
-                  手机号 : {user.mobilePhoneNumber || '无'}
-                </b>
+                <LeftView>
+                  <b>
+                    姓名: {user.username}
+                  </b>
+                  <p/>
+                  <b>
+                    手机号 : {user.mobilePhoneNumber || '无'}
+                  </b>
+                </LeftView>
+                <RightView>
+                  <Button>
+                    设置成管理员
+                  </Button>
+                  <Button>
+                    取消管理员
+                  </Button>
+                </RightView>
               </ListItem>
             </Fade>
           )}
@@ -86,6 +101,7 @@ export default class Users extends Component {
     )
   }
 }
+
 
 
 

@@ -8,6 +8,8 @@ import LoginForm from 'styles/LoginForm';
 import Overlay from 'styles/Overlay';
 import Welcome from 'styles/Welcome';
 import Form from 'components/Login/Form';
+import { immutableRenderDecorator } from 'react-immutable-render-mixin';
+
 @connect(
   state => ({
     user: state.auth.user,
@@ -15,6 +17,7 @@ import Form from 'components/Login/Form';
     loginError: state.auth.loginError
   }),
   authActions)
+@immutableRenderDecorator
 export default class Login extends Component {
   static propTypes = {
     user: PropTypes.object,
