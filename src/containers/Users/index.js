@@ -56,6 +56,7 @@ export default class Users extends Component {
 
   render() {
     // console.log('this.props:', this.props.users);
+    console.log('test:', '1111');
     const users = this.props.users
     return (
       <UsersView>

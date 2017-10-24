@@ -23,6 +23,10 @@ const store = createStore(browserHistory, client, window.__data);
 // const history = syncHistoryWithStore(_browserHistory, store);
 
 // const history = createHistory()
+const reloadOnPropsChange = (props, nextProps) => {
+  // reload only when path/route has changed
+  return props.location.pathname !== nextProps.location.pathname;
+};
 
 const component = (
   <Router
@@ -31,6 +35,7 @@ const component = (
         {...props}
         helpers={{ client }}
         filter={item => !item.deferred}
+        reloadOnPropsChange={reloadOnPropsChange}
         render={applyRouterMiddleware(useScroll())}
       />
     )}

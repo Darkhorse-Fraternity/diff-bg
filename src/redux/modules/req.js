@@ -5,7 +5,7 @@
 const LOAD = 'combo/req/LOAD';
 const LOAD_SUCCESS = 'combo/req/LOAD_SUCCESS';
 const LOAD_FAIL = 'combo/req/LOAD_FAIL';
-
+// import * as immutable from 'immutable';
 const initialState = {};
 export default function reducer(state = initialState, action = {}) {
   switch (action.type) {

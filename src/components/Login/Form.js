@@ -87,7 +87,7 @@ errorMsgTranslator (err) {
             hide={!isLogging}
             />
           <Button login
-            primary={true}
+            // primary={true}
             type='submit'
             hide={isLogging}
             innerRef={node => this.submitBtn = node}>
