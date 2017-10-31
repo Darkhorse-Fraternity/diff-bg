@@ -51,3 +51,22 @@ const setNormalACL = (className)=>{
 }
 
 ACLSet(classNames)
+
+
+//删除
+AV.Cloud.beforeUpdate('_User', (req,res)=> {
+
+  const id1 = req.currentUser.get('avatar').get('id');
+  const id2 = req.object.get('avatar');
+  if(id1 !== id2){
+    const file = AV.File.createWithoutData(id1);
+    file.destroy().then(suc=>{}, e=>{
+      console.log('test:', e.message);
+    });
+  }
+
+  //直接先返回结果
+  res.success();
+
+})
+
