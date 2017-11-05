@@ -55,7 +55,7 @@ export default function reducer(state = initialState, action: Object) {
       return initialState;
 
     default:
-      return state;
+      return initialState;
   }
 }
 
