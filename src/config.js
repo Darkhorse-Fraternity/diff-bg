@@ -1,6 +1,6 @@
 require('babel-polyfill');
 const {LeanCloud_APP_ID, LeanCloud_APP_SIGN} = require('./lckey');
-
+// require('../cloud')
 const environment = {
   development: {
     isProduction: false

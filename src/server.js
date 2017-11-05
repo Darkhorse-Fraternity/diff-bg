@@ -20,7 +20,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import {Provider} from 'react-redux';
 import getRoutes from './routes';
 import AV from 'leanengine'
-
+import cloud from '../cloud'
 const targetUrl = 'http://' + config.apiHost + ':' + config.apiPort;
 const pretty = new PrettyError();
 const app = new Express();
