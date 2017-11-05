@@ -56,9 +56,10 @@ ACLSet(classNames)
 //删除
 AV.Cloud.beforeUpdate('_User', (req,res)=> {
 
-  const id1 = req.currentUser.get('avatar').get('id');
-  const id2 = req.object.get('avatar');
-  if(id1 !== id2){
+  const avatar = req.currentUser && req.currentUser.get('avatar')
+  const id1 = avatar && avatar.get('id');
+  const id2 = req.object && req.object.get('avatar');
+  if(id1 && id2 && id1 !== id2){
     const file = AV.File.createWithoutData(id1);
     file.destroy().then(suc=>{}, e=>{
       console.log('test:', e.message);

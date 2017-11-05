@@ -121,7 +121,7 @@
     "leanengine": "^3.0.2",
     "lru-memoize": "^1.0.0",
     "map-props": "^1.0.0",
-    "material-ui": "^1.0.0-beta.17",
+    "material-ui": "^1.0.0-beta.19",
     "md5": "^2.2.1",
     "normalizr": "^3.2.4",
     "piping": "^0.3.0",
