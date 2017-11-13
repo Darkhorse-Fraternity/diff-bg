@@ -53,7 +53,7 @@ AV.Cloud.afterSave('iDo', req => new Promise((solve, reject) => {
       u.set('time', time)
       u.set('statu', period === time ? "stop" : "start")
       u.set('doneDate', doneDate)
-      u.save().catch(e=>{
+      u.save(null,{user:currentUser}).catch(e=>{
         console.log('iUse save:', e.message);
       })
     }).catch(e=>{
