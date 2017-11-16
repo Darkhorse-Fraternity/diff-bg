@@ -1,7 +1,8 @@
 const AV = require('leanengine');
 const {iUse, iCard, iDo} = require('./cloudKeys')
-
+const ApiClient  = require('../src/helpers/ApiClient')
 const useMasterKey = {useMasterKey: true}
+const {push} = require('../src/helpers/leanCloud')
 
 const normalACL = (currentUser) => {
   const acl = new AV.ACL()
@@ -45,10 +46,11 @@ AV.Cloud.afterSave('iDo', req => new Promise((solve, reject) => {
   if (object) {
     const use = object.get(iUse);
     use.fetch({
-      include:['iCard'],
+      include:['iCard','user','iCard,user'],
     }).then(u =>{
+      const card = u.get('iCard')
       const time = u.get('time') + 1
-      const period = Number(u.get('iCard').get('period'))
+      const period = Number(card.get('period'))
       const doneDate = new Date();
       u.set('time', time)
       u.set('statu', period === time ? "stop" : "start")
@@ -56,9 +58,29 @@ AV.Cloud.afterSave('iDo', req => new Promise((solve, reject) => {
       u.save(null,{user:currentUser}).catch(e=>{
         console.log('iUse save:', e.message);
       })
+
+      if(card.get('user').id !== currentUser.id){
+        //发送给卡片的拥有者。
+        const params = push({
+          "alert" : "alarm message",
+          "webUrl" : "combo://Information",
+          "title": "test",
+          "silent": false,
+          "action": "com.avos.UPDATE_STATUS",
+        },{
+          "user":{
+            "__type": "Pointer",
+            "className": "user",
+            "objectId": "595df22a1b69e64c8de8f549"
+          }
+        });
+        ApiClient().req(params)
+      }
+
     }).catch(e=>{
       console.log('icard save:', e.message);
     })
+
     solve()
   } else {
     reject('未发现有效的' + className + '对象')

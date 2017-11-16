@@ -39,7 +39,7 @@ export default class ApiClient {
 
 
   req({
-        scheme = 'https',
+        // scheme = 'https',
         host = config.remoteApiHost,
         path = '/',
         method = 'get',
@@ -50,7 +50,7 @@ export default class ApiClient {
       }: Object) {
     return new Promise((resolve, reject) => {
       const adjustedPath = path[0] !== '/' ? '/' + path : path;
-      const url = scheme + '://' + host + adjustedPath;
+      const url =  host + adjustedPath;
       const request = superagent[method](url);
       request.set(head);
       request.timeout(timeout);

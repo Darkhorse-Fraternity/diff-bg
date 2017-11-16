@@ -15,9 +15,7 @@ module.exports = Object.assign({
   port: process.env.LEANCLOUD_APP_PORT || process.env.PORT,
   apiHost: process.env.APIHOST || 'localhost',
   apiPort: process.env.APIPORT,
-  remoteApiHost: environment.isProduction ?
-    'cmwljtyw.api.lncld.net/1.1' :
-    'q81jdsbi.api.lncld.net/1.1',
+  remoteApiHost: process.env.LEANCLOUD_API_SERVER,
   remoteApiPort: '',
   remoteHeader: {
     'X-LC-Id': LeanCloud_APP_ID,
