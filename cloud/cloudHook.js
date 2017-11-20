@@ -1,8 +1,9 @@
 const AV = require('leanengine');
 const {iUse, iCard, iDo} = require('./cloudKeys')
-const ApiClient  = require('../src/helpers/ApiClient')
+const ApiClient = require('../src/helpers/ApiClient')
 const useMasterKey = {useMasterKey: true}
 const {push} = require('../src/helpers/leanCloud')
+const {user} = require('../src/helpers/LCModle')
 
 const normalACL = (currentUser) => {
   const acl = new AV.ACL()
@@ -39,15 +40,13 @@ ACLSet(classNames)
 //添加iDo 之后，修改iUse
 
 
-
-
 AV.Cloud.afterSave('iDo', req => new Promise((solve, reject) => {
   const {object, currentUser} = req
   if (object) {
     const use = object.get(iUse);
     use.fetch({
-      include:['iCard','user','iCard,user'],
-    }).then(u =>{
+      include: ['iCard', 'user', 'iCard,user'],
+    }).then(u => {
       const card = u.get('iCard')
       const time = u.get('time') + 1
       const period = Number(card.get('period'))
@@ -55,29 +54,23 @@ AV.Cloud.afterSave('iDo', req => new Promise((solve, reject) => {
       u.set('time', time)
       u.set('statu', period === time ? "stop" : "start")
       u.set('doneDate', doneDate)
-      u.save(null,{user:currentUser}).catch(e=>{
+      u.save(null, {user: currentUser}).catch(e => {
         console.log('iUse save:', e.message);
       })
 
-      if(card.get('user').id !== currentUser.id){
+      if (card.get('user').id !== currentUser.id) {
         //发送给卡片的拥有者。
         const params = push({
-          "alert" : "alarm message",
-          "webUrl" : "combo://Information",
+          "alert": "alarm message",
+          "webUrl": "combo://Information",
           "title": "test",
           "silent": false,
           "action": "com.avos.UPDATE_STATUS",
-        },{
-          "user":{
-            "__type": "Pointer",
-            "className": "user",
-            "objectId": "595df22a1b69e64c8de8f549"
-          }
-        });
+        }, user(card.get('user').id));
         ApiClient().req(params)
       }
 
-    }).catch(e=>{
+    }).catch(e => {
       console.log('icard save:', e.message);
     })
 
@@ -88,6 +81,29 @@ AV.Cloud.afterSave('iDo', req => new Promise((solve, reject) => {
 }));
 
 //删除avatar
+
+AV.Cloud.beforeUpdate(iCard, (req, res) => {
+  const img = req.object.get("img")
+  const newImgID  = img.get("objectId")
+  req.object.fetch().then(c => {
+    const img2 = c.get("img")
+    const lastImgID  = img2.get("objectId")
+    // console.log('id',newImgID, lastImgID);
+    if (newImgID !== lastImgID ) {
+      img2.destroy().then(suc => {
+        // console.log('delete:', suc);
+      }, e => {
+        console.log('test:', e.message);
+      });
+    }
+    res.success();
+  }).catch(e => {
+    console.log('fetch error:', e.message);
+    res.success();
+  })
+})
+
+
 AV.Cloud.beforeUpdate('_User', (req, res) => {
 
   const avatar = req.currentUser && req.currentUser.get('avatar')
@@ -105,7 +121,6 @@ AV.Cloud.beforeUpdate('_User', (req, res) => {
   res.success();
 
 })
-
 
 
 AV.Cloud.afterDelete(iUse, req => {
