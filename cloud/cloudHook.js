@@ -14,7 +14,7 @@ const normalACL = (currentUser) => {
   return acl
 }
 
-const classNames = [iCard, iUse, iDo, '_User']
+const classNames = [iCard, iUse, iDo]
 const ACLSet = (classNames) => {
   classNames.forEach(className => {
     setNormalACL(className)
@@ -24,7 +24,7 @@ const ACLSet = (classNames) => {
 const setNormalACL = (className) => {
   AV.Cloud.beforeSave(className, req => new Promise((solve, reject) => {
     const {object, currentUser} = req
-    if (object) {
+    if (object && currentUser) {
       object.setACL(normalACL(currentUser));
       solve()
     } else {
