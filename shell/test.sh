@@ -7,8 +7,8 @@ curl -X POST \
         "where":{
             "user":{
                     "__type": "Pointer",
-                    "className": "user",
-                    "objectId": "59a5029644d9040058136049"
+                    "className": "_User",
+                    "objectId": "5a20c7630b616000457eb881"
             }
         },
         "prod": "dev",
@@ -23,5 +23,5 @@ curl -X POST \
               "action": "com.avos.UPDATE_STATUS",
         }
      }' \
-https://leancloud.cn/1.1/push
+https://api.leancloud.cn/1.1/push
 

@@ -14,6 +14,9 @@ function formatUrl(path) {
   return '/api' + adjustedPath;
 }
 
+// process.env.LEANCLOUD_API_SERVER
+
+
 export default class ApiClient {
 
   constructor(req) {
@@ -50,7 +53,10 @@ export default class ApiClient {
       }: Object) {
     return new Promise((resolve, reject) => {
       const adjustedPath = path[0] !== '/' ? '/' + path : path;
-      const url =  host + adjustedPath;
+      const url = host + adjustedPath;
+      console.log('config:', config);
+      console.log('url:', url);
+      console.log('process.env:', process.env);
       const request = superagent[method](url);
       request.set(head);
       request.timeout(timeout);
@@ -60,7 +66,7 @@ export default class ApiClient {
       } else {
         request.send(params);
       }
-      request.end((err, {body} = {}) => err ? reject(body || err) : resolve(body));
+      request.end((err, {body} = {}) => err ? reject(err) : resolve(body));
     });
   }
 

@@ -44,9 +44,10 @@ AV.Cloud.afterSave('iDo', req => new Promise((solve, reject) => {
   const {object, currentUser} = req
   if (object) {
     const use = object.get(iUse);
+
     use.fetch({
       include: ['iCard', 'user', 'iCard,user'],
-    }).then(u => {
+    }).then(async u => {
       const card = u.get('iCard')
       const time = u.get('time') + 1
       const period = Number(card.get('period'))
@@ -67,11 +68,14 @@ AV.Cloud.afterSave('iDo', req => new Promise((solve, reject) => {
           "silent": false,
           "action": "com.avos.UPDATE_STATUS",
         }, user(card.get('user').id));
-        ApiClient().req(params)
+        const client = new ApiClient()
+        const res = await client.req(params)
+        console.log('client.req:', res);
       }
 
     }).catch(e => {
-      console.log('icard save:', e.message);
+      // console.log('icard save1:', e);
+      console.log('icard save2:', e.code, e.message);
     })
 
     solve()
@@ -84,12 +88,12 @@ AV.Cloud.afterSave('iDo', req => new Promise((solve, reject) => {
 
 AV.Cloud.beforeUpdate(iCard, (req, res) => {
   const img = req.object.get("img")
-  const newImgID  = img.get("objectId")
+  const newImgID = img.get("objectId")
   req.object.fetch().then(c => {
     const img2 = c.get("img")
-    const lastImgID  = img2.get("objectId")
+    const lastImgID = img2.get("objectId")
     // console.log('id',newImgID, lastImgID);
-    if (newImgID !== lastImgID ) {
+    if (newImgID !== lastImgID) {
       img2.destroy().then(suc => {
         // console.log('delete:', suc);
       }, e => {

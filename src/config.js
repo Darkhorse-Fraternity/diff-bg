@@ -10,12 +10,14 @@ const environment = {
   }
 }[process.env.LEANCLOUD_APP_ENV || process.env.NODE_ENV || 'development'];
 
-module.exports = Object.assign({
+
+export default Object.assign({
   host: process.env.HOST || 'localhost',
   port: process.env.LEANCLOUD_APP_PORT || process.env.PORT,
   apiHost: process.env.APIHOST || 'localhost',
   apiPort: process.env.APIPORT,
-  remoteApiHost: process.env.LEANCLOUD_API_SERVER,
+  remoteApiHost: process.env.LEANCLOUD_API_SERVER ? (process.env.LEANCLOUD_API_SERVER+'/1.1') :
+    'https://api.leancloud.cn/1.1',
   remoteApiPort: '',
   remoteHeader: {
     'X-LC-Id': LeanCloud_APP_ID,
