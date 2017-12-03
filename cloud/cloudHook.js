@@ -61,12 +61,25 @@ AV.Cloud.afterSave('iDo', req => new Promise((solve, reject) => {
 
       if (card.get('user').id !== currentUser.id) {
         //发送给卡片的拥有者。
+        const title = card.get('title');
+        const body = currentUser.get('username') + '刚刚打卡了,快去看看吧~!';
+        const url = "combo://Serve"
         const params = push({
-          "alert": "alarm message",
-          "webUrl": "combo://Information",
-          "title": "test",
-          "silent": false,
-          "action": "com.avos.UPDATE_STATUS",
+          "ios": {
+            "alert": {
+              "title": title,
+              "body": body,
+            },
+            "webUrl": url,
+            "badge": "Increment"
+          },
+          "android": {
+            "webUrl": url,
+            "title": title,
+            "alert": body,
+            "silent": false,
+            "action": "com.avos.UPDATE_STATUS",
+          }
         }, user(card.get('user').id));
         const client = new ApiClient()
         const res = await client.req(params)

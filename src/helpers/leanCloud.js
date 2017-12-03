@@ -352,7 +352,7 @@ export function push(data, where) {
     params: {
       data,
       where,
-      prod: "dev",
+      prod: process.env.LEANCLOUD_APP_ENV === 'development' ? "prod" : "dev",
     },
   }
 }

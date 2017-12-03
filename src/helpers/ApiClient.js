@@ -54,9 +54,6 @@ export default class ApiClient {
     return new Promise((resolve, reject) => {
       const adjustedPath = path[0] !== '/' ? '/' + path : path;
       const url = host + adjustedPath;
-      console.log('config:', config);
-      console.log('url:', url);
-      console.log('process.env:', process.env);
       const request = superagent[method](url);
       request.set(head);
       request.timeout(timeout);

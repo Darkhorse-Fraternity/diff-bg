@@ -22,8 +22,11 @@ const  id_pro = 'cmwLjTYWoYfN4jCgPR49rsi6-gzGzoHsz'
 const  key_pro = 'S6wxWnhQfL9rBLo2ngEctK0u'
 
 
-const LeanCloud_APP_ID =  !environment.isProduction ? id_dev : id_pro
-const  LeanCloud_APP_KEY =  !environment.isProduction ? key_dev : key_pro
+let LeanCloud_APP_ID =  !environment.isProduction ? id_dev : id_pro
+let LeanCloud_APP_KEY =  !environment.isProduction ? key_dev : key_pro
+
+LeanCloud_APP_ID = process.env.LEANCLOUD_APP_ID ||  LeanCloud_APP_ID
+LeanCloud_APP_KEY = process.env.LEANCLOUD_APP_KEY ||  LeanCloud_APP_KEY
 
 const timeStamp = Math.round(new Date())
 const LeanCloud_APP_SIGN =  md5( timeStamp + LeanCloud_APP_KEY ) + ',' + timeStamp

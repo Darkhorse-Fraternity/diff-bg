@@ -13,14 +13,21 @@ curl -X POST \
         },
         "prod": "dev",
         "data": {
+          "ios":{
              "alert" : {
                 "title":"test",
                 "body":"body",
              },
               "webUrl" : "combo://Information",
-              "title": "combo test",
-              "silent": false,
-              "action": "com.avos.UPDATE_STATUS",
+              "badge":"Increment"
+           },
+          "android":{
+                   "webUrl" : "combo://Information",
+                   "title": "combo test",
+                   "alert": "body",
+                   "silent": false,
+                   "action": "com.avos.UPDATE_STATUS",
+           }
         }
      }' \
 https://api.leancloud.cn/1.1/push
