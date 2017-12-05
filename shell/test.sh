@@ -1,14 +1,14 @@
 
 curl -X POST \
-  -H "X-LC-Id: q81jdsbi5qp679fi5o46i5nppjgycztgivwj30707xfvehzt"          \
-  -H "X-LC-Key: njvke2r653u04lm7dpporogtsgz2d2mw5wfcartktn9kwo6f,master"        \
+  -H "X-LC-Id: cmwLjTYWoYfN4jCgPR49rsi6-gzGzoHsz"          \
+  -H "X-LC-Key: jYL7hiGyAArkuMcp8F8llI52,master"        \
   -H "Content-Type: application/json" \
   -d '{
         "where":{
             "user":{
                     "__type": "Pointer",
                     "className": "_User",
-                    "objectId": "59a5029644d9040058136049"
+                    "objectId": "595df22a1b69e64c8de8f549"
             }
         },
         "prod": "dev",
@@ -20,7 +20,7 @@ curl -X POST \
              },
               "webUrl" : "combo://Serve",
               "badge":"Increment",
-              "params":{"iCard":{"title":"ceshi","objectId":"59ff053b1579a300457b440a"}}
+              "params":{"iCard":{"title":"ceshi","objectId":"59cb8609ee920a0044a919dd"}}
            },
           "android":{
                    "webUrl" : "combo://Serve",
@@ -28,7 +28,7 @@ curl -X POST \
                    "alert": "body",
                    "silent": false,
                    "action": "com.avos.UPDATE_STATUS",
-                   "params":{"iCard":{"title":"ceshi","objectId":"59ff053b1579a300457b440a"}}
+                   "params":{"iCard":{"title":"ceshi","objectId":"59cb8609ee920a0044a919dd"}}
            }
         }
      }' \
