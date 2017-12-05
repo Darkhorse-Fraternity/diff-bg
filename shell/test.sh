@@ -8,7 +8,7 @@ curl -X POST \
             "user":{
                     "__type": "Pointer",
                     "className": "_User",
-                    "objectId": "5a20c7630b616000457eb881"
+                    "objectId": "59a5029644d9040058136049"
             }
         },
         "prod": "dev",
@@ -18,15 +18,17 @@ curl -X POST \
                 "title":"test",
                 "body":"body",
              },
-              "webUrl" : "combo://Information",
-              "badge":"Increment"
+              "webUrl" : "combo://Serve",
+              "badge":"Increment",
+              "params":{"iCard":{"title":"ceshi","objectId":"59ff053b1579a300457b440a"}}
            },
           "android":{
-                   "webUrl" : "combo://Information",
+                   "webUrl" : "combo://Serve",
                    "title": "combo test",
                    "alert": "body",
                    "silent": false,
                    "action": "com.avos.UPDATE_STATUS",
+                   "params":{"iCard":{"title":"ceshi","objectId":"59ff053b1579a300457b440a"}}
            }
         }
      }' \

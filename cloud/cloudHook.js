@@ -64,6 +64,14 @@ AV.Cloud.afterSave('iDo', req => new Promise((solve, reject) => {
         const title = card.get('title');
         const body = currentUser.get('username') + '刚刚打卡了,快去看看吧~!';
         const url = "combo://Serve"
+        // const vParam = card.toJSON()
+        const vParam = {
+          "iCard":
+            {
+              "title": card.get('title'),
+              "objectId": card.get('objectId')
+            }
+        }
         const params = push({
           "ios": {
             "alert": {
@@ -71,7 +79,8 @@ AV.Cloud.afterSave('iDo', req => new Promise((solve, reject) => {
               "body": body,
             },
             "webUrl": url,
-            "badge": "Increment"
+            "badge": "Increment",
+            "params": vParam,
           },
           "android": {
             "webUrl": url,
@@ -79,6 +88,7 @@ AV.Cloud.afterSave('iDo', req => new Promise((solve, reject) => {
             "alert": body,
             "silent": false,
             "action": "com.avos.UPDATE_STATUS",
+            "params": vParam,
           }
         }, user(card.get('user').id));
         const client = new ApiClient()
