@@ -20,6 +20,7 @@ curl -X POST \
              },
               "webUrl" : "combo://Serve",
               "badge":"Increment",
+              "sound": "tip.mp3",
               "params":{"iCard":{"title":"ceshi","objectId":"59cb8609ee920a0044a919dd"}}
            },
           "android":{

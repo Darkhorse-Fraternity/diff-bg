@@ -80,6 +80,7 @@ AV.Cloud.afterSave('iDo', req => new Promise((solve, reject) => {
             },
             "webUrl": url,
             "badge": "Increment",
+            "sound": "tip.mp3",
             "params": vParam,
           },
           "android": {
@@ -110,7 +111,6 @@ AV.Cloud.afterSave('iDo', req => new Promise((solve, reject) => {
 //删除avatar
 
 AV.Cloud.beforeUpdate(iCard, (req, res) => {
-
   const img = req.object.get("img")
   if(img){
     const newImgID = img.get("objectId")
