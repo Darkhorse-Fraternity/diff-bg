@@ -2,7 +2,7 @@ const AV = require('leanengine');
 const {iUse, iCard, iDo} = require('./cloudKeys')
 const ApiClient = require('../src/helpers/ApiClient')
 const useMasterKey = {useMasterKey: true}
-const {push} = require('../src/helpers/leanCloud')
+// const {push} = require('../src/helpers/leanCloud')
 const {user} = require('../src/helpers/LCModle')
 
 const normalACL = (currentUser) => {
@@ -72,7 +72,7 @@ AV.Cloud.afterSave('iDo', req => new Promise((solve, reject) => {
               "objectId": card.get('objectId')
             }
         }
-        const params = push({
+        const data = {
           "ios": {
             "alert": {
               "title": title,
@@ -91,11 +91,18 @@ AV.Cloud.afterSave('iDo', req => new Promise((solve, reject) => {
             "action": "com.avos.UPDATE_STATUS",
             "params": vParam,
           }
-        }, user(card.get('user').id));
-        const client = new ApiClient()
-        console.log('test:', params);
-        const res = await client.req(params)
-        console.log('client.req:', res);
+        }
+        // const params = push(data, user(card.get('user').id));
+        // const client = new ApiClient()
+        // console.log('test:', params);
+        // const res = await client.req(params)
+
+        const uid = card.get('user').id
+        AV.Push.send({
+          cql: 'select * from _Installation where ' +
+          'user=pointer(\'_User\','+ uid +')',
+          data,
+        });
       }
 
     }).catch(e => {
