@@ -46,7 +46,7 @@ AV.Cloud.afterSave('iDo', req => new Promise((solve, reject) => {
     const use = object.get(iUse);
 
     use.fetch({
-      include: ['iCard', 'user', 'iCard,user'],
+      include: ['iCard', 'user', 'iCard.user'],
     }).then(async u => {
       const card = u.get('iCard')
       const time = u.get('time') + 1
@@ -59,7 +59,9 @@ AV.Cloud.afterSave('iDo', req => new Promise((solve, reject) => {
         console.log('iUse save:', e.message);
       })
 
+      console.log('test:', '1111');
       if (card.get('user').id !== currentUser.id) {
+        console.log('test:', '2222');
         //发送给卡片的拥有者。
         const title = card.get('title');
         const body = currentUser.get('username') + '刚刚打卡了,快去看看吧~!';
@@ -92,6 +94,7 @@ AV.Cloud.afterSave('iDo', req => new Promise((solve, reject) => {
             "params": vParam,
           }
         }, user(card.get('user').id));
+        console.log('test:', params);
         const client = new ApiClient()
         const res = await client.req(params)
         console.log('client.req:', res);
