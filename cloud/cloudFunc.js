@@ -11,8 +11,8 @@ AV.Cloud.define('cardList', (req)=> {
     query.skip(params.skip)
     query.limit(40)
 
-    query.ascending('createdAt');
-    query.ascending('useNum');
+    // query.ascending('createdAt');
+    query.descending('useNum');
 
     // query.order
     //设置每次搜索个数
