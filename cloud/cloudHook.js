@@ -99,10 +99,10 @@ AV.Cloud.afterSave('iDo', req => new Promise((solve, reject) => {
 
         const uid = card.get('user').id
 
-        // const cql = 'select * from _Installation where ' +
-        //   'user=pointer(\'_User\','+ uid +')'
-        const cql = 'select * from _Installation where objectId="RgGzf45HtXYc6a5JeS6R3EmxnhCvx874"'
-        console.log('test:', cql);
+        const cql = 'select * from _Installation where ' +
+          'user=pointer(\'_User\','+ uid +')'
+        // const cql = 'select * from _Installation where objectId="RgGzf45HtXYc6a5JeS6R3EmxnhCvx874"'
+        console.log('test:', AV.Push.send);
         AV.Push.send({
           cql,
           data,
