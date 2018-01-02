@@ -11,7 +11,6 @@ curl -X POST \
                     "objectId": "595df22a1b69e64c8de8f549"
             }
         },
-        "prod": "dev",
         "data": {
           "ios":{
              "alert" : {
