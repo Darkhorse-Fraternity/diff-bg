@@ -2,6 +2,7 @@
 /* @flow */
 'use strict'
 
+import config from '../config';
 
 const methodType = {
   get: 'get',
@@ -347,6 +348,7 @@ export function pushInstallation(OS: String, token: string, owner: obejct) {
 
 export function push(data, where) {
   return {
+    head : config.remoteMHeader,
     path: '/push',
     method: methodType.post,
     params: {

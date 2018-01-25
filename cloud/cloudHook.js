@@ -104,7 +104,7 @@ AV.Cloud.afterSave('iDo', req => new Promise((solve, reject) => {
 
     solve()
   } else {
-    reject('未发现有效的' + className + '对象')
+    reject('未发现有效的' + 'ido' + '对象')
   }
 }));
 

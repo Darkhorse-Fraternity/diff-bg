@@ -1,5 +1,9 @@
 require('babel-polyfill');
-const {LeanCloud_APP_ID, LeanCloud_APP_SIGN} = require('./lckey');
+const {
+  LeanCloud_APP_ID,
+  LeanCloud_APP_SIGN,
+  LeanCloud_APP_M_KEY
+} = require('./lckey');
 // require('../cloud')
 const environment = {
   development: {
@@ -22,6 +26,10 @@ export default Object.assign({
   remoteHeader: {
     'X-LC-Id': LeanCloud_APP_ID,
     'X-LC-Sign': LeanCloud_APP_SIGN,
+  },
+  remoteMHeader: {
+    'X-LC-Id': LeanCloud_APP_ID,
+    'X-LC-Key': LeanCloud_APP_M_KEY,
   },
   app: {
     title: 'Combo',
