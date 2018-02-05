@@ -14,7 +14,7 @@ const normalACL = (currentUser) => {
   return acl
 }
 
-const classNames = [iCard, iUse, iDo]
+const classNames = [iCard, iUse, iDo, iComment]
 const ACLSet = (classNames) => {
   classNames.forEach(className => {
     setNormalACL(className)

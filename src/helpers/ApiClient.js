@@ -48,7 +48,8 @@ export default class ApiClient {
         method = 'get',
         timeout = 20000,
         params,
-        head = config.remoteHeader,
+
+
         // needSession = false
       }: Object) {
     return new Promise((resolve, reject) => {

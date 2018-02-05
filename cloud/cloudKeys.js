@@ -1,9 +1,10 @@
-
- const iUse = 'iUse'
- const iCard = 'iCard'
- const iDo = 'iDo'
- module.exports = {
-     iUse,
-     iCard,
-     iDo
- }
+const iUse = 'iUse'
+const iCard = 'iCard'
+const iDo = 'iDo'
+const iComment = 'iComment'
+module.exports = {
+  iUse,
+  iCard,
+  iDo,
+  iComment
+}
