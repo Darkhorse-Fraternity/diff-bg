@@ -1,5 +1,9 @@
 const AV = require('leanengine');
-const {iUse, iCard, iDo} = require('./cloudKeys')
+const {
+  iUse,
+  iCard,
+  iDo,
+  iComment} = require('./cloudKeys')
 const ApiClient = require('../src/helpers/ApiClient')
 const useMasterKey = {useMasterKey: true}
 const {push} = require('../src/helpers/leanCloud')
@@ -112,7 +116,7 @@ AV.Cloud.afterSave('iDo', req => new Promise((solve, reject) => {
 
 AV.Cloud.beforeUpdate(iCard, (req, res) => {
   const img = req.object.get("img")
-  if(img){
+  if (img) {
     const newImgID = img.get("objectId")
     req.object.fetch().then(c => {
       const img2 = c.get("img")
@@ -130,7 +134,7 @@ AV.Cloud.beforeUpdate(iCard, (req, res) => {
       console.log('fetch error:', e.message);
       res.success();
     })
-  }else {
+  } else {
     res.success();
   }
 })
