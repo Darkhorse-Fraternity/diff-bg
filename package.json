@@ -24,7 +24,7 @@
   ],
   "main": "bin/server.js",
   "scripts": {
-    "start": "concurrently  \"concurrently -k\" \"npm run start-prod\" \"npm run start-prod-api\"",
+    "start": "concurrently  \"concurrently -k\" \"npm run start-prod\"",
     "start-prod": "better-npm-run start-prod",
     "start-prod-api": "better-npm-run start-prod-api",
     "build": "better-npm-run build",
@@ -40,7 +40,7 @@
   },
   "betterScripts": {
     "start-prod": {
-      "command": "node ./bin/server.js",
+      "command": "node --experimental-modules ./bin/server.js",
       "env": {
         "NODE_PATH": "./src",
         "NODE_ENV": "production",
@@ -49,7 +49,7 @@
       }
     },
     "start-prod-api": {
-      "command": "node ./bin/api.js",
+      "command": "node --experimental-modules ./bin/api.js",
       "env": {
         "NODE_PATH": "./api",
         "NODE_ENV": "production",
@@ -57,7 +57,7 @@
       }
     },
     "start-dev": {
-      "command": "node ./bin/server.js",
+      "command": "node --experimental-modules ./bin/server.js",
       "env": {
         "NODE_PATH": "./src",
         "NODE_ENV": "development",
@@ -66,7 +66,7 @@
       }
     },
     "start-dev-api": {
-      "command": "node ./bin/api.js",
+      "command": "node --experimental-modules ./bin/api.js",
       "env": {
         "NODE_PATH": "./api",
         "NODE_ENV": "development",
