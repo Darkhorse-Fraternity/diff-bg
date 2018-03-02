@@ -1,9 +1,8 @@
-
 const ApiClient = require('../src/helpers/ApiClient')
-const {push} = require('../src/helpers/leanCloud')
+const { push } = require('../src/helpers/leanCloud')
 
 
- lcPush =  ( title,body,url,params,where)=>{
+const lcPush = (title, body, url, vParams, where) => {
   const params = push({
     "ios": {
       "alert": {
@@ -13,7 +12,7 @@ const {push} = require('../src/helpers/leanCloud')
       "webUrl": url,
       "badge": "Increment",
       "sound": "tip.mp3",
-      "params": params,
+      "params": vParams,
     },
     "android": {
       "webUrl": url,
@@ -21,11 +20,11 @@ const {push} = require('../src/helpers/leanCloud')
       "alert": body,
       "silent": false,
       "action": "com.avos.UPDATE_STATUS",
-      "params": params,
+      "params": vParams,
     }
   }, where);
   const client = new ApiClient()
-  return  client.req(params)
+  return client.req(params)
 }
 
 module.exports = {

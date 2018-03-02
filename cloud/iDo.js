@@ -4,15 +4,15 @@ const {
   iCard,
   iDo,
 } = require('./cloudKeys')
-const ApiClient = require('../src/helpers/ApiClient')
-const {push} = require('../src/helpers/leanCloud')
 const {user} = require('../src/helpers/LCModle')
 const {lcPush} = require('./cloudPush')
 
-AV.Cloud.afterSave('iDo', req => new Promise((solve, reject) => {
+AV.Cloud.afterSave(iDo, req => new Promise((solve, reject) => {
   const {object, currentUser} = req
   if (object) {
     const use = object.get(iUse);
+
+    console.log('object:', object);
 
     use.fetch({
       include: ['iCard', 'user', 'iCard.user'],
@@ -32,10 +32,10 @@ AV.Cloud.afterSave('iDo', req => new Promise((solve, reject) => {
         //发送给卡片的拥有者。
         const title = card.get('title');
         const body = currentUser.get('username') + '刚刚打卡了,快去看看吧~!';
-        const url = "combo://Serve"
+        const url = "combo://RComment"
         // const vParam = card.toJSON()
         const vParam = {
-          "iCard":
+          "data":
             {
               "title": card.get('title'),
               "objectId": card.get('objectId')
