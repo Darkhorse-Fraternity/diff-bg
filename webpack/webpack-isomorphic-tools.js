@@ -38,7 +38,7 @@ module.exports = {
     // this whole "bootstrap" asset type is only used once in development mode.
     // the only place it's used is the Html.js file
     // where a <style/> tag is created with the contents of the
-    // './src/theme/bootstrap.config.js' file.
+    // './src/theme/bootstrap.config.mjs' file.
     // (the aforementioned <style/> tag can reduce the white flash
     //  when refreshing page in development mode)
     //

@@ -7,7 +7,7 @@ const {
 const ApiClient = require('../src/helpers/ApiClient')
 const {push} = require('../src/helpers/leanCloud')
 const {user} = require('../src/helpers/LCModle')
-
+const {lcPush} = require('./cloudPush')
 
 AV.Cloud.afterSave('iDo', req => new Promise((solve, reject) => {
   const {object, currentUser} = req
@@ -41,28 +41,8 @@ AV.Cloud.afterSave('iDo', req => new Promise((solve, reject) => {
               "objectId": card.get('objectId')
             }
         }
-        const params = push({
-          "ios": {
-            "alert": {
-              "title": title,
-              "body": body,
-            },
-            "webUrl": url,
-            "badge": "Increment",
-            "sound": "tip.mp3",
-            "params": vParam,
-          },
-          "android": {
-            "webUrl": url,
-            "title": title,
-            "alert": body,
-            "silent": false,
-            "action": "com.avos.UPDATE_STATUS",
-            "params": vParam,
-          }
-        }, user(card.get('user').id));
-        const client = new ApiClient()
-        const res = await client.req(params)
+        const where = user(card.get('user').id)
+        const res = await lcPush(title,body,url,vParam,where)
         console.log('client.req:', res);
       }
 

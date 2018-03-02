@@ -1,7 +1,7 @@
 import React from 'react';
-import {IndexRoute, Route} from 'react-router';
+import { IndexRoute, Route } from 'react-router';
 // import {isLoaded as isAuthLoaded, load as loadAuth} from 'redux/modules/auth';
-import {isLoaded as isAuthLoaded} from 'redux/modules/auth';
+import { isLoaded as isAuthLoaded } from 'redux/modules/auth';
 import {
   App,
   Home,
@@ -14,7 +14,7 @@ import {
 export default (store) => {
   const requireLogin = (nextState, replace, cb) => {
     function checkAuth() {
-      const {auth: {user}} = store.getState();
+      const { auth: { user } } = store.getState();
       if (!user) {
         // oops, not logged in, so can't be here!
         replace('/login');

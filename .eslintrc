@@ -1,10 +1,12 @@
-{ "extends": "eslint-config-airbnb",
+{ "extends": "airbnb",
   "env": {
     "browser": true,
     "node": true,
-    "mocha": true
+    "mocha": true,
+    "es6": true
   },
   "rules": {
+    "func-names": ["error", "never"],
     "new-cap": [2, { "capIsNewExceptions": ["List", "Map", "Set"] }],
     "react/no-multi-comp": 0,
     "import/default": 0,
@@ -16,7 +18,8 @@
     "comma-dangle": 0,  // not sure why airbnb turned this on. gross!
     "indent": [2, 2, {"SwitchCase": 1}],
     "no-console": 0,
-    "no-alert": 0
+    "no-alert": 0,
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
   },
   "plugins": [
     "react", "import"
@@ -25,6 +28,13 @@
     "import/parser": "babel-eslint",
     "import/resolve": {
       "moduleDirectory": ["node_modules", "src"]
+    }
+  },
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
     }
   },
   "globals": {

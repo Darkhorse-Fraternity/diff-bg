@@ -1,3 +1,4 @@
+/*eslint-disable */
 /**
  * THIS IS THE ENTRY POINT FOR THE CLIENT, JUST LIKE server.js IS THE ENTRY POINT FOR THE SERVER.
  */
@@ -13,6 +14,7 @@ import {ReduxAsyncConnect} from 'redux-connect';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { useScroll } from 'react-router-scroll';
 // import createHistory from 'history/createBrowserHistory'
+import env from './env'
 
 import getRoutes from './routes';
 
@@ -55,7 +57,7 @@ ReactDOM.hydrate(
   dest
 );
 
-if (process.env.LEANCLOUD_APP_ENV !== 'production') {
+if (!env.isProduction) {
   window.React = React; // enable debugger
 
   // if (!dest || !dest.firstChild || !dest.firstChild.attributes ||

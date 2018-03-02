@@ -1,4 +1,3 @@
-/*eslint-disable */
 import React, {Component} from 'react'
 import {TransitionGroup, CSSTransition} from 'react-transition-group'
 import {List, ListItem, UsersView, LeftView, RightView} from 'styles/Users'
@@ -8,6 +7,8 @@ import {connect} from 'react-redux';
 import {searchUser, updateRoles} from 'helpers/leanCloud'
 import _ from 'lodash';
 import {USERS, UPDATEROLE} from 'redux/reqKeys';
+
+
 import Button from 'material-ui/Button';
 import { immutableRenderDecorator } from 'react-immutable-render-mixin';
 

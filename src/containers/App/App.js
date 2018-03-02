@@ -1,15 +1,15 @@
-import React, {Component} from 'react';
-import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
-import {IndexLink, Link} from 'react-router';
-import Helmet from 'react-helmet';
-import {logout} from 'redux/modules/auth';
-import {push} from 'react-router-redux';
-import config from '../../config';
-import {asyncConnect} from 'redux-connect';
-import { immutableRenderDecorator } from 'react-immutable-render-mixin';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import { IndexLink, Link } from 'react-router'
+import Helmet from 'react-helmet'
+import { logout } from 'redux/modules/auth'
+import { push } from 'react-router-redux'
+import config from '../../config'
+import { asyncConnect } from 'redux-connect'
+import { immutableRenderDecorator } from 'react-immutable-render-mixin'
 
-import FlatButton from 'material-ui/Button';
+import FlatButton from 'material-ui/Button'
 
 @asyncConnect([{
   key: 'app',
@@ -24,32 +24,34 @@ import FlatButton from 'material-ui/Button';
     // }
 
     // return Promise.all(promises);
-    return Promise.resolve({id: 1, name: 'Borsch'});
+    return Promise.resolve({id: 1, name: 'Borsch'})
   }
 }])
 @connect(
   state => ({user: state.auth.user}),
   {logout, pushState: push})
+
 @immutableRenderDecorator
+
 export default class App extends Component {
   static propTypes = {
     children: PropTypes.object.isRequired,
     user: PropTypes.object,
     logout: PropTypes.func.isRequired,
     pushState: PropTypes.func.isRequired
-  };
+  }
 
   static contextTypes = {
     store: PropTypes.object.isRequired
-  };
+  }
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps (nextProps) {
     if (!this.props.user && nextProps.user) {
       // login
-      this.props.pushState('/');
+      this.props.pushState('/')
     } else if (this.props.user && !nextProps.user) {
       // logout
-      this.props.pushState('/');
+      this.props.pushState('/')
     }
   }
 
@@ -58,18 +60,18 @@ export default class App extends Component {
   // }
 
   handleLogout = (event) => {
-    event.preventDefault();
-    this.props.logout();
-  };
+    event.preventDefault()
+    this.props.logout()
+  }
 
   // activity = (toLocation, onlyActiveOnIndex) =>{
   //   const router = this.context.router;
   //   return router.isActive(toLocation, onlyActiveOnIndex);
   // };
 
-  render() {
+  render () {
     // console.log('props:', this.props);
-    const {user} = this.props;
+    const {user} = this.props
     // const styles = require('./App.scss');
     // console.log('this.context:', this.context);
 
@@ -80,14 +82,14 @@ export default class App extends Component {
         <Helmet {...config.app.head}/>
 
         <div>
-          <FlatButton component={IndexLink} to={"/"}>
+          <FlatButton component={IndexLink} to={'/'}>
             首页
           </FlatButton>
           {user && (
-            <FlatButton component={Link} to={"/users"}>
+            <FlatButton component={Link} to={'/users'}>
               用户列表
             </FlatButton>)}
-          <FlatButton component={Link} to={"/login"}>
+          <FlatButton component={Link} to={'/login'}>
             登录
           </FlatButton>
         </div>
@@ -101,6 +103,6 @@ export default class App extends Component {
           target="_blank">design by tony</a>
         </div>
       </div>
-    );
+    )
   }
 }

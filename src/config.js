@@ -1,3 +1,4 @@
+/*eslint-disable */
 require('babel-polyfill');
 const {
   LeanCloud_APP_ID,
@@ -5,22 +6,15 @@ const {
   LeanCloud_APP_M_KEY
 } = require('./lckey');
 // require('../cloud')
-const environment = {
-  development: {
-    isProduction: false
-  },
-  production: {
-    isProduction: true
-  }
-}[process.env.LEANCLOUD_APP_ENV || process.env.NODE_ENV || 'development'];
 
+const environment = require('./env');
 
-export default Object.assign({
+const config = Object.assign({
   host: process.env.HOST || 'localhost',
   port: process.env.LEANCLOUD_APP_PORT || process.env.PORT,
   apiHost: process.env.APIHOST || 'localhost',
   apiPort: process.env.APIPORT,
-  remoteApiHost: process.env.LEANCLOUD_API_SERVER ? (process.env.LEANCLOUD_API_SERVER+'/1.1') :
+  remoteApiHost: process.env.LEANCLOUD_API_SERVER ? (process.env.LEANCLOUD_API_SERVER + '/1.1') :
     'https://api.leancloud.cn/1.1',
   remoteApiPort: '',
   remoteHeader: {
@@ -54,3 +48,5 @@ export default Object.assign({
   },
 
 }, environment);
+
+module.exports = config;

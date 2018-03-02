@@ -2,13 +2,14 @@
 require('../server.babel'); // babel registration (runtime transpilation for node)
 var path = require('path');
 var rootDir = path.resolve(__dirname, '..');
+const env = require('../src/env')
 /**
  * Define isomorphic constants.
  */
 global.__CLIENT__ = false;
 global.__SERVER__ = true;
 global.__DISABLE_SSR__ = false;  // <----- DISABLES SERVER SIDE RENDERING FOR ERROR DEBUGGING
-global.__DEVELOPMENT__ = (process.env.LEANCLOUD_APP_ENV || process.env.NODE_ENV) !== 'production';
+global.__DEVELOPMENT__ = !env.isProduction;
 
 if (__DEVELOPMENT__) {
   if (!require('piping')({

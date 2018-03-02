@@ -1,6 +1,6 @@
 
 const AV = require('leanengine');
-const {iUse,iCard,iDo} = require('./cloudKeys')
+const {iCard} = require('./cloudKeys')
 
 
 AV.Cloud.define('cardList', (req)=> {
