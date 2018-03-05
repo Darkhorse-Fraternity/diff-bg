@@ -2,8 +2,8 @@
 
 
 
-export function addParams(url:string, params:Object) {
-  if (url.indexOf('?') == -1) {
+ function addParams(url, params) {
+  if (url.indexOf('?') === -1) {
     return url+'?'+toQueryString(params);
   }else {
     return url + '&' + toQueryString(params);
@@ -17,7 +17,7 @@ export function addParams(url:string, params:Object) {
  * @param  {[type]} obj 参数
  * @return {[type]} string key1=value1&key2=value2
  */
-export function toQueryString(obj:Object) {
+ function toQueryString(obj) {
   return obj?Object.keys(obj).sort().map(function(key){
     let val = obj[key];
     if (typeof val === 'object') val = JSON.stringify(val);
@@ -29,3 +29,9 @@ export function toQueryString(obj:Object) {
     return encodeURIComponent(key) + '=' + encodeURIComponent(val);
   }).join('&'):'';
 };
+
+
+module.exports = {
+  addParams,
+  toQueryString
+}

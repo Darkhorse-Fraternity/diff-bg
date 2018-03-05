@@ -1,6 +1,10 @@
-import superagent from 'superagent';
-import config from '../config';
-import {toQueryString} from './useMeth';
+// import superagent from 'superagent';
+// import config from '../config';
+// import {toQueryString} from './useMeth';
+const superagent = require('superagent')
+const config = require('../config')
+const {toQueryString} = require('./useMeth')
+
 
 const methods = ['get', 'post', 'put', 'patch', 'del'];
 
@@ -17,7 +21,7 @@ function formatUrl(path) {
 // process.env.LEANCLOUD_API_SERVER
 
 
-export default class ApiClient {
+class ApiClient {
 
   constructor(req) {
     methods.forEach((method) =>
@@ -50,7 +54,7 @@ export default class ApiClient {
         params,
         head = config.remoteHeader
         // needSession = false
-      }: Object) {
+      }) {
     return new Promise((resolve, reject) => {
       const adjustedPath = path[0] !== '/' ? '/' + path : path;
       const url = host + adjustedPath;
@@ -78,3 +82,5 @@ export default class ApiClient {
    * Remove it at your own risk.
    */
 }
+
+module.exports = ApiClient;

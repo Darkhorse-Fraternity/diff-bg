@@ -2,7 +2,9 @@
 /* @flow */
 'use strict'
 
-import config from '../config';
+
+const config = require('../config')
+
 
 const methodType = {
   get: 'get',
@@ -15,7 +17,7 @@ const methodType = {
 
 // import {LeanCloud_APP_ID,LeanCloud_APP_KEY} from '../configure/leancloud'
 
-export function requestSmsCode(mobilePhoneNumber) {
+function requestSmsCode(mobilePhoneNumber) {
   return {
     path: '/requestSmsCode',
     method: methodType.post,
@@ -30,9 +32,9 @@ export function requestSmsCode(mobilePhoneNumber) {
 /**
  * 通过手机短信来实现「忘记密码」的功能：
  * @param mobilePhoneNumber
- * @returns {{path: string, method: string, param: Arguments}}
+ * @returns {{path, method, param: Arguments}}
  */
-export function requestPasswordResetBySmsCode(mobilePhoneNumber: string) {
+function requestPasswordResetBySmsCode(mobilePhoneNumber) {
   return {
     path: '/requestPasswordResetBySmsCode',
     method: methodType.post,
@@ -42,7 +44,7 @@ export function requestPasswordResetBySmsCode(mobilePhoneNumber: string) {
   }
 }
 
-export function resetPasswordBySmsCode(password: string, code: string) {
+function resetPasswordBySmsCode(password, code) {
   return {
     path: '/resetPasswordBySmsCode/' + code,
     method: methodType.put,
@@ -59,7 +61,7 @@ export function resetPasswordBySmsCode(password: string, code: string) {
  * @param  {[type]} password:string          [description]
  * @return {[type]}                          [description]
  */
-export function requestUsersByMobilePhone(mobilePhoneNumber: string, smsCode: string, password): Object {
+function requestUsersByMobilePhone(mobilePhoneNumber, smsCode, password) {
   return {
     path: '/usersByMobilePhone',
     method: methodType.post,
@@ -71,7 +73,7 @@ export function requestUsersByMobilePhone(mobilePhoneNumber: string, smsCode: st
   }
 }
 
-export function searchUser(params) {
+function searchUser(params) {
   return {
     path: '/users',
     method: methodType.get,
@@ -85,7 +87,7 @@ export function searchUser(params) {
  * @param  {[type]} password:string          密码
  * @return {[type]}                          返回参数信息
  */
-export function requestLogin(mobilePhoneNumber: string, password: string): Object {
+function requestLogin(mobilePhoneNumber, password) {
   return {
     path: '/login',
     method: methodType.get,
@@ -100,9 +102,9 @@ export function requestLogin(mobilePhoneNumber: string, password: string): Objec
 /**
  * 获取用户
  * @param id 用户的ID
- * @returns {{path: string, method: string}}
+ * @returns {{path, method}}
  */
-export function getUserByID(id: string): Object {
+function getUserByID(id) {
   return {
     path: '/users/' + id,
     method: methodType.get,
@@ -115,7 +117,7 @@ export function getUserByID(id: string): Object {
  * @param  {[type]} obj:Object    [description]
  * @return {[type]}               [description]
  */
-export function bindingToUser(userID: string, obj: Object): Object {
+function bindingToUser(userID, obj) {
 
   const path = '/users/' + userID;
   return {
@@ -133,8 +135,8 @@ export function bindingToUser(userID: string, obj: Object): Object {
  * @param  {[type]} new_password:'string' [description]
  * @return {[type]}                       [description]
  */
-export function updatePassword(id: string, old_password: string,
-                               new_password: string): Object {
+function updatePassword(id, old_password,
+                        new_password) {
   return {
     path: '/users/' + id + '/updatePassword',
     method: methodType.put,
@@ -152,7 +154,7 @@ export function updatePassword(id: string, old_password: string,
  * @param  {[type]} username:string 更新后的名字
  * @return {[type]}                 [description]
  */
-export function updateUserName(id: string, username: string): Object {
+function updateUserName(id, username) {
   return {
     path: '/users/' + id,
     method: methodType.put,
@@ -168,7 +170,7 @@ export function updateUserName(id: string, username: string): Object {
 /*
  * 更新角色
  */
-export function updateRoles(id, op, rolsesId) {
+function updateRoles(id, op, rolsesId) {
   return {
     path: '/roles/' + rolsesId,
     method: methodType.put,
@@ -195,7 +197,7 @@ export function updateRoles(id, op, rolsesId) {
  * @param  {[type]} name:string   [description]
  * @return {[type]}               [description]
  */
-export function bindingFileToUser(userID: string, fileID: string, name: string): Object {
+function bindingFileToUser(userID, fileID, name) {
 
   const param = {};
   param[name] = {
@@ -211,7 +213,7 @@ export function bindingFileToUser(userID: string, fileID: string, name: string):
  * @param  {[type]} fileID:string 文件的ID，
  * @return {[type]}               [description]
  */
-export function deleteFile(fileID: string): Object {
+function deleteFile(fileID) {
   const path = '/files/' + fileID
   return {
     path: path,
@@ -219,7 +221,7 @@ export function deleteFile(fileID: string): Object {
   }
 }
 
-export function feedbackParam(content: string, contact: string): Object {
+function feedbackParam(content, contact) {
   return {
     path: '/feedback',
     method: methodType.post,
@@ -239,15 +241,15 @@ export function feedbackParam(content: string, contact: string): Object {
  * @param  {[type]} id:string        =“” 可选，具体的id
  * @return {[type]}                  [description]
  */
-export function classNormalSearch(className: string, id: string = ''): Object {
+function classNormalSearch(className, id = '') {
   return {
     path: '/classes/' + className + '/' + id,
     method: methodType.get
   }
 }
 
-export function limitSearch(className: string, page: Number = 0,
-                            limit: Number = 40, other: Object = {}, callPath: string): Object {
+function limitSearch(className, page = 0,
+                     limit = 40, other = {}, callPath) {
   const skip = page * limit;
   return {
     path: !callPath ? '/classes/' + className : '/call/' + callPath,
@@ -267,7 +269,7 @@ export function limitSearch(className: string, page: Number = 0,
  * @param  {[type]} params:Object    参数
  * @return {[type]}                  [description]
  */
-export function classCreatNewOne(className: string, params: Object): Object {
+function classCreatNewOne(className, params) {
   return {
     path: '/classes/' + className,
     method: methodType.post,
@@ -282,7 +284,7 @@ export function classCreatNewOne(className: string, params: Object): Object {
  * @param  {[type]} params:Object    参数
  * @return {[type]}                  [description]
  */
-export function classUpdate(className: string, objectId: string, params: Object): Object {
+function classUpdate(className, objectId, params) {
   return {
     path: '/classes/' + className + '/' + objectId,
     method: methodType.put,
@@ -298,7 +300,7 @@ export function classUpdate(className: string, objectId: string, params: Object)
  * @param  {[type]} params:Object    [description]
  * @return {[type]}                  [description]
  */
-export function classDelete(className: string, objectId: string, params: Object): Object {
+function classDelete(className, objectId, params) {
   return {
     path: '/classes/' + className + '/' + objectId,
     method: methodType.delete,
@@ -306,7 +308,7 @@ export function classDelete(className: string, objectId: string, params: Object)
   }
 }
 
-export function classBatch(requests: [Object]): Object {
+function classBatch(requests) {
   const newRequests = requests.map((request, i) => {
     return {
       path: '/1.1' + request.path,
@@ -317,12 +319,12 @@ export function classBatch(requests: [Object]): Object {
   return {
     path: '/batch',
     method: methodType.post,
-    params: {requests: newRequests},
+    params: { requests: newRequests },
   }
 }
 
-export function pushInstallation(OS: String, token: string, owner: obejct) {
-  let installationId = OS == 'ios' ? {"deviceToken": token} : {"installationId": token}
+function pushInstallation(OS, token, owner) {
+  let installationId = OS == 'ios' ? { "deviceToken": token } : { "installationId": token }
   // const LeanCloud_APP_ID = 'q81jdsbi5qp679fi5o46i5nppjgycztgivwj30707xfvehzt';
   // const LeanCloud_APP_KEY = 'y6ffzv6mq705pya2pd6kgl1ni1vwlppesis7f1qi19afg5nn';
   return {
@@ -346,9 +348,9 @@ export function pushInstallation(OS: String, token: string, owner: obejct) {
   }
 }
 
-export function push(data, where) {
+function push(data, where) {
   return {
-    head : config.remoteMHeader,
+    head: config.remoteMHeader,
     path: '/push',
     method: methodType.post,
     params: {
@@ -357,4 +359,10 @@ export function push(data, where) {
       prod: process.env.LEANCLOUD_APP_ENV === 'development' ? "dev" : "prod",
     },
   }
+}
+
+
+module.exports = {
+  push,
+  requestSmsCode
 }

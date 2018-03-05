@@ -5,7 +5,7 @@ const {
   LeanCloud_APP_SIGN,
   LeanCloud_APP_M_KEY
 } = require('./lckey');
-// require('../cloud')
+require('../cloud')
 
 const environment = require('./env');
 
