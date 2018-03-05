@@ -45,16 +45,14 @@ class ApiClient {
   }
 
 
-  req({
-        // scheme = 'https',
-        host = config.remoteApiHost,
-        path = '/',
-        method = 'get',
-        timeout = 20000,
-        params,
-        head = config.remoteHeader
-        // needSession = false
-      }) {
+  req(data) {
+    let {host,path, method,timeout,params,head} = data;
+    host = host || config.remoteApiHost;
+    path = path || '/';
+    method = method || 'get';
+    timeout = timeout || 20000;
+    head = head || config.remoteHeader
+
     return new Promise((resolve, reject) => {
       const adjustedPath = path[0] !== '/' ? '/' + path : path;
       const url = host + adjustedPath;
@@ -83,4 +81,4 @@ class ApiClient {
    */
 }
 
-module.exports = ApiClient;
+module.exports = ApiClient
