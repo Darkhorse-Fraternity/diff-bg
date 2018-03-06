@@ -2,6 +2,7 @@
 
 // const AV = require('leanengine');
 
+console.log('test:', 'cloud111');
 
 require('./cloudHook')
 require('./cloudFunc')

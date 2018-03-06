@@ -1,3 +1,4 @@
+/*eslint-disable */
 // import superagent from 'superagent';
 // import config from '../config';
 // import {toQueryString} from './useMeth';
@@ -45,7 +46,7 @@ class ApiClient {
   }
 
 
-  req(data) {
+  req(data:Object) {
     let {host,path, method,timeout,params,head} = data;
     host = host || config.remoteApiHost;
     path = path || '/';
@@ -56,9 +57,11 @@ class ApiClient {
     return new Promise((resolve, reject) => {
       const adjustedPath = path[0] !== '/' ? '/' + path : path;
       const url = host + adjustedPath;
+
       const request = superagent[method](url);
       request.set(head);
       request.timeout(timeout);
+
       if (method === 'get') {
         const queryString = toQueryString(params);
         request.query(queryString);
