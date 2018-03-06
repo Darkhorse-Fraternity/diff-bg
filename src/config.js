@@ -50,4 +50,4 @@ const config = Object.assign({
 
 }, environment);
 
-// module.exports = config;
+module.exports = config;
