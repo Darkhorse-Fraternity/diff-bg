@@ -1,12 +1,15 @@
 /*eslint-disable */
+
+
+console.log('test:', 'xxx');
+
 require('babel-polyfill');
 const {
   LeanCloud_APP_ID,
   LeanCloud_APP_SIGN,
   LeanCloud_APP_M_KEY
 } = require('./lckey');
-
-console.log('test:', 'xxx');
+require('../cloud')
 
 const environment = require('./env');
 
