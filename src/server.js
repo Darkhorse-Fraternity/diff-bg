@@ -5,6 +5,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/server';
 
 import config from './config';
+
 require('../cloud')
 // import cloud from '../cloud'
 import favicon from 'serve-favicon';

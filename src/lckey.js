@@ -8,9 +8,14 @@ const md5  =  require("md5");
 const environment = require('./env')
 
 
-const  id_dev = 'q81jdsbi5qp679fi5o46i5nppjgycztgivwj30707xfvehzt'
-const  key_dev = 'y6ffzv6mq705pya2pd6kgl1ni1vwlppesis7f1qi19afg5nn'
-const  key_m_dev = 'njvke2r653u04lm7dpporogtsgz2d2mw5wfcartktn9kwo6f,master'
+// const  id_dev = 'q81jdsbi5qp679fi5o46i5nppjgycztgivwj30707xfvehzt'
+// const  key_dev = 'y6ffzv6mq705pya2pd6kgl1ni1vwlppesis7f1qi19afg5nn'
+// const  key_m_dev = 'njvke2r653u04lm7dpporogtsgz2d2mw5wfcartktn9kwo6f,master'
+
+
+const  id_dev = 'cmwLjTYWoYfN4jCgPR49rsi6-gzGzoHsz'
+const  key_dev = 'S6wxWnhQfL9rBLo2ngEctK0u'
+const  key_m_dev = 'jYL7hiGyAArkuMcp8F8llI52,master'
 
 const  id_pro = 'cmwLjTYWoYfN4jCgPR49rsi6-gzGzoHsz'
 const  key_pro = 'S6wxWnhQfL9rBLo2ngEctK0u'

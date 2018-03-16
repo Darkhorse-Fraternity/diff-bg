@@ -349,6 +349,7 @@ function pushInstallation(OS, token, owner) {
 }
 
 function push(data, where) {
+  // console.log('config.remoteMHeader:', config.remoteMHeader);
   return {
     head: config.remoteMHeader,
     path: '/push',

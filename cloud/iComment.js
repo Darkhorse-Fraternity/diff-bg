@@ -1,47 +1,45 @@
 const AV = require('leanengine');
 const {
-  iUse,
+  iDo,
   iCard,
   iComment,
 } = require('./cloudKeys')
 const {user} = require('../src/helpers/LCModle')
 const {lcPush} = require('./cloudPush')
+const env = require('../src/env')
 
 AV.Cloud.afterSave(iComment, req => new Promise((solve, reject) => {
   const {object, currentUser} = req
   if (object) {
-    const use = object.get(iUse);
+    const Do = object.get(iDo);
+    Do.fetch({
+      include: ['iCard', 'user'],
+    }).then(async d => {
+      const iDoItem = d.toJSON()
 
-    use.fetch({
-      include: ['iCard', 'user', 'iCard.user'],
-    }).then(async u => {
-      const card = u.get('iCard')
-      const time = u.get('time') + 1
-      const period = Number(card.get('period'))
-      const doneDate = new Date();
-      u.set('time', time)
-      u.set('statu', period === time ? "stop" : "start")
-      u.set('doneDate', doneDate)
-      u.save(null, {user: currentUser}).catch(e => {
-        console.log('iUse save:', e.message);
+      d.increment('commentNum', 1);
+      const doUser = d.get('user')
+      if(doUser.id !== currentUser.id){
+        d.set('commentNew', true)
+      }
+      d.save(null, {user: currentUser}).catch(e => {
+        console.log('iDo save:', e.message);
       })
 
-      if (card.get('user').id !== currentUser.id) {
+      //当在正式环境下，只有id 不为自己时候才进这个方法。
+      if (!env.isProduction || user.id !== currentUser.id) {
         //发送给卡片的拥有者。
+        const card = d.get('iCard')
         const title = card.get('title');
-        const body = currentUser.get('username') + '刚刚打卡了,快去看看吧~!';
-        const url = "combo://Serve"
+        const body = currentUser.get('username') +"在" +title+'下发表了一个评论,快去看看吧~!';
+        const url = "combo://RComment"
         // const vParam = card.toJSON()
         const vParam = {
-          "iCard":
-            {
-              "title": card.get('title'),
-              "objectId": card.get('objectId')
-            }
+          "data":iDoItem
         }
         const where = user(card.get('user').id)
         const res = await lcPush(title,body,url,vParam,where)
-        console.log('client.req:', res);
+        // console.log('client.req:', res);
       }
 
     }).catch(e => {

@@ -15,7 +15,7 @@ var WebpackIsomorphicToolsPlugin = require('webpack-isomorphic-tools/plugin');
 var webpackIsomorphicToolsPlugin = new WebpackIsomorphicToolsPlugin(require('./webpack-isomorphic-tools'));
 
 var host = (process.env.HOST || 'localhost');
-var port = process.env.LEANCLOUD_APP_PORT || (+process.env.PORT + 1) || 3001;
+var port = process.env.LEANCLOUD_APP_PORT || (+process.env.PORT + 2) || 3002;
 
 
 module.exports = {
