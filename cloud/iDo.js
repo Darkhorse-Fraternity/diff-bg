@@ -12,7 +12,7 @@ AV.Cloud.afterSave(iDo, req => new Promise((solve, reject) => {
   if (object) {
     const use = object.get(iUse);
 
-    const iDoItem = object.toJSON()
+    // const iDoItem = object.toJSON()
     use.fetch({
       include: ['iCard', 'user', 'iCard.user'],
     }).then(async u => {
@@ -29,16 +29,18 @@ AV.Cloud.afterSave(iDo, req => new Promise((solve, reject) => {
 
       if (card.get('user').id !== currentUser.id) {
         //发送给卡片的拥有者。
-
         const title = card.get('title');
         const body = currentUser.get('username') + '刚刚打卡了,快去看看吧~!';
         const url = "combo://RComment"
         // const vParam = card.toJSON()
         const vParam = {
-          "data":iDoItem
+          "data":
+            {
+              "title": card.get('title'),
+              "objectId": card.get('objectId')
+            }
         }
         const where = user(card.get('user').id)
-
         const res = await lcPush(title,body,url,vParam,where)
         console.log('client.req:', res);
       }

@@ -4,25 +4,24 @@ const {
   iCard,
   iComment,
 } = require('./cloudKeys')
-const {user} = require('../src/helpers/LCModle')
-const {lcPush} = require('./cloudPush')
+const { user } = require('../src/helpers/LCModle')
+const { lcPush } = require('./cloudPush')
 const env = require('../src/env')
 
 AV.Cloud.afterSave(iComment, req => new Promise((solve, reject) => {
-  const {object, currentUser} = req
+  const { object, currentUser } = req
   if (object) {
     const Do = object.get(iDo);
     Do.fetch({
       include: ['iCard', 'user'],
     }).then(async d => {
-      const iDoItem = d.toJSON()
 
       d.increment('commentNum', 1);
       const doUser = d.get('user')
-      if(doUser.id !== currentUser.id){
+      if (doUser.id !== currentUser.id) {
         d.set('commentNew', true)
       }
-      d.save(null, {user: currentUser}).catch(e => {
+      d.save(null, { user: currentUser }).catch(e => {
         console.log('iDo save:', e.message);
       })
 
@@ -31,14 +30,19 @@ AV.Cloud.afterSave(iComment, req => new Promise((solve, reject) => {
         //发送给卡片的拥有者。
         const card = d.get('iCard')
         const title = card.get('title');
-        const body = currentUser.get('username') +"在" +title+'下发表了一个评论,快去看看吧~!';
+        const body = currentUser.get('username') + "在" + title + '下发表了一个评论,快去看看吧~!';
         const url = "combo://RComment"
         // const vParam = card.toJSON()
+        const iDoItem = d.toJSON()
+        iDoItem.user = {}
+        iDoItem.iCard = {}
+        iDoItem.iUse = {}
+
         const vParam = {
-          "data":iDoItem
+          "data": iDoItem
         }
         const where = user(card.get('user').id)
-        const res = await lcPush(title,body,url,vParam,where)
+        const res = await lcPush(title, body, url, vParam, where)
         // console.log('client.req:', res);
       }
 
