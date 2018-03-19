@@ -41,7 +41,7 @@ AV.Cloud.afterSave(iComment, req => new Promise((solve, reject) => {
         const vParam = {
           "data": iDoItem
         }
-        const where = user(card.get('user').id)
+        const where = user(doUser.id)
         const res = await lcPush(title, body, url, vParam, where)
         // console.log('client.req:', res);
       }
