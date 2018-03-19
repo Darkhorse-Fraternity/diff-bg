@@ -21,7 +21,7 @@ AV.Cloud.afterSave(iComment, req => new Promise((solve, reject) => {
       if (doUser.id !== currentUser.id) {
         d.set('commentNew', true)
       }
-      d.save(null, { user: currentUser }).catch(e => {
+      d.save(null, { user: currentUser,useMasterKey: true }).catch(e => {
         console.log('iDo save:', e.message);
       })
 
