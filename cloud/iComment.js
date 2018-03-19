@@ -26,6 +26,7 @@ AV.Cloud.afterSave(iComment, req => new Promise((solve, reject) => {
       })
 
       //当在正式环境下，只有id 不为自己时候才进这个方法。
+      console.log('test:', env.isProduction);
       if (!env.isProduction || user.id !== currentUser.id) {
         //发送给卡片的拥有者。
         const card = d.get('iCard')
