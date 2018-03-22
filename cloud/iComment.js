@@ -34,9 +34,9 @@ AV.Cloud.afterSave(iComment, req => new Promise((solve, reject) => {
         const url = "combo://RComment"
         // const vParam = card.toJSON()
         const iDoItem = d.toJSON()
-        iDoItem.user = {}
-        iDoItem.iCard = {}
-        iDoItem.iUse = {}
+        iDoItem.user = {objectId: iDoItem.user.objectId}
+        iDoItem.iCard = {objectId: iDoItem.iCard.objectId}
+        iDoItem.iUse = {objectId: iDoItem.iUse.objectId}
 
         const vParam = {
           "data": iDoItem
