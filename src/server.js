@@ -36,6 +36,8 @@ const proxy = httpProxy.createProxyServer({
 });
 
 
+
+
 if (process.env.LEANCLOUD_APP_ID) {
   AV.init({
     appId: process.env.LEANCLOUD_APP_ID,
@@ -43,6 +45,10 @@ if (process.env.LEANCLOUD_APP_ID) {
     masterKey: process.env.LEANCLOUD_APP_MASTER_KEY
   });
 }
+
+
+// app.enable('trust proxy');
+// app.use(AV.Cloud.HttpsRedirect());
 
 app.use(compression());
 app.use(favicon(path.join(__dirname, '..', 'static', 'favicon.ico')));
