@@ -34,10 +34,11 @@ export default class Share extends Component {
     render() {
 
 
+        const id = this.props.location.query.id
         return (
             <StyledContent>
               <Helmet title="Share Us" />
-              <h1>待完工~！</h1>
+              <h1>{id}欢迎~！</h1>
               <div>
                 <img src={kitten} />
               </div>

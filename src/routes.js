@@ -35,18 +35,20 @@ export default (store) => {
    * Please keep routes in alphabetical order
    */
   return (
-    <Route path="/" component={App}>
-      {/* Home (main) route */}
-      <IndexRoute component={Home}/>
+    <Route path="/">
+      {/* Routes */}
+      <Route component={App}>
+        {/* Home (main) route */}
+        <IndexRoute component={Home}/>
+        <Route path="about" component={About}/>
+        <Route path="login" component={Login}/>
 
-      {/* Routes requiring login */}
-      <Route onEnter={requireLogin}>
-        <Route path="users" component={Users}/>
+        {/* Routes requiring login */}
+        <Route onEnter={requireLogin}>
+          <Route path="users" component={Users}/>
+        </Route>
       </Route>
 
-      {/* Routes */}
-      <Route path="about" component={About}/>
-      <Route path="login" component={Login}/>
       <Route path="share" component={Share}/>
       {/* Catch all route */}
       <Route path="*" component={NotFound} status={404}/>
