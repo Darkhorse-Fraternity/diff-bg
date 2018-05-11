@@ -60,6 +60,8 @@ export default class Share extends Component {
     const loadState = this.props.loadState
     console.log('iUse:', iUse);
 
+
+
     return (
       <StyledContent>
         <Helmet title="我的打卡记录"/>

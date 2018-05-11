@@ -66,6 +66,9 @@ export default function reducer(state = initialState, action: Object) {
     case '@@INIT' :
       return initialState;
 
+    case '@@redux/INIT' :
+      return initialState;
+
     default:
       return state
   }

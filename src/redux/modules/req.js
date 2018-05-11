@@ -28,6 +28,7 @@ const initialState = immutable.fromJS({
   ...registerKeys(registerReqKeys)
 });
 export default function reducer(state = initialState, action: Object) {
+  // console.log('state:', state,action.type);
   switch (action.type) {
     case LOAD:
       return state.setIn(['loadState', action.key, 'loading'], true);
@@ -54,7 +55,10 @@ export default function reducer(state = initialState, action: Object) {
     }
 
     case '@@INIT' :
-    return initialState;
+      return initialState;
+
+    case '@@redux/INIT' :
+      return initialState;
 
     default:
       return state;
