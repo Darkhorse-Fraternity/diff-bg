@@ -94,7 +94,7 @@ export default class Users extends Component {
               <ListItem>
                 <LeftView>
                   <b>
-                    姓名: {user.username}
+                    姓名: {user.nickname||'路人甲'}
                   </b>
                   <p/>
                   <b>
