@@ -10,6 +10,7 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 import { iUse as iUserModle } from '../../helpers/LCModle'
+import { } from 'material-ui/';
 
 
 const kitten = require('../About/kitten.jpg');
@@ -17,23 +18,24 @@ const kitten = require('../About/kitten.jpg');
 import {
   StyledContent,
 } from './style'
-import {req} from '../../redux/modules/req'
-import {classNormalSearch} from '../../helpers/leanCloud'
+import { req } from '../../redux/modules/req'
+import { classNormalSearch } from '../../helpers/leanCloud'
 import { shouldComponentUpdate } from 'react-immutable-render-mixin';
-import {IUSE,ICARD} from '../../redux/reqKeys'
+import { IUSE, ICARD } from '../../redux/reqKeys'
 
 @connect(
   state => ({
-     iUse: state.req.get(IUSE)
+    iUse: state.req.get(IUSE),
+    loadState: state.req.get('loadState').get(IUSE).get('loading')
   }),
   (dispatch, props) => ({
     load: () => {
       const iUserId = props.location.query.id
       // const model = iUserModle(iUserId)
-      const params = classNormalSearch(IUSE,iUserId,{
-        include:'iCard,iCard.user'
+      const params = classNormalSearch(IUSE, iUserId, {
+        include: 'iCard,iCard.user'
       })
-      dispatch(req(params,IUSE))
+      dispatch(req(params, IUSE))
       // client.req()
     }
   })
@@ -53,10 +55,9 @@ export default class Share extends Component {
 
   render() {
 
-    //iuser id
-    const id = this.props.location.query.id
 
     const iUse = this.props.iUse.toJS()
+    const loadState = this.props.loadState
     console.log('iUse:', iUse);
 
     return (

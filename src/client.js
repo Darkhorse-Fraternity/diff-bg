@@ -12,10 +12,8 @@ import {Router, browserHistory, applyRouterMiddleware} from 'react-router';
 // import {syncHistoryWithStore} from 'react-router-redux';
 import {ReduxAsyncConnect} from 'redux-connect';
 
-import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
-import purple from 'material-ui/colors/purple';
-import green from 'material-ui/colors/green';
-
+import { MuiThemeProvider } from 'material-ui/styles';
+import theme from './theme'
 
 import { useScroll } from 'react-router-scroll';
 // import createHistory from 'history/createBrowserHistory'
@@ -64,12 +62,7 @@ if (!env.isProduction) {
   // }
 }
 
-const theme = createMuiTheme({
-  palette: {
-    primary: purple,
-    secondary: green,
-  },
-});
+
 
 
 const Hydrate = (props)=> (
