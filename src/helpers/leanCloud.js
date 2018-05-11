@@ -241,10 +241,11 @@ function feedbackParam(content, contact) {
  * @param  {[type]} id:string        =“” 可选，具体的id
  * @return {[type]}                  [description]
  */
-function classNormalSearch(className, id = '') {
+function classNormalSearch(className, id = '',params) {
   return {
     path: '/classes/' + className + '/' + id,
-    method: methodType.get
+    method: methodType.get,
+    params
   }
 }
 
@@ -365,5 +366,6 @@ function push(data, where) {
 
 module.exports = {
   push,
-  requestSmsCode
+  requestSmsCode,
+  classNormalSearch
 }

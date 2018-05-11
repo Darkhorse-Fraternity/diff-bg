@@ -1,16 +1,21 @@
-
+export const ICARD = 'iCard'
 export const USERS = 'users';
 export const CARDLIST = 'cardList';
 export const UPDATEROLE = 'updateRole';
+export const IUSE = 'iUse'
+export const USER  ='user'
 
 export const registerReqKeys = [
   USERS,
-  UPDATEROLE
+  UPDATEROLE,
+  IUSE,
+  ICARD
 ];
 
 
 export const registerListKeys = [
-  CARDLIST
+  CARDLIST,
+  IUSE
 ];
 
 export const registerNormalizrKeys = registerListKeys;

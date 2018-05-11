@@ -6,7 +6,8 @@ const LOAD = 'combo/req/LOAD';
 const LOAD_SUCCESS = 'combo/req/LOAD_SUCCESS';
 const LOAD_FAIL = 'combo/req/LOAD_FAIL';
 import * as immutable from 'immutable';
-import {registerReqKeys} from '../reqKeys';
+import { registerReqKeys } from '../reqKeys';
+import {addNormalizrEntity} from './normalizr'
 
 const registerKeys = (keys = []) => {
   const newKyes = {};
@@ -31,13 +32,14 @@ export default function reducer(state = initialState, action: Object) {
     case LOAD:
       return state.setIn(['loadState', action.key, 'loading'], true);
     case LOAD_SUCCESS: {
+
       const loadState = state.get('loadState').mergeDeep({
         [action.key]: {
           loading: false,
           loaded: true,
         }
       });
-      return state.merge({loadState, [action.key]: action.result});
+      return state.merge({ loadState, [action.key]: action.result });
     }
     case LOAD_FAIL: {
       const loadState = state.get('loadState').mergeDeep({
@@ -48,19 +50,33 @@ export default function reducer(state = initialState, action: Object) {
         }
       });
 
-      return state.mergeDeep({loadState});
+      return state.mergeDeep({ loadState });
     }
 
     case '@@INIT' :
-      return initialState;
+    return initialState;
 
     default:
-      return initialState;
+      return state;
   }
 }
 
 
 export function req(params, key) {
+  return async (dispatch) => {
+     dispatch(reqN(params,key))
+  }
+}
+
+export function reqN(params, key) {
+  return async (dispatch) => {
+    const res = await dispatch(load(params,key))
+    dispatch(addNormalizrEntity(key,res))
+    return res;
+  };
+}
+
+export function load(params, key) {
   return {
     types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
     promise: client => client.req(params).then(res => res.results || res),
@@ -68,13 +84,4 @@ export function req(params, key) {
   };
 }
 
-// 做normalizr 做到一半，太累了，后面做
-export function reqN(params, key) {
-  return () => {
-    return {
-      types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
-      promise: client => client.req(params).then(res => res.results || res),
-      key
-    };
-  };
-}
+

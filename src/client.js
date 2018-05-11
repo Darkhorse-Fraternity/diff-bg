@@ -48,14 +48,7 @@ const component = (
 );
 
 
-ReactDOM.hydrate(
-  <MuiThemeProvider>
-    <Provider store={store} key="provider">
-      {component}
-    </Provider>
-  </MuiThemeProvider>,
-  dest
-);
+
 
 if (!env.isProduction) {
   window.React = React; // enable debugger
@@ -70,12 +63,21 @@ if (!env.isProduction) {
 if (__DEVTOOLS__ && !window.devToolsExtension) {
   const DevTools = require('./containers/DevTools/DevTools');
   ReactDOM.hydrate(
-    <MuiThemeProvider>
+    <MuiThemeProvider theme={{}}>
       <Provider store={store} key="provider">
         <div>
           {component}
           <DevTools/>
         </div>
+      </Provider>
+    </MuiThemeProvider>,
+    dest
+  );
+}else {
+  ReactDOM.hydrate(
+    <MuiThemeProvider theme={{}}>
+      <Provider store={store} key="provider">
+        {component}
       </Provider>
     </MuiThemeProvider>,
     dest

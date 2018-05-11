@@ -6,6 +6,8 @@ const {iCard} = require('./cloudKeys')
 AV.Cloud.define('cardList', (req)=> {
     const {params}  = req
     const query = new AV.Query(iCard);
+    //TODO 取当前时间
+
     query.equalTo('state', 1);
     //按人数多少排列。
     query.skip(params.skip)

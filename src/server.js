@@ -114,7 +114,7 @@ app.use((req, res) => {
       } else if (renderProps) {
         loadOnServer({...renderProps, store, helpers: {client}}).then(() => {
           const component = (
-            <MuiThemeProvider>
+            <MuiThemeProvider theme={{}}>
               <Provider store={store} key="provider">
                 <ReduxAsyncConnect {...renderProps} />
               </Provider>
