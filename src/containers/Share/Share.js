@@ -44,9 +44,6 @@ export default class Share extends Component {
   constructor(props: Object) {
     super(props);
     this.shouldComponentUpdate = shouldComponentUpdate.bind(this);
-    //TODO:CLASS 生成了两次 不知道是什么原因
-    // console.log('test:', 'load000');
-
   }
 
 

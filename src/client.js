@@ -11,7 +11,12 @@ import {Provider} from 'react-redux';
 import {Router, browserHistory, applyRouterMiddleware} from 'react-router';
 // import {syncHistoryWithStore} from 'react-router-redux';
 import {ReduxAsyncConnect} from 'redux-connect';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+
+import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
+import purple from 'material-ui/colors/purple';
+import green from 'material-ui/colors/green';
+
+
 import { useScroll } from 'react-router-scroll';
 // import createHistory from 'history/createBrowserHistory'
 import env from './env'
@@ -20,7 +25,6 @@ import getRoutes from './routes';
 
 const client = new ApiClient();
 // const _browserHistory = useScroll(() => browserHistory)();
-const dest = document.getElementById('content');
 const store = createStore(browserHistory, client, window.__data);
 // const history = syncHistoryWithStore(_browserHistory, store);
 
@@ -60,26 +64,40 @@ if (!env.isProduction) {
   // }
 }
 
+const theme = createMuiTheme({
+  palette: {
+    primary: purple,
+    secondary: green,
+  },
+});
+
+
+const Hydrate = (props)=> (
+  <MuiThemeProvider theme={theme} >
+    <Provider store={store} key="provider">
+      {props.children}
+    </Provider>
+  </MuiThemeProvider>
+)
+const dest = document.getElementById('content');
+
+
 if (__DEVTOOLS__ && !window.devToolsExtension) {
   const DevTools = require('./containers/DevTools/DevTools');
   ReactDOM.hydrate(
-    <MuiThemeProvider theme={{}}>
-      <Provider store={store} key="provider">
+    <Hydrate >
         <div>
           {component}
           <DevTools/>
         </div>
-      </Provider>
-    </MuiThemeProvider>,
+    </Hydrate>,
     dest
   );
 }else {
   ReactDOM.hydrate(
-    <MuiThemeProvider theme={{}}>
-      <Provider store={store} key="provider">
+    <Hydrate >
         {component}
-      </Provider>
-    </MuiThemeProvider>,
+    </Hydrate>,
     dest
   );
 }
