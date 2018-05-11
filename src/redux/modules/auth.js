@@ -95,6 +95,7 @@ export function load() {
 
 export function login(...args) {
   const params = requestUsersByMobilePhone(...args);
+  console.log('login:', params);
   return {
     types: [LOGIN, LOGIN_SUCCESS, LOGIN_FAIL],
     promise: client => client.req(params).then(res => {

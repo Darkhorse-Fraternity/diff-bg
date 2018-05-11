@@ -68,7 +68,7 @@ function requestUsersByMobilePhone(mobilePhoneNumber, smsCode, password) {
     params: {
       mobilePhoneNumber,//必须
       smsCode,//必须，且为六位。
-      password,//不必须，要业务需求必须。
+      //password,//不必须，要业务需求必须。
     }
   }
 }
@@ -367,5 +367,6 @@ function push(data, where) {
 module.exports = {
   push,
   requestSmsCode,
-  classNormalSearch
+  classNormalSearch,
+  requestUsersByMobilePhone,
 }

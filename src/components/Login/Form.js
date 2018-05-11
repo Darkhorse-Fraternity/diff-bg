@@ -58,7 +58,7 @@ errorMsgTranslator (err) {
           }
         >
           <LoginInfo error={loginError}>
-            { loginError ? loginError.error : 'Combo'}
+            { loginError || 'Combo'}
           </LoginInfo>
           <TextField
             id='username'
