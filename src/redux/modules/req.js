@@ -13,7 +13,7 @@ const registerKeys = (keys = []) => {
   const newKyes = {};
   const loadState = {};
   keys.forEach((key) => {
-    newKyes[key] = [];
+    newKyes[key] = {};
     loadState[key] = {
       loading: false,
       loaded: false,

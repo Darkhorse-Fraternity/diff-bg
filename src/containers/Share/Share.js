@@ -56,12 +56,13 @@ export default class Share extends Component {
     //iuser id
     const id = this.props.location.query.id
 
-    console.log('iUse:', this.props.iUse.toJS());
+    const iUse = this.props.iUse.toJS()
+    console.log('iUse:', iUse);
 
     return (
       <StyledContent>
         <Helmet title="我的打卡记录"/>
-        <h1>{id}欢迎~！</h1>
+        <h1>{iUse.iCard && iUse.iCard.title}</h1>
         <div>
           <img src={kitten}/>
         </div>
