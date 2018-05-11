@@ -369,4 +369,6 @@ module.exports = {
   requestSmsCode,
   classNormalSearch,
   requestUsersByMobilePhone,
+  searchUser,
+  updateRoles
 }

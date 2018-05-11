@@ -89,7 +89,7 @@ export default class Users extends Component {
         {users && <TransitionGroup
           className='todo-list'
         >
-          {users.map(user =>
+          {users.map && users.map(user =>
             <Fade key={user.username}>
               <ListItem>
                 <LeftView>
