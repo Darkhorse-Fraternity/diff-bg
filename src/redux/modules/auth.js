@@ -10,65 +10,49 @@ const LOGOUT_FAIL = 'combo/auth/LOGOUT_FAIL';
 
 import config from '../../config';
 
-import {requestUsersByMobilePhone} from '../../helpers/leanCloud';
+import { requestUsersByMobilePhone, userMe } from '../../helpers/leanCloud';
+
 const initialState = {
-  loaded: false
+  loaded: false,
+  loading: false
 };
 
 export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
-    case LOAD:
+    case LOGIN:
       return {
         ...state,
         loading: true
       };
-    case LOAD_SUCCESS:
+    case LOGIN_SUCCESS:
       return {
         ...state,
         loading: false,
         loaded: true,
         user: action.result
       };
-    case LOAD_FAIL:
+    case LOGIN_FAIL:
       return {
         ...state,
         loading: false,
         loaded: false,
         error: action.error
       };
-    case LOGIN:
-      return {
-        ...state,
-        loggingIn: true
-      };
-    case LOGIN_SUCCESS:
-      return {
-        ...state,
-        loggingIn: false,
-        user: action.result
-      };
-    case LOGIN_FAIL:
-      return {
-        ...state,
-        loggingIn: false,
-        user: null,
-        loginError: action.error
-      };
     case LOGOUT:
       return {
         ...state,
-        loggingOut: true
+        loading: true
       };
     case LOGOUT_SUCCESS:
       return {
         ...state,
-        loggingOut: false,
+        loading: false,
         user: null
       };
     case LOGOUT_FAIL:
       return {
         ...state,
-        loggingOut: false,
+        loading: false,
         logoutError: action.error
       };
 
@@ -86,12 +70,28 @@ export function isLoaded(globalState) {
   return globalState.auth && globalState.auth.loaded;
 }
 
-export function load() {
-  return {
-    types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
-    promise: (client) => client.get('/loadAuth')
-  };
+
+export function load(globalState) {
+
+  if (__SERVER__) {
+    return;
+  }
+  if (globalState && isLoaded(globalState)) {
+    return;
+  }
+
+  const sessionToken = localStorage.sessionToken
+  if (sessionToken) {
+    config.remoteHeader['X-LC-Session'] = sessionToken;
+    const params = userMe();
+    return {
+      types: [LOGIN, LOGIN_SUCCESS, LOGIN_FAIL],
+      promise: client => client.req(params)
+    };
+
+  }
 }
+
 
 export function login(...args) {
   const params = requestUsersByMobilePhone(...args);
@@ -100,6 +100,7 @@ export function login(...args) {
     types: [LOGIN, LOGIN_SUCCESS, LOGIN_FAIL],
     promise: client => client.req(params).then(res => {
       config.remoteHeader['X-LC-Session'] = res.sessionToken;
+      localStorage.sessionToken = res.sessionToken;
       return res;
     })
   };
@@ -118,6 +119,7 @@ export function logout() {
   //   types: [LOGOUT, LOGOUT_SUCCESS, LOGOUT_FAIL],
   //   promise: (client) => client.get('/logout')
   // };
+  localStorage.removeItem('sessionToken');
   return {
     type: LOGOUT_SUCCESS,
     // promise: (client) => client.get('/logout')

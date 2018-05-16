@@ -43,8 +43,8 @@ if (process.env.LEANCLOUD_APP_ID) {
 }
 
 
-// app.enable('trust proxy');
-// app.use(AV.Cloud.HttpsRedirect());
+app.enable('trust proxy');
+app.use(AV.Cloud.HttpsRedirect());
 
 app.use(compression());
 app.use(favicon(path.join(__dirname, '..', 'static', 'favicon.ico')));

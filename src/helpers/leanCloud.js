@@ -73,6 +73,19 @@ function requestUsersByMobilePhone(mobilePhoneNumber, smsCode, password) {
   }
 }
 
+
+//已登录用户信息
+function userMe() {
+  return {
+    path: '/users/me',
+    method: methodType.get,
+    params: {}
+  }
+}
+
+
+
+
 function searchUser(params) {
   return {
     path: '/users',
@@ -369,6 +382,7 @@ module.exports = {
   requestSmsCode,
   classNormalSearch,
   requestUsersByMobilePhone,
+  userMe,
   searchUser,
   updateRoles
 }

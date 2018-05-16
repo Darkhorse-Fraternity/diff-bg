@@ -3,7 +3,8 @@ const {
   iUse,
   iCard,
   iDo,
-  iComment
+  iComment,
+  User
 } = require('./cloudKeys')
 
 
@@ -16,7 +17,7 @@ const normalACL = (currentUser) => {
   return acl
 }
 
-const classNames = [iCard, iUse, iDo, iComment]
+const classNames = [iCard, iUse, iDo, iComment, User]
 const ACLSet = (classNames) => {
   classNames.forEach(className => {
     setNormalACL(className)
@@ -25,7 +26,7 @@ const ACLSet = (classNames) => {
 
 const setNormalACL = (className) => {
   AV.Cloud.beforeSave(className, req => new Promise((solve, reject) => {
-    const {object, currentUser} = req
+    const { object, currentUser } = req
     if (object && currentUser) {
       object.setACL(normalACL(currentUser));
       solve()

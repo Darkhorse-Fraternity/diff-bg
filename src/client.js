@@ -11,19 +11,20 @@ import {Provider} from 'react-redux';
 import {Router, browserHistory, applyRouterMiddleware} from 'react-router';
 // import {syncHistoryWithStore} from 'react-router-redux';
 import {ReduxAsyncConnect} from 'redux-connect';
-
+// import {} from ''
 import { MuiThemeProvider } from 'material-ui/styles';
 import theme from './theme'
 
 import { useScroll } from 'react-router-scroll';
 // import createHistory from 'history/createBrowserHistory'
 import env from './env'
-
 import getRoutes from './routes';
 
 const client = new ApiClient();
 // const _browserHistory = useScroll(() => browserHistory)();
 const store = createStore(browserHistory, client, window.__data);
+
+
 // const history = syncHistoryWithStore(_browserHistory, store);
 
 // const history = createHistory()
@@ -75,6 +76,7 @@ const Hydrate = (props)=> (
 const dest = document.getElementById('content');
 
 
+store.dispatch()
 if (__DEVTOOLS__ && !window.devToolsExtension) {
   const DevTools = require('./containers/DevTools/DevTools');
   ReactDOM.hydrate(

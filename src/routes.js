@@ -1,7 +1,7 @@
 import React from 'react';
 import { IndexRoute, Route } from 'react-router';
 // import {isLoaded as isAuthLoaded, load as loadAuth} from 'redux/modules/auth';
-import { isLoaded as isAuthLoaded } from 'redux/modules/auth';
+import { isLoaded as isAuthLoaded, load as loadAuth } from 'redux/modules/auth';
 import {
   App,
   Home,
@@ -23,13 +23,26 @@ export default (store) => {
       cb();
     }
 
+
     if (!isAuthLoaded(store.getState())) {
-      // store.dispatch(loadAuth()).then(checkAuth);
-      checkAuth();
+      if(__SERVER__){
+        cb()
+        return;
+      }
+
+
+      const interValId = setInterval(()=>{
+          checkAuth();
+          // console.log('interValId:', interValId);
+          clearInterval(interValId)
+      },1000)
+      // checkAuth();
     } else {
       checkAuth();
     }
   };
+  
+  store.dispatch(loadAuth(store.getState()));
 
   /**
    * Please keep routes in alphabetical order

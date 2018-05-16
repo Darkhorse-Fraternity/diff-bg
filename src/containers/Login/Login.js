@@ -14,7 +14,6 @@ import { immutableRenderDecorator } from 'react-immutable-render-mixin';
 @connect(
   state => ({
     user: state.auth.user,
-    isLogging: state.auth.loggingIn,
     loginError: state.auth.loginError &&  state.auth.loginError.response.text
   }),
   authActions)
@@ -25,12 +24,10 @@ export default class Login extends Component {
     login: PropTypes.func,
     logout: PropTypes.func,
     sign: PropTypes.func,
-    isLogging: PropTypes.bool,
     loginError: PropTypes.string
   }
 
   static defaultProps = {
-    isLogging: false,
     loginError: ''
   }
 
