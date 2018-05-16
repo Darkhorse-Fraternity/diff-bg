@@ -14,7 +14,7 @@ import { immutableRenderDecorator } from 'react-immutable-render-mixin';
 @connect(
   state => ({
     user: state.auth.user,
-    loginError: state.auth.loginError &&  state.auth.loginError.response.text
+    loginError: state.auth.error &&  state.auth.error.response.text
   }),
   authActions)
 @immutableRenderDecorator

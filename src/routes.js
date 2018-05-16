@@ -41,7 +41,7 @@ export default (store) => {
       checkAuth();
     }
   };
-  
+
   store.dispatch(loadAuth(store.getState()));
 
   /**
