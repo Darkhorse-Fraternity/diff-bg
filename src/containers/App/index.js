@@ -13,7 +13,7 @@ import FlatButton from 'material-ui/Button'
 
 @asyncConnect([{
   key: 'app',
-  promise: ({store: {}}) => {
+  promise: ({ store: {} }) => {
     // const promises = [];
 
     // if (!isInfoLoaded(getState())) {
@@ -24,12 +24,12 @@ import FlatButton from 'material-ui/Button'
     // }
 
     // return Promise.all(promises);
-    return Promise.resolve({id: 1, name: 'Borsch'})
+    return Promise.resolve({ id: 1, name: 'Borsch' })
   }
 }])
 @connect(
-  state => ({user: state.auth.user}),
-  {logout, pushState: push})
+  state => ({ user: state.auth.user }),
+  { logout, pushState: push })
 
 @immutableRenderDecorator
 
@@ -45,7 +45,7 @@ export default class App extends Component {
     store: PropTypes.object.isRequired
   }
 
-  componentWillReceiveProps (nextProps) {
+  componentWillReceiveProps(nextProps) {
     if (!this.props.user && nextProps.user) {
       // login
       this.props.pushState('/')
@@ -69,14 +69,14 @@ export default class App extends Component {
   //   return router.isActive(toLocation, onlyActiveOnIndex);
   // };
 
-  render () {
+  render() {
     // console.log('props:', this.props);
-    const {user} = this.props
+    const { user } = this.props
     // const styles = require('./App.scss');
     // console.log('this.context:', this.context);
 
-    // console.log('test:', this.props);
 
+    console.log('test:', '2222');
     return (
       <div>
         <Helmet {...config.app.head}/>
@@ -85,12 +85,9 @@ export default class App extends Component {
           <FlatButton component={IndexLink} to={'/'}>
             首页
           </FlatButton>
-          {user && (
-            <FlatButton component={Link} to={'/users'}>
-              用户列表
-            </FlatButton>)}
-          <FlatButton component={Link} to={'/login'}>
-            登录
+
+          <FlatButton component={Link} to={'/about'}>
+            关于我们
           </FlatButton>
         </div>
         <div>

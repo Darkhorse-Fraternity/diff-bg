@@ -9,7 +9,8 @@ import {
   Login,
   Users,
   NotFound,
-  Share
+  Share,
+  Admin
 } from 'containers';
 
 export default (store) => {
@@ -25,17 +26,17 @@ export default (store) => {
 
 
     if (!isAuthLoaded(store.getState())) {
-      if(__SERVER__){
+      if (__SERVER__) {
         cb()
         return;
       }
 
 
-      const interValId = setInterval(()=>{
-          checkAuth();
-          // console.log('interValId:', interValId);
-          clearInterval(interValId)
-      },1000)
+      const interValId = setInterval(() => {
+        checkAuth();
+        // console.log('interValId:', interValId);
+        clearInterval(interValId)
+      }, 1000)
       // checkAuth();
     } else {
       checkAuth();
@@ -50,17 +51,22 @@ export default (store) => {
   return (
     <Route path="/">
       {/* Routes */}
+      {/*Front*/}
       <Route component={App}>
         {/* Home (main) route */}
         <IndexRoute component={Home}/>
         <Route path="about" component={About}/>
-        <Route path="login" component={Login}/>
+      </Route>
 
-        {/* Routes requiring login */}
+      <Route component={Admin}>
+        {/* Home (main) route */}
         <Route onEnter={requireLogin}>
           <Route path="users" component={Users}/>
         </Route>
+        <Route path="login" component={Login}/>
       </Route>
+      {/*后台*/}
+
 
       <Route path="share" component={Share}/>
       {/* Catch all route */}
