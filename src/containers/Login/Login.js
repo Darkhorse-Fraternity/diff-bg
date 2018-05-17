@@ -6,7 +6,7 @@ import Helmet from 'react-helmet';
 import * as authActions from 'redux/modules/auth';
 // import Form from 'components/Login/Form';
 import LoginForm from 'styles/LoginForm';
-import Overlay from 'styles/Overlay';
+import Overlay from './Overlay';
 import Welcome from 'styles/Welcome';
 import Form from 'components/Login/Form';
 import { immutableRenderDecorator } from 'react-immutable-render-mixin';

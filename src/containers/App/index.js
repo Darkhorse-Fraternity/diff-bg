@@ -8,7 +8,11 @@ import { push } from 'react-router-redux'
 import config from '../../config'
 import { asyncConnect } from 'redux-connect'
 import { immutableRenderDecorator } from 'react-immutable-render-mixin'
-import {StyledContent} from './style'
+import {
+  StyledContent,
+  StyledMenu,
+  StyledPage
+} from './style'
 import FlatButton from 'material-ui/Button'
 
 @asyncConnect([{
@@ -79,7 +83,7 @@ export default class App extends Component {
       <StyledContent>
         <Helmet {...config.app.head}/>
 
-        <div>
+        <StyledMenu>
           <FlatButton component={IndexLink} to={'/'}>
             首页
           </FlatButton>
@@ -87,12 +91,12 @@ export default class App extends Component {
           <FlatButton component={Link} to={'/about'}>
             关于我们
           </FlatButton>
-        </div>
-        <div>
+        </StyledMenu>
+        <StyledPage>
           {this.props.children}
-        </div>
+        </StyledPage>
 
-        <div className="well text-center">
+        <div>
           footer <a
           href="http://icard.leanapp.cn/"
           target="_blank">design by tony</a>

@@ -10,18 +10,19 @@ export const StyledContent = styled.div`
     display:flex;
     flex: 1;
     background-color: white;
+    flex-direction: column;
 `
 
 export const StyledMain = styled.div`
    display:flex;
    flex: 1;
-   flex-direction: row;
 `
 
 export const StyledMenu = styled.div`
   display:flex;
   flex-direction: column;
   border-right:1px solid black;
+  height: 100%;
 `
 export const StyledPage = styled.div`
   display:flex;
