@@ -15,7 +15,8 @@ export const registerReqKeys = [
 
 export const registerListKeys = [
   CARDLIST,
-  IUSE
+  IUSE,
+  USERS
 ];
 
 export const registerNormalizrKeys = registerListKeys;

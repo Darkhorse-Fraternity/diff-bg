@@ -24,7 +24,8 @@ const initialState = immutable.fromJS({ ...registerKeys(registerNormalizrKeys) }
 export const ADD_NORMALIZR = 'ADD_NORMALIZR'
 
 export function addNormalizrEntity(key, data) {
-  return dispatch => dispatch(addNormalizrEntities(key, { [code]: [data] }))
+  const nData = data === 'object' ?  [data] : data
+  return dispatch => dispatch(addNormalizrEntities(key, {[code]:nData}))
 }
 
 
@@ -33,6 +34,9 @@ export function addNormalizrEntities(schemeOrkey, data) {
     return
   }
   const scheme = typeof schemeOrkey === 'string' ? schemas[schemeOrkey] : schemeOrkey
+
+  console.log('test:', scheme,data);
+
   const nData = normalize(data, scheme)
   return dispatch => dispatch(addEntities(nData.entities))
 }
