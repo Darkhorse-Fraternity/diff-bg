@@ -2,8 +2,6 @@
 import styled from 'styled-components';
 
 const Overlay = styled.div`
-  display:flex;
-  flex: 1;
   background-size: cover;
   background-position: center;
   height: 100vh;
