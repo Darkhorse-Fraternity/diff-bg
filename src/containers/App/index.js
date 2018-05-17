@@ -8,7 +8,7 @@ import { push } from 'react-router-redux'
 import config from '../../config'
 import { asyncConnect } from 'redux-connect'
 import { immutableRenderDecorator } from 'react-immutable-render-mixin'
-
+import {StyledContent} from './style'
 import FlatButton from 'material-ui/Button'
 
 @asyncConnect([{
@@ -75,10 +75,8 @@ export default class App extends Component {
     // const styles = require('./App.scss');
     // console.log('this.context:', this.context);
 
-
-    console.log('test:', '2222');
     return (
-      <div>
+      <StyledContent>
         <Helmet {...config.app.head}/>
 
         <div>
@@ -96,10 +94,10 @@ export default class App extends Component {
 
         <div className="well text-center">
           footer <a
-          href="http://lahuo.leanapp.cn/"
+          href="http://icard.leanapp.cn/"
           target="_blank">design by tony</a>
         </div>
-      </div>
+      </StyledContent>
     )
   }
 }

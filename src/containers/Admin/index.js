@@ -8,7 +8,12 @@ import { push } from 'react-router-redux'
 import config from '../../config'
 import { asyncConnect } from 'redux-connect'
 import { immutableRenderDecorator } from 'react-immutable-render-mixin'
-
+import {
+  StyledContent,
+  StyledMain,
+  StyledMenu,
+  StyledPage
+} from './style'
 import FlatButton from 'material-ui/Button'
 
 // @asyncConnect([{
@@ -56,34 +61,32 @@ export default class Admin extends Component {
   }
 
 
-
   render() {
     const { user } = this.props
-
-
-    console.log('test:', '11111');
     return (
-      <div>
+      <StyledContent>
         <Helmet {...config.app.head}/>
-        <div>
-          <FlatButton component={Link} to={'/users'}>
-            用户
-          </FlatButton>
+        <StyledMain>
+          {user && <StyledMenu>
+            <FlatButton component={Link} to={'/users'}>
+              用户
+            </FlatButton>
 
-          <FlatButton component={Link} to={'/login'}>
-            登录
-          </FlatButton>
-        </div>
-        <div>
-          {this.props.children}
-        </div>
+            <FlatButton component={Link} to={'/login'}>
+              我的信息
+            </FlatButton>
+          </StyledMenu>}
+          <StyledPage>
+            {this.props.children}
+          </StyledPage>
+        </StyledMain>
 
         <div className="well text-center">
           footer <a
-          href="http://lahuo.leanapp.cn/"
+          href="http://icard.leanapp.cn/"
           target="_blank">design by tony</a>
         </div>
-      </div>
+      </StyledContent>
     )
   }
 }

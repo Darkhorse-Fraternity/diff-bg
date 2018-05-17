@@ -5,7 +5,10 @@ export  const List = styled.div`
 `;
 
 export const UsersView = styled.form`
+  display:flex;
+  flex:1;
   padding: 25px;
+  background-color: white;
 `
 
 export const ListItem = styled.div`

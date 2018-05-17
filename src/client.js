@@ -76,7 +76,6 @@ const Hydrate = (props)=> (
 const dest = document.getElementById('content');
 
 
-store.dispatch()
 if (__DEVTOOLS__ && !window.devToolsExtension) {
   const DevTools = require('./containers/DevTools/DevTools');
   ReactDOM.hydrate(

@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {TransitionGroup, CSSTransition} from 'react-transition-group'
-import {List, ListItem, UsersView, LeftView, RightView} from 'styles/Users'
+import {List, ListItem, UsersView, LeftView, RightView} from './style'
 import TextField from 'material-ui/TextField'
 import {req} from 'redux/modules/req'
 import {connect} from 'react-redux';
