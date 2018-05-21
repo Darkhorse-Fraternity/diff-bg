@@ -11,7 +11,8 @@ import { immutableRenderDecorator } from 'react-immutable-render-mixin'
 import {
   StyledContent,
   StyledMenu,
-  StyledPage
+  StyledPage,
+  StyledMain
 } from './style'
 import FlatButton from 'material-ui/Button'
 
@@ -81,26 +82,31 @@ export default class App extends Component {
 
     return (
       <StyledContent>
-        <Helmet {...config.app.head}/>
 
-        <StyledMenu>
-          <FlatButton component={IndexLink} to={'/'}>
-            首页
-          </FlatButton>
 
-          <FlatButton component={Link} to={'/about'}>
-            关于我们
-          </FlatButton>
-        </StyledMenu>
-        <StyledPage>
-          {this.props.children}
-        </StyledPage>
+        <StyledMain>
+          <Helmet {...config.app.head}/>
+          <StyledMenu>
+            <FlatButton component={IndexLink} to={'/'}>
+              首页
+            </FlatButton>
 
-        <div>
-          footer <a
-          href="http://icard.leanapp.cn/"
-          target="_blank">design by tony</a>
-        </div>
+            <FlatButton component={Link} to={'/about'}>
+              关于我们
+            </FlatButton>
+          </StyledMenu>
+          <StyledPage>
+            {this.props.children}
+          </StyledPage>
+
+          <div>
+            footer <a
+            href="http://icard.leanapp.cn/"
+            target="_blank">design by tony</a>
+          </div>
+        </StyledMain>
+
+
       </StyledContent>
     )
   }

@@ -9,9 +9,14 @@ import styled from "styled-components";
 export const StyledContent = styled.div`
     display:flex;
     flex: 1;
-    flex-direction: column;
+    flex-direction: row;
 `
 
+
+export const StyledMain = styled.div`
+   display:flex;
+   flex: 1;
+`
 
 export const StyledMenu = styled.div`
 

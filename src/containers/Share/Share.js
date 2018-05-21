@@ -62,7 +62,6 @@ export default class Share extends Component {
 
 
     if(!iUse.iCard){
-
       return (<IndicatorView/>)
     }
 
