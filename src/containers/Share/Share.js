@@ -11,7 +11,7 @@ import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 import { iUse as iUserModle } from '../../helpers/LCModle'
 import { } from 'material-ui/';
-
+import IndicatorView from '../../components/IndicatorView/IndicatorView'
 
 const kitten = require('../About/kitten.jpg');
 
@@ -61,11 +61,16 @@ export default class Share extends Component {
     console.log('iUse:', iUse);
 
 
+    if(!iUse.iCard){
+
+      return (<IndicatorView/>)
+    }
+
 
     return (
       <StyledContent>
         <Helmet title="我的打卡记录"/>
-        <h1>{iUse.iCard && iUse.iCard.title}</h1>
+        <h1>{iUse.iCard.title}</h1>
         <div>
           <img src={kitten}/>
         </div>

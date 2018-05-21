@@ -1,5 +1,5 @@
 /**
- * Created by lintong on 2018/4/2.
+ * Created by lintong on 2018/5/18.
  * @flow
  */
 'use strict';
@@ -10,6 +10,6 @@ export const StyledContent = styled.div`
     display:flex;
     flex: 1;
     background-color: white;
-    flex-direction: column;
     align-items: center;
+    justify-content: center;
 `
