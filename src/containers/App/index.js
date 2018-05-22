@@ -98,14 +98,12 @@ export default class App extends Component {
           <StyledPage>
             {this.props.children}
           </StyledPage>
-
-          <div>
-            footer <a
-            href="http://icard.leanapp.cn/"
-            target="_blank">design by tony</a>
-          </div>
         </StyledMain>
-
+        <div>
+          footer <a
+          href="http://icard.leanapp.cn/"
+          target="_blank">design by tony</a>
+        </div>
 
       </StyledContent>
     )
