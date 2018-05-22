@@ -6,6 +6,7 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import {CircularProgress} from 'material-ui/Progress';
 
 
 import {
@@ -32,7 +33,9 @@ export default class IndicatorView extends Component {
 
         return (
             <StyledContent>
-
+              <CircularProgress
+                variant="determinate"
+              />
             </StyledContent>
         );
     }

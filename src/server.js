@@ -19,7 +19,7 @@ import { match } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 import { ReduxAsyncConnect, loadOnServer } from 'redux-connect';
 import createHistory from 'react-router/lib/createMemoryHistory';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+// import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { Provider } from 'react-redux';
 import getRoutes from './routes';
 import AV from 'leanengine'
@@ -43,9 +43,6 @@ if (process.env.LEANCLOUD_APP_ID) {
 }
 
 
-app.enable('trust proxy');
-// app.use(AV.Cloud.HttpsRedirect());
-
 app.use(compression());
 app.use(favicon(path.join(__dirname, '..', 'static', 'favicon.ico')));
 
@@ -53,6 +50,13 @@ app.use(Express.static(path.join(__dirname, '..', 'static')));
 
 // 加载云引擎中间件
 app.use(AV.express());
+
+if(process.env.LEANCLOUD_APP_ID){
+  app.enable('trust proxy');
+  app.use(AV.Cloud.HttpsRedirect());
+}
+
+
 
 // Proxy to API server
 app.use('/api', (req, res) => {
