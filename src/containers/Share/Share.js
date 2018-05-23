@@ -10,14 +10,19 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 import { iUse as iUserModle } from '../../helpers/LCModle'
-import { } from 'material-ui/';
+import {
+  Card,
+  CardHeader,
+  CardMedia,
+  Avatar
+} from 'material-ui';
 import IndicatorView from '../../components/IndicatorView/IndicatorView'
 
 const kitten = require('../About/kitten.jpg');
 
 import {
   StyledContent,
-  StyledIcardImage
+  StyledIcardImage,
 } from './style'
 import { req } from '../../redux/modules/req'
 import { classNormalSearch } from '../../helpers/leanCloud'
@@ -62,11 +67,11 @@ export default class Share extends Component {
     console.log('iUse:', iUse);
 
 
-    if(!iUse.iCard){
+    if (!iUse.iCard) {
       return (<IndicatorView loadKey={IUSE}/>)
     }
 
-    const {img} = iUse.iCard
+    const { img, user } = iUse.iCard
 
     return (
       <StyledContent>
@@ -74,8 +79,13 @@ export default class Share extends Component {
 
         <div>
           <StyledIcardImage src={img.url}/>
-          <h1>{iUse.iCard.title}</h1>
+
+          <h3>{iUse.iCard.title}</h3>
+          <h5>{iUse.iCard.notifyText}</h5>
+
         </div>
+
+
       </StyledContent>
     );
   }
