@@ -13,3 +13,7 @@ export const StyledContent = styled.div`
     flex-direction: column;
     align-items: center;
 `
+export const StyledIcardImage = styled.img`
+    width: 100%;
+    height: 250px;
+`

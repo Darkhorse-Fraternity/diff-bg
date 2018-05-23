@@ -31,7 +31,7 @@ const LoginForm = styled.form`
          if(props.out){
          return '280px'
          }else{
-           return '280px'
+           return '350px'
          }
         }     
   };

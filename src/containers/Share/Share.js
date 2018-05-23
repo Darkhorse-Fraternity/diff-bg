@@ -17,6 +17,7 @@ const kitten = require('../About/kitten.jpg');
 
 import {
   StyledContent,
+  StyledIcardImage
 } from './style'
 import { req } from '../../redux/modules/req'
 import { classNormalSearch } from '../../helpers/leanCloud'
@@ -57,21 +58,23 @@ export default class Share extends Component {
 
 
     const iUse = this.props.iUse.toJS()
-    const loadState = this.props.loadState
+    // const loadState = this.props.loadState
     console.log('iUse:', iUse);
 
 
     if(!iUse.iCard){
-      return (<IndicatorView/>)
+      return (<IndicatorView loadKey={IUSE}/>)
     }
 
+    const {img} = iUse.iCard
 
     return (
       <StyledContent>
         <Helmet title="我的打卡记录"/>
-        <h1>{iUse.iCard.title}</h1>
+
         <div>
-          <img src={kitten}/>
+          <StyledIcardImage src={img.url}/>
+          <h1>{iUse.iCard.title}</h1>
         </div>
       </StyledContent>
     );

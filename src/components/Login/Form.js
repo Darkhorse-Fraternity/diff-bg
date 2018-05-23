@@ -49,6 +49,7 @@ errorMsgTranslator (err) {
     const { sign,login, isLogging, loginError } = this.props
     return (true) ?
     <LoginForm  login
+                autoComplete='off'
           onSubmit={(e) => {
             e.preventDefault()
             login(
@@ -64,7 +65,7 @@ errorMsgTranslator (err) {
             id='username'
             label='账号'
             className='username'
-            autoComplete='off'
+
             margin="normal"
             onChange={event=>this.setState({phoneNum:event.target.value})}
             />

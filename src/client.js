@@ -7,13 +7,15 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import createStore from './redux/create';
 import ApiClient from './helpers/ApiClient';
-import {Provider} from 'react-redux';
-import {Router, browserHistory, applyRouterMiddleware} from 'react-router';
+import { Provider } from 'react-redux';
+import { Router, browserHistory, applyRouterMiddleware } from 'react-router';
 // import {syncHistoryWithStore} from 'react-router-redux';
-import {ReduxAsyncConnect} from 'redux-connect';
+import { ReduxAsyncConnect } from 'redux-connect';
 // import {} from ''
 import { MuiThemeProvider } from 'material-ui/styles';
 import theme from './theme'
+import { ThemeProvider } from 'styled-components';
+
 
 import { useScroll } from 'react-router-scroll';
 // import createHistory from 'history/createBrowserHistory'
@@ -51,8 +53,6 @@ const component = (
 );
 
 
-
-
 if (!env.isProduction) {
   window.React = React; // enable debugger
 
@@ -64,13 +64,13 @@ if (!env.isProduction) {
 }
 
 
-
-
-const Hydrate = (props)=> (
-  <MuiThemeProvider theme={theme} >
-    <Provider store={store} key="provider">
-      {props.children}
-    </Provider>
+const Hydrate = (props) => (
+  <MuiThemeProvider theme={theme}>
+    <ThemeProvider theme={theme}>
+      <Provider store={store} key="provider">
+        {props.children}
+      </Provider>
+    </ThemeProvider>
   </MuiThemeProvider>
 )
 const dest = document.getElementById('content');
@@ -79,18 +79,18 @@ const dest = document.getElementById('content');
 if (__DEVTOOLS__ && !window.devToolsExtension) {
   const DevTools = require('./containers/DevTools/DevTools');
   ReactDOM.hydrate(
-    <Hydrate >
-        <div>
-          {component}
-          <DevTools/>
-        </div>
+    <Hydrate>
+      <div>
+        {component}
+        <DevTools/>
+      </div>
     </Hydrate>,
     dest
   );
-}else {
+} else {
   ReactDOM.hydrate(
-    <Hydrate >
-        {component}
+    <Hydrate>
+      {component}
     </Hydrate>,
     dest
   );
