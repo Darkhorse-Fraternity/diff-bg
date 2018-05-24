@@ -4,6 +4,7 @@ export const CARDLIST = 'cardList';
 export const UPDATEROLE = 'updateRole';
 export const IUSE = 'iUse'
 export const USER  ='user'
+export const IDO = 'iDo'
 
 export const registerReqKeys = [
   USERS,
@@ -16,7 +17,8 @@ export const registerReqKeys = [
 export const registerListKeys = [
   CARDLIST,
   IUSE,
-  USERS
+  USERS,
+  IDO
 ];
 
 export const registerNormalizrKeys = registerListKeys;

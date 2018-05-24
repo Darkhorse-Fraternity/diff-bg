@@ -25,25 +25,37 @@ import {
   StyledIcardImage,
 } from './style'
 import { req } from '../../redux/modules/req'
-import { classNormalSearch } from '../../helpers/leanCloud'
+import { classNormalSearch, limitSearch } from '../../helpers/leanCloud'
 import { shouldComponentUpdate } from 'react-immutable-render-mixin';
-import { IUSE, ICARD } from '../../redux/reqKeys'
+import { IUSE, ICARD, IDO } from '../../redux/reqKeys'
+import { user as UserModle, iUse } from '../../helpers/LCModle'
+import RecordRow from './RecordRow'
 
 @connect(
   state => ({
     iUse: state.req.get(IUSE),
-    loadState: state.req.get('loadState').get(IUSE).get('loading')
+    loadState: state.req.get('loadState').get(IUSE).get('loading'),
+    iDo: state.req.get(IDO)
   }),
   (dispatch, props) => ({
-    load: () => {
+    load: async () => {
       const iUserId = props.location.query.id
       // const model = iUserModle(iUserId)
       const params = classNormalSearch(IUSE, iUserId, {
         include: 'iCard,iCard.user'
       })
-      dispatch(req(params, IUSE))
-      // client.req()
-    }
+      const res = await  dispatch(req(params, IUSE))
+      const userId = res.user.objectId
+      const iDoParams = limitSearch(IDO, 0, 20, {
+        'where': {
+          ...UserModle(userId),
+          ...iUse(iUserId)
+        }
+      })
+      dispatch(req(iDoParams, IDO))
+
+    },
+
   })
 )
 
@@ -59,12 +71,21 @@ export default class Share extends Component {
     this.props.load()
   }
 
+
+  _renderIdos = (data) => {
+
+    return (
+      <RecordRow key={data.createdAt} item={data}/>
+    )
+
+  }
+
   render() {
 
 
     const iUse = this.props.iUse.toJS()
     // const loadState = this.props.loadState
-    console.log('iUse:', iUse);
+    // console.log('iUse:', iUse);
 
 
     if (!iUse.iCard) {
@@ -73,17 +94,20 @@ export default class Share extends Component {
 
     const { img, user } = iUse.iCard
 
+
+    // console.log('iUse:', iUse);
+
+    const dos = this.props.iDo && this.props.iDo.toJS()
+    // console.log('dos:', dos);
+
     return (
       <StyledContent>
-        <Helmet title="我的打卡记录"/>
+        <Helmet title={iUse.iCard.title}/>
 
-        <div>
           <StyledIcardImage src={img.url}/>
-
           <h3>{iUse.iCard.title}</h3>
           <h5>{iUse.iCard.notifyText}</h5>
-
-        </div>
+          {dos && dos.map(item => this._renderIdos(item))}
 
 
       </StyledContent>

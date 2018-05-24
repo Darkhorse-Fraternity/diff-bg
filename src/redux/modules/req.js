@@ -67,8 +67,8 @@ export default function reducer(state = initialState, action: Object) {
 
 
 export function req(params, key) {
-  return async (dispatch) => {
-     dispatch(reqN(params,key))
+  return  (dispatch) => {
+     return dispatch(reqN(params,key))
   }
 }
 

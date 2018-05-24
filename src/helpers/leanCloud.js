@@ -384,5 +384,6 @@ module.exports = {
   requestUsersByMobilePhone,
   userMe,
   searchUser,
-  updateRoles
+  updateRoles,
+  limitSearch
 }
