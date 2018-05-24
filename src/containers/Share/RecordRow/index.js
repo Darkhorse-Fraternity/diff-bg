@@ -71,15 +71,10 @@ export default class RecordRow extends Component {
 
   _renderDone = () => {
     return (
-      <StyledIcon
-        ref={this.chatBtnRef}
-        name={'md-checkmark'}
-        size={25}
-        color={'green'}
-        //backgroundColor="transparent"
-        //resizeMode = 'contain'
-        //source={image}
-      />
+      <StyledIcon color="primary">
+        <path fill="none" d="M0 0h24v24H0z"/>
+        <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/>
+      </StyledIcon>
     )
   }
 
@@ -103,9 +98,7 @@ export default class RecordRow extends Component {
             <StyledDateText>
               {date}
             </StyledDateText>
-            {this.props.showChat ?
-              this._renderChatBtn(item) :
-              this._renderDone()}
+            {this._renderDone()}
           </StyledDateView>
         </StyledBottom>
       </StyledButton>

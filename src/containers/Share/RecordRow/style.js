@@ -1,5 +1,5 @@
 import styled from "styled-components";
-
+import Icon from 'material-ui/SvgIcon'
 
 export const StyledButton = styled.div`
     display:flex;
@@ -18,22 +18,21 @@ export const StyledZoomImage = styled.img`
 `
 
 export const StyledBottom = styled.div`
-    margin-top: 5px;
-    margin-bottom: 5px;
-    padding: 0px 15px;
+    padding: 5px 30px 15px 30px;
 `
 
 export const StyledDateView = styled.div`
+    display:flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    height: 30px;
 `
 
 export const StyledNewTip = styled.div`
     width: 8px;
     height: 8px;
     border-radius: 4px;
-    background-color: red;
     margin-right: 5px;
     
 `
@@ -48,8 +47,8 @@ export const StyledRecordText = styled.h5`
    color: #323232;
 `
 
-export const StyledIcon = styled.div`
-    align-self: center;
+export const StyledIcon = styled(Icon)`
+
 `
 
 export const StyledChatbtn = styled.div`

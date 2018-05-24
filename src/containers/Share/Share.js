@@ -101,12 +101,12 @@ export default class Share extends Component {
     // console.log('dos:', dos);
 
     return (
-      <StyledContent>
+      <StyledContent>a
         <Helmet title={iUse.iCard.title}/>
 
           <StyledIcardImage src={img.url}/>
           <h3>{iUse.iCard.title}</h3>
-          <h5>{iUse.iCard.notifyText}</h5>
+          <a>{iUse.iCard.notifyText}</a>
           {dos && dos.map(item => this._renderIdos(item))}
 
 
