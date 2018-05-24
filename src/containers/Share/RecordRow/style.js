@@ -3,8 +3,8 @@ import Icon from 'material-ui/SvgIcon'
 
 export const StyledButton = styled.div`
     display:flex;
-    flex: 1;
     flex-direction: column;
+    width: 100%;
 `
 
 export const StyledImage = styled.img`

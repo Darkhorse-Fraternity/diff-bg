@@ -13,9 +13,10 @@ export const StyledContent = styled.div`
     flex: 1;
     background-color: white;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
 `
 export const StyledIcardImage = styled.img`
     width: 100%;
     height: ${props =>props.theme.width * 0.7};
 `
+
