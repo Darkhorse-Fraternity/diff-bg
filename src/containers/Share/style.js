@@ -17,6 +17,7 @@ export const StyledContent = styled.div`
 `
 export const StyledIcardImage = styled.img`
     width: 100%;
-    height: ${props =>props.theme.width * 0.7};
+    height: ${props => props.theme.width * 0.7
+}};
 `
 

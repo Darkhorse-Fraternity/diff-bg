@@ -10,6 +10,8 @@ const theme = createMuiTheme({
       contrastText: "#fff"
     },
   },
+  width:window.screen.width,
+  height:window.screen.height
 });
 
 
