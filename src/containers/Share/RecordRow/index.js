@@ -20,7 +20,8 @@ import {
   StyledDateText,
   StyledRecordText,
   StyledChatbtn,
-  StyledChatBtnText
+  StyledChatBtnText,
+  StyledImageDiv
 } from './style'
 //static displayName = RecordRow
 
@@ -86,9 +87,9 @@ export default class RecordRow extends Component {
     return (
       <StyledButton
         style={this.props.style}>
-        <StyledImage
+        {img && <StyledImageDiv><StyledImage
           // easingFunc={Easing.bounce}
-          src={img}/>
+          src={img}/></StyledImageDiv>}
         <StyledBottom>
           {!!item.recordText && item.recordText.length > 0 &&
           (<StyledRecordText numberOfLines={1}>

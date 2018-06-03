@@ -23,6 +23,9 @@ const kitten = require('../About/kitten.jpg');
 import {
   StyledContent,
   StyledIcardImage,
+  StyledIcardDiv,
+  StyledIcardSpan,
+  StyledIcardP
 } from './style'
 import { req } from '../../redux/modules/req'
 import { classNormalSearch, limitSearch } from '../../helpers/leanCloud'
@@ -104,11 +107,15 @@ export default class Share extends Component {
       <StyledContent>
         <Helmet title={iUse.iCard.title}/>
 
-          <StyledIcardImage src={img.url}/>
-          <h3>{iUse.iCard.title}</h3>
-          <a>{iUse.iCard.notifyText}</a>
-          {dos && dos.map(item => this._renderIdos(item))}
+          <StyledIcardDiv>
+            <StyledIcardImage src={img.url}/>
+            <StyledIcardSpan>
+              <StyledIcardP>{iUse.iCard.title}</StyledIcardP>
+              <StyledIcardP>{iUse.iCard.notifyText}</StyledIcardP>
+            </StyledIcardSpan>
+          </StyledIcardDiv>
 
+          {dos && dos.map(item => this._renderIdos(item))}
 
       </StyledContent>
     );

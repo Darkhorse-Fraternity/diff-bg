@@ -2,14 +2,18 @@ import styled from "styled-components";
 import Icon from 'material-ui/SvgIcon'
 
 export const StyledButton = styled.div`
-    display:flex;
-    flex-direction: column;
     width: 100%;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #f1f1f1;    
 `
 
+export const StyledImageDiv = styled.div`
+    width: 100%;
+    height: 200px;
+`
 export const StyledImage = styled.img`
     width: 100%;
-    height: ${props =>props.theme.width * 0.7};
+    height: 200px;
 `
 
 export const StyledZoomImage = styled.img`
@@ -18,7 +22,6 @@ export const StyledZoomImage = styled.img`
 `
 
 export const StyledBottom = styled.div`
-    padding: 5px 30px 15px 30px;
 `
 
 export const StyledDateView = styled.div`
@@ -37,14 +40,12 @@ export const StyledNewTip = styled.div`
     
 `
 
-export const StyledDateText = styled.h5`
-    font-size: 15px;
-    color: #646464;
-    padding: 3px 0px;
+export const StyledDateText = styled.p`
+    margin: 5px;
 `
 
-export const StyledRecordText = styled.h5`
-   color: #323232;
+export const StyledRecordText = styled.p`
+   margin: 5px;
 `
 
 export const StyledIcon = styled(Icon)`
