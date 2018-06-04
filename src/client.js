@@ -82,7 +82,7 @@ if (__DEVTOOLS__ && !window.devToolsExtension) {
     <Hydrate>
       <div>
         {component}
-        <DevTools/>
+        {/*<DevTools/>*/}
       </div>
     </Hydrate>,
     dest
