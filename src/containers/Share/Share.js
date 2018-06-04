@@ -89,7 +89,7 @@ export default class Share extends Component {
 
 
     if (!iUse.iCard) {
-      return null
+      return (<IndicatorView loadKey={IUSE}/>)
     }
 
     const { img, user } = iUse.iCard

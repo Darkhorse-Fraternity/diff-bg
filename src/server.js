@@ -3,6 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/server';
 
 import config from './config';
+import { ServerStyleSheet, StyleSheetManager } from 'styled-components'
 
 require('../cloud')
 // import cloud from '../cloud'
@@ -51,11 +52,10 @@ app.use(Express.static(path.join(__dirname, '..', 'static')));
 // 加载云引擎中间件
 app.use(AV.express());
 
-if(process.env.LEANCLOUD_APP_ID){
+if (process.env.LEANCLOUD_APP_ID) {
   app.enable('trust proxy');
   app.use(AV.Cloud.HttpsRedirect());
 }
-
 
 
 // Proxy to API server
@@ -93,10 +93,18 @@ app.use((req, res) => {
   const store = createStore(memoryHistory, client);
   const history = syncHistoryWithStore(memoryHistory, store);
 
+  const sheet = new ServerStyleSheet()
+
   function hydrateOnClient() {
     res.send('<!doctype html>\n' +
-      ReactDOM.renderToString(<Html assets={webpackIsomorphicTools.assets()} store={store}/>));
+      ReactDOM.renderToString(
+        <StyleSheetManager sheet={sheet.instance}>
+          <Html assets={webpackIsomorphicTools.assets()} store={store}/>
+        </StyleSheetManager>
+      ));
   }
+
+  const styleTags = sheet.getStyleTags()
 
   if (__DISABLE_SSR__) {
     hydrateOnClient();
@@ -114,9 +122,9 @@ app.use((req, res) => {
       } else if (renderProps) {
         loadOnServer({ ...renderProps, store, helpers: { client } }).then(() => {
           const component = (
-              <Provider store={store} key="provider">
-                  <ReduxAsyncConnect {...renderProps} />
-              </Provider>
+            <Provider store={store} key="provider">
+              <ReduxAsyncConnect {...renderProps} />
+            </Provider>
           );
 
           res.status(200);

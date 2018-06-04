@@ -17,8 +17,7 @@ export const StyledContent = styled.div`
     top:0;
     bottom:0;
     background-color: white;
-    align-items: center;
-    justify-content: center;   
+     
     
 `
 
