@@ -4,7 +4,7 @@
 
 console.log('test:', 'cloud');
 
-require('./cloudHook')
+require('./aclHook')
 require('./cloudFunc')
 require('./iCard')
 require('./iComment')
