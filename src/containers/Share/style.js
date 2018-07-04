@@ -9,6 +9,7 @@ import styled from "styled-components";
 
 
 export const StyledContent = styled.div`
+     justify-content: flex-start;
 `
 export const StyledIcardDiv = styled.div`
     width: 100%;

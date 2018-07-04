@@ -17,10 +17,10 @@ export const StyledContent = styled.div`
     top:0;
     bottom:0;
     background-color: white;
-     
+    justify-content: center;
     
 `
 
 export const StyledProgress = styled(CircularProgress)`
-
+    align-self: center;
 `

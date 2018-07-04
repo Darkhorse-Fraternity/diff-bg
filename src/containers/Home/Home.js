@@ -19,7 +19,7 @@ export default class Home extends Component {
           <div className="container">
             <div >
               <p>
-                <img src={logoImage}/>
+                <img src={logoImage} style={{width:300,height:300}}/>
               </p>
             </div>
             <h1>{config.app.title}</h1>
