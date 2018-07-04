@@ -10,10 +10,14 @@ export const StyledButton = styled.div`
 export const StyledImageDiv = styled.div`
     width: 100%;
     height: 200px;
+    overflow: hidden;
 `
 export const StyledImage = styled.img`
-    width: 100%;
+    width: 90%;
     height: 200px;
+    margin: 0px 15px;
+    border-radius: 10px;
+
 `
 
 export const StyledZoomImage = styled.img`
@@ -22,6 +26,8 @@ export const StyledZoomImage = styled.img`
 `
 
 export const StyledBottom = styled.div`
+    width: 90%;
+    margin: 10px 15px;
 `
 
 export const StyledDateView = styled.div`
@@ -41,11 +47,10 @@ export const StyledNewTip = styled.div`
 `
 
 export const StyledDateText = styled.p`
-    margin: 5px;
 `
 
 export const StyledRecordText = styled.p`
-   margin: 5px;
+   margin: 15px;
 `
 
 export const StyledIcon = styled(Icon)`

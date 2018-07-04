@@ -11,7 +11,6 @@ import moment from 'moment'
 import {
   StyledButton,
   StyledImage,
-  StyledZoomImage,
   StyledArrowView,
   StyledIcon,
   StyledBottom,
@@ -87,14 +86,17 @@ export default class RecordRow extends Component {
     return (
       <StyledButton
         style={this.props.style}>
-        {img && <StyledImageDiv><StyledImage
-          // easingFunc={Easing.bounce}
-          src={img}/></StyledImageDiv>}
+        {!!item.recordText && item.recordText.length > 0 &&
+        (<StyledRecordText numberOfLines={1}>
+          {item.recordText}
+        </StyledRecordText>)}
+        {img && <StyledImageDiv>
+          <StyledImage
+            // easingFunc={Easing.bounce}
+            src={img}/>
+        </StyledImageDiv>}
         <StyledBottom>
-          {!!item.recordText && item.recordText.length > 0 &&
-          (<StyledRecordText numberOfLines={1}>
-            {item.recordText}
-          </StyledRecordText>)}
+
           <StyledDateView>
             <StyledDateText>
               {date}
