@@ -21,7 +21,7 @@ AV.Cloud.afterSave(iDo, req => new Promise((solve, reject) => {
       const period = Number(card.get('period'))
       const doneDate = new Date();
       u.set('time', time)
-      u.set('statu', period === time ? "stop" : "start")
+      u.set('statu', time % period === 0 ? "stop" : "start")
       u.set('doneDate', doneDate)
       u.save(null, {user: currentUser}).catch(e => {
         console.log('iUse save:', e.message);
