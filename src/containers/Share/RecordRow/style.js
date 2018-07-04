@@ -4,20 +4,19 @@ import Icon from 'material-ui/SvgIcon'
 export const StyledButton = styled.div`
     width: 100%;
     margin-bottom: 10px;
-    border-bottom: 1px solid #f1f1f1;    
+    border-bottom: 2px solid #f1f1f1;    
 `
 
 export const StyledImageDiv = styled.div`
-    width: 100%;
-    height: 200px;
+    height: 250px;
     overflow: hidden;
-`
-export const StyledImage = styled.img`
-    width: 90%;
-    height: 200px;
     margin: 0px 15px;
     border-radius: 10px;
-
+`
+export const StyledImage = styled.img`
+    width: 100%;
+    height: auto;
+  
 `
 
 export const StyledZoomImage = styled.img`
