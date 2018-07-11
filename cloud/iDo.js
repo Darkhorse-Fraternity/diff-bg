@@ -30,7 +30,7 @@ AV.Cloud.afterSave(iDo, req => new Promise((solve, reject) => {
       if (card.get('user').id !== currentUser.id) {
         //发送给卡片的拥有者。
         const title = card.get('title');
-        const body = currentUser.get('username') + '刚刚打卡了,快去看看吧~!';
+        const body = currentUser.get('nickname') + '刚刚打卡了,快去看看吧~!';
         const url = "combo://RComment"
         // const vParam = card.toJSON()
         const vParam = {
