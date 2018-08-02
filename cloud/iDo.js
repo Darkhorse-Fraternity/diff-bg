@@ -18,10 +18,10 @@ AV.Cloud.afterSave(iDo, req => new Promise((solve, reject) => {
     }).then(async u => {
       const card = u.get('iCard')
       const time = u.get('time') + 1
-      const period = Number(card.get('period'))
+      // const period = Number(card.get('period'))
       const doneDate = new Date();
       u.set('time', time)
-      u.set('statu', time % period === 0 ? "stop" : "start")
+      // u.set('statu', time % period === 0 ? "stop" : "start")
       u.set('doneDate', doneDate)
       u.save(null, {user: currentUser}).catch(e => {
         console.log('iUse save:', e.message);
@@ -30,19 +30,15 @@ AV.Cloud.afterSave(iDo, req => new Promise((solve, reject) => {
       if (card.get('user').id !== currentUser.id) {
         //发送给卡片的拥有者。
         const title = card.get('title');
-        const body = currentUser.get('nickname') + '刚刚打卡了,快去看看吧~!';
+        const body = (currentUser.get('nickname')||'路人甲') + '刚刚打卡了!';
         const url = "combo://RComment"
         // const vParam = card.toJSON()
         const vParam = {
-          "data":
-            {
-              "title": card.get('title'),
-              "objectId": card.get('objectId')
-            }
+          "iDoID": object.id
         }
         const where = user(card.get('user').id)
         const res = await lcPush(title,body,url,vParam,where)
-        console.log('client.req:', res);
+        // console.log('client.req:', res);
       }
 
     }).catch(e => {

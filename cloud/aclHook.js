@@ -4,6 +4,7 @@ const {
   iCard,
   iDo,
   iComment,
+  Course
 } = require('./cloudKeys')
 
 
@@ -16,7 +17,7 @@ const normalACL = (currentUser) => {
   return acl
 }
 
-const classNames = [iCard, iUse, iDo, iComment]
+const classNames = [iCard, iUse, iDo, iComment,Course]
 const ACLSet = (classNames) => {
   classNames.forEach(className => {
     setNormalACL(className)

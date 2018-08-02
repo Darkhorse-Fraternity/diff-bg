@@ -30,16 +30,16 @@ AV.Cloud.afterSave(iComment, req => new Promise((solve, reject) => {
         //发送给卡片的拥有者。
         const card = d.get('iCard')
         const title = card.get('title');
-        const body = currentUser.get('username') + "在" + title + '下发表了一个评论,快去看看吧~!';
+        const body = (currentUser.get('nickname')||'路人甲') + '发表了一个评论!';
         const url = "combo://RComment"
         // const vParam = card.toJSON()
         const iDoItem = d.toJSON()
-        iDoItem.user = {objectId: iDoItem.user.objectId}
-        iDoItem.iCard = {objectId: iDoItem.iCard.objectId}
-        iDoItem.iUse = {objectId: iDoItem.iUse.objectId}
+        // iDoItem.user = {objectId: iDoItem.user.objectId}
+        // iDoItem.iCard = {objectId: iDoItem.iCard.objectId}
+        // iDoItem.iUse = {objectId: iDoItem.iUse.objectId}
 
         const vParam = {
-          "data": iDoItem
+          "iDoID": iDoItem.objectId
         }
         const where = user(doUser.id)
         const res = await lcPush(title, body, url, vParam, where)
